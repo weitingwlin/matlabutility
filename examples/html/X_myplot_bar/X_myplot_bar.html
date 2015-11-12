@@ -1,0 +1,170 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Example: how to use [myplot_bar]</title><meta name="generator" content="MATLAB 8.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-09-22"><meta name="DC.source" content="X_myplot_bar.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Example: how to use [myplot_bar]</h1><!--introduction--><p>This is an DEMO for my function <b>[myplot_bar]</b>.</p><p><b>Wei-Ting Lin</b> <i>2015/9/22</i></p><p>Demo depends on [mycolor]</p><p><i>This file is formatted to be published.</i></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Create mock data</a></li><li><a href="#2">Use default settings</a></li><li><a href="#3">Add text to the plot</a></li><li><a href="#4">Change the styles</a></li><li><a href="#5">About [mycolor]</a></li><li><a href="#6">More examples</a></li></ul></div><h2>Create mock data<a name="1"></a></h2><pre class="codeinput">temp=rand(10,5);
+MockData = temp.*repmat([5 5 5 8 8],10,1)+repmat([1:5],10,1);
+</pre><h2>Use default settings<a name="2"></a></h2><p><b>Syntax</b></p><pre>myplot_bar (data)</pre><p>[data]: n x p matrix, each column is a variable, with (at most) n points/replicates.            variables with less than n datapoint represented by NaN</p><pre class="codeinput">myplot_bar(MockData);
+</pre><img vspace="5" hspace="5" src="X_myplot_bar_01.png" alt=""> <h2>Add text to the plot<a name="3"></a></h2><p><b>Syntax</b></p><pre>myplot_bar(data, Styles, Texts)</pre><pre>Since [Styles] is the second input, we need a place holder</pre><p>Note: Not all items in the structure need to be specified.</p><pre class="codeinput">    myStyle = []; <span class="comment">% place holder for [Styles]</span>
+    mytexts = [];
+         MockLabels={<span class="string">'A'</span>,<span class="string">'B'</span>,<span class="string">' C'</span>,<span class="string">'D'</span>, <span class="string">' E'</span>};
+    mytexts.xlabels= MockLabels;<span class="comment">% use struct(field, value) for the first element</span>
+    mytexts.xlabel = <span class="string">'Examples'</span>;
+    mytexts.ylabel = <span class="string">'Values'</span>;
+    mytexts.title = <span class="string">'Title'</span>;
+    <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%</span>
+    myplot_bar(MockData, myStyle,mytexts);
+    <span class="comment">%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><img vspace="5" hspace="5" src="X_myplot_bar_02.png" alt=""> <h2>Change the styles<a name="4"></a></h2><p>[Styles]: a structure, with fields             * barcolor: vector of 3, code for color of the bars;             * ebcolor: vector of 3, color of the error bars; default is equal to .barcolor             * pointcolor: vector of 3, color of the datapoints; default is equal to .barcolor             * ErrorOn: 0 or 1; whether to plot bar, default is 1             * BarOn: 0 or 1; whether to plot bar, default is 0 (mean value shown as a point)             * DataPointsOn: whether to plot data points, default is 0</p><pre class="codeinput">myStyle = struct([]);
+myStyle = struct(<span class="string">'barcolor'</span>, mycolor(11));<span class="comment">% use struct(field, value) for the first element</span>
+myStyle.BarOn = 1;
+figure
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%</span>
+myplot_bar(MockData, myStyle,mytexts);
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><img vspace="5" hspace="5" src="X_myplot_bar_03.png" alt=""> <h2>About [mycolor]<a name="5"></a></h2><p>[mycolor] is a function to chose some colors from a color plate.</p><p>type: mycolor(0) will generate this color plate.</p><p>or type: help(mycolor) for documentation</p><pre class="codeinput">mycolor(0);
+</pre><pre class="codeoutput">Display color plate for you to chose.
+</pre><img vspace="5" hspace="5" src="X_myplot_bar_04.png" alt=""> <h2>More examples<a name="6"></a></h2><pre class="codeinput">myStyle.DataPointsOn = 1;
+myStyle.barcolor = mycolor(28);
+myStyle.pointcolor = mycolor(11);
+figure
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%</span>
+myplot_bar(MockData, myStyle,mytexts);
+<span class="comment">%%%%%%%%%%%%%%%%%%%%%%%</span>
+</pre><img vspace="5" hspace="5" src="X_myplot_bar_05.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2014a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Example: how to use [myplot_bar]
+% This is an DEMO for my function *[myplot_bar]*.
+%
+% *Wei-Ting Lin* _2015/9/22_
+% 
+% Demo depends on [mycolor]
+%
+% _This file is formatted to be published._
+%% Create mock data
+temp=rand(10,5);
+MockData = temp.*repmat([5 5 5 8 8],10,1)+repmat([1:5],10,1);
+%% Use default settings
+% *Syntax*
+%
+%  myplot_bar (data)
+%
+% [data]: n x p matrix, each column is a variable, with (at most) n points/replicates. 
+%            variables with less than n datapoint represented by NaN 
+myplot_bar(MockData);
+%% Add text to the plot
+ % *Syntax*
+ %
+ %  myplot_bar(data, Styles, Texts)
+ %
+ %  Since [Styles] is the second input, we need a place holder
+ %
+ % Note: Not all items in the structure need to be specified.
+    myStyle = []; % place holder for [Styles]
+    mytexts = [];
+         MockLabels={'A','B',' C','D', ' E'};
+    mytexts.xlabels= MockLabels;% use struct(field, value) for the first element
+    mytexts.xlabel = 'Examples';
+    mytexts.ylabel = 'Values';
+    mytexts.title = 'Title';
+    %%%%%%%%%%%%%%%%%%%%%%%
+    myplot_bar(MockData, myStyle,mytexts);
+    %%%%%%%%%%%%%%%%%%%%%%%
+%% Change the styles
+% [Styles]: a structure, with fields
+%             * barcolor: vector of 3, code for color of the bars;
+%             * ebcolor: vector of 3, color of the error bars; default is equal to .barcolor
+%             * pointcolor: vector of 3, color of the datapoints; default is equal to .barcolor
+%             * ErrorOn: 0 or 1; whether to plot bar, default is 1 
+%             * BarOn: 0 or 1; whether to plot bar, default is 0 (mean value shown as a point)
+%             * DataPointsOn: whether to plot data points, default is 0
+myStyle = struct([]);
+myStyle = struct('barcolor', mycolor(11));% use struct(field, value) for the first element
+myStyle.BarOn = 1;
+figure
+%%%%%%%%%%%%%%%%%%%%%%%
+myplot_bar(MockData, myStyle,mytexts);
+%%%%%%%%%%%%%%%%%%%%%%%
+%% About [mycolor]
+% [mycolor] is a function to chose some colors from a color plate.
+%
+% type: mycolor(0) will generate this color plate.
+%
+% or type: help(mycolor) for documentation
+mycolor(0);
+
+%% More examples
+myStyle.DataPointsOn = 1;
+myStyle.barcolor = mycolor(28);
+myStyle.pointcolor = mycolor(11);
+figure
+%%%%%%%%%%%%%%%%%%%%%%%
+myplot_bar(MockData, myStyle,mytexts);
+%%%%%%%%%%%%%%%%%%%%%%%
+
+##### SOURCE END #####
+--></body></html>

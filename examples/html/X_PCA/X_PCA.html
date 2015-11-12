@@ -1,0 +1,199 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>X_PCA : how to do PCA in matlab</title><meta name="generator" content="MATLAB 8.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2014-10-10"><meta name="DC.source" content="X_PCA.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>X_PCA : how to do PCA in matlab</h1><!--introduction--><p>This is an example file for PCA, how it works and how to make plots.</p><p>Use my Iva insect data <b>[X_community]</b>.  Even though for the particular data set PCA may not be the best thing to do.</p><p>required functions: <b>[myplot]</b></p><p>by Wei-Ting Lin, <i>2014/10/10</i></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Setting up and load data</a></li><li><a href="#2">View the oringinal data</a></li><li><a href="#3">PCA : using the matlab function pca</a></li><li><a href="#7">Plot data in PC space</a></li></ul></div><h2>Setting up and load data<a name="1"></a></h2><p>X_community contains two matrices, and two "name" files:</p><div><ul><li>insect_data : 44 x 13 matrix, data for 44 patches and 13 species</li><li>patch_met : 44 x12 matrix, data for 44 patches and 12 patch attributes</li><li>insect_names : content of the insects</li><li>met_names : content of the patch attributes I like to keep data as a matrix and put their names in a seperate file. We are only using the <b>[insect_data]</b> here, but you can look into the "name" file for more info.</li></ul></div><pre class="codeinput">clear;clc
+<span class="comment">% Because this is the working file, set current directory to X_example folder</span>
+<span class="comment">% laptop</span>
+cd <span class="string">'C:\Asus WebStorage\weiting.lin.lin@gmail.com\MySyncFolder\(ASUS-PC)2014-09-04 10-42-03\MATLAB\utility_wtl\X_examples'</span>
+load <span class="string">X_community</span>
+
+<span class="comment">% load the color plate [mycolor]</span>
+script_mycolorplate
+</pre><h2>View the oringinal data<a name="2"></a></h2><p>Here each site is represented as vector of species composition</p><pre>         dimension = # of species</pre><p>Each of the 10 lines represent the "vector" of one site, for the first 10 sites</p><pre class="codeinput">[n,p] =size(insect_data);<span class="comment">% There are n sites and p species.</span>
+ldata = log(insect_data+1); <span class="comment">% The data is log-transformed</span>
+<span class="comment">% Visualising the first fiewlines of data</span>
+<span class="keyword">for</span> i=1:10
+plot(1:13,ldata(i,:),<span class="string">'Linewidth'</span>,3,<span class="string">'color'</span>,mycolor(i,:));hold <span class="string">on</span>
+<span class="keyword">end</span>
+</pre><img vspace="5" hspace="5" src="X_PCA_01.png" alt=""> <h2>PCA : using the matlab function pca<a name="3"></a></h2><p><b>Syntax:</b></p><pre class="codeinput">[coeff, score,latent] = pca(ldata);
+</pre><div><ul><li>[coeff] : each column is the set of coefficients for a PC in terms of variable</li><li>[score] : representing data in the PC space; each row is an observation, each column is a PC</li><li>[latent] : varience of the PCs</li></ul></div><p><b>Plot of the first 4 PCs:</b></p><pre class="codeinput">figure
+<span class="comment">% subplot(6,1,1:3)</span>
+<span class="keyword">for</span> j=1:4
+plot(1:13,coeff(:,j),<span class="string">'Linewidth'</span>,2,<span class="string">'color'</span>,mycolor(j,:));hold <span class="string">on</span>
+<span class="keyword">end</span>
+legend(<span class="string">'PC 1'</span>,<span class="string">'PC 2'</span>,<span class="string">'PC 3'</span>,<span class="string">'PC 4'</span>);
+title(<span class="string">'Composition of each PC'</span>)
+xlabel(<span class="string">'variable (species)'</span>); ylabel(<span class="string">'PC coefficient'</span>)
+</pre><img vspace="5" hspace="5" src="X_PCA_02.png" alt=""> <p><b>The percentage of varience explained by each PC</b></p><pre class="codeinput">figure
+<span class="comment">% subplot(6,1,5:6)</span>
+varPC=latent./sum(latent);
+plot(1:p,cumsum(varPC),<span class="string">'Linewidth'</span>,2,<span class="string">'color'</span>,mycolor(3,:))
+axis([1 14 0 1.01])
+title(<span class="string">'Cumulative % of variance explained by PC'</span>)
+xlabel(<span class="string">'PC'</span>); ylabel(<span class="string">'% of variance'</span>)
+</pre><img vspace="5" hspace="5" src="X_PCA_03.png" alt=""> <h2>Plot data in PC space<a name="7"></a></h2><p>For the fitst two PCs, we can plot the 44 observations on this 2-D space</p><pre class="codeinput"><span class="comment">%*[myplot]* is my function to create better styled plots</span>
+figure
+  <span class="comment">% plot(score(:,1),score(:,2),'.','color',mycolor(8,:))</span>
+  myplot(score(:,1),score(:,2),<span class="string">'S'</span>,8)
+  <span class="comment">% S means scatter plot; 8 is for light blue</span>
+   <span class="keyword">for</span> i=1:n
+   text(score(i,1),score(i,2),num2str(i),<span class="string">'fontsize'</span>,8)
+   <span class="keyword">end</span>
+   xlabel([<span class="string">'PC1   ('</span> num2str(varPC(1)*100) <span class="string">'% varience)'</span>])
+   ylabel([<span class="string">'PC2   ('</span> num2str(varPC(2)*100) <span class="string">'% varience)'</span>])
+</pre><img vspace="5" hspace="5" src="X_PCA_04.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2014a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% X_PCA : how to do PCA in matlab 
+% This is an example file for PCA, how it works and how to make plots.
+%
+% Use my Iva insect data *[X_community]*.  Even though for the particular data set PCA may not be the best thing to do.    
+%
+% required functions: *[myplot]*
+%
+% by Wei-Ting Lin, _2014/10/10_
+%% Setting up and load data
+% X_community contains two matrices, and two "name" files:
+%
+% * insect_data : 44 x 13 matrix, data for 44 patches and 13 species 
+% * patch_met : 44 x12 matrix, data for 44 patches and 12 patch attributes
+% * insect_names : content of the insects
+% * met_names : content of the patch attributes
+% I like to keep data as a matrix and put their names in a seperate file.
+% We are only using the *[insect_data]* here, but you can look into the
+% "name" file for more info.
+
+clear;clc
+% Because this is the working file, set current directory to X_example folder 
+% laptop 
+cd 'C:\Asus WebStorage\weiting.lin.lin@gmail.com\MySyncFolder\(ASUS-PC)2014-09-04 10-42-03\MATLAB\utility_wtl\X_examples'
+load X_community
+
+% load the color plate [mycolor]
+script_mycolorplate
+%% View the oringinal data
+% Here each site is represented as vector of species composition
+% 
+%           dimension = # of species 
+%
+% Each of the 10 lines represent the "vector" of one site, for the first 10 sites 
+[n,p] =size(insect_data);% There are n sites and p species.
+ldata = log(insect_data+1); % The data is log-transformed 
+% Visualising the first fiewlines of data  
+for i=1:10
+plot(1:13,ldata(i,:),'Linewidth',3,'color',mycolor(i,:));hold on
+end
+
+%% PCA : using the matlab function pca
+% *Syntax:*
+[coeff, score,latent] = pca(ldata);
+%%
+% * [coeff] : each column is the set of coefficients for a PC in terms of variable
+% * [score] : representing data in the PC space; each row is an
+% observation, each column is a PC
+% * [latent] : varience of the PCs
+%
+
+%%
+% *Plot of the first 4 PCs:*
+figure
+% subplot(6,1,1:3)
+for j=1:4
+plot(1:13,coeff(:,j),'Linewidth',2,'color',mycolor(j,:));hold on
+end
+legend('PC 1','PC 2','PC 3','PC 4');
+title('Composition of each PC')
+xlabel('variable (species)'); ylabel('PC coefficient')
+%%
+% *The percentage of varience explained by each PC* 
+
+figure
+% subplot(6,1,5:6)
+varPC=latent./sum(latent);
+plot(1:p,cumsum(varPC),'Linewidth',2,'color',mycolor(3,:))
+axis([1 14 0 1.01])
+title('Cumulative % of variance explained by PC')
+xlabel('PC'); ylabel('% of variance')
+
+%% Plot data in PC space
+% For the fitst two PCs, we can plot the 44 observations on this 2-D space
+%
+%*[myplot]* is my function to create better styled plots
+figure
+  % plot(score(:,1),score(:,2),'.','color',mycolor(8,:))
+  myplot(score(:,1),score(:,2),'S',8)
+  % S means scatter plot; 8 is for light blue
+   for i=1:n
+   text(score(i,1),score(i,2),num2str(i),'fontsize',8)
+   end
+   xlabel(['PC1   (' num2str(varPC(1)*100) '% varience)'])
+   ylabel(['PC2   (' num2str(varPC(2)*100) '% varience)'])
+
+
+
+##### SOURCE END #####
+--></body></html>

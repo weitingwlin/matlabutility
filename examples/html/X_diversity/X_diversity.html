@@ -1,0 +1,308 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Calculating Bio-diveristy indices using [bio_diversity]</title><meta name="generator" content="MATLAB 8.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2014-10-18"><meta name="DC.source" content="X_diversity.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Calculating Bio-diveristy indices using [bio_diversity]</h1><!--introduction--><p>This file provide usage examples and documentation for the function <b>[bio_diveristy]</b></p><p>Use my Iva insect data <b>[X_community]</b> as example , and I will use my color plate <b>[my_colorplates.mat]</b> for plotting .</p><p>by Wei-Ting Lin, <i>2014/10/15</i></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Setting up and load data</a></li><li><a href="#3">Using [bio_diversity.m]</a></li><li><a href="#4">Calculate diversity indices for patch 1</a></li><li><a href="#5">Calculate diversity indices for all patches</a></li><li><a href="#6">Application: Diveristy vs. Patch size</a></li><li><a href="#9">More about Eveness indices</a></li><li><a href="#12">Major references:</a></li></ul></div><h2>Setting up and load data<a name="1"></a></h2><pre class="codeinput">clear;clc
+load <span class="string">X_community</span>
+load <span class="string">my_colorplates</span>
+</pre><p><b>[X_community]</b> contains two matrices, and two "name" files:</p><div><ul><li>insect_data : 44 x 13 matrix, data for 44 patches and 13 species</li><li>patch_met : 44 x12 matrix, data for 44 patches and 12 patch attributes</li><li>insect_names : content of the insects (each column in [insect_data])</li><li>met_names : content of the patch attributes I like to keep data as a matrix and put their names in a seperate file. We are only using the <b>[insect_data]</b> here.</li></ul></div><h2>Using [bio_diversity.m]<a name="3"></a></h2><p><b>Syntax</b></p><p>output = bio_diversity (X)</p><p><b>X</b> : data, N x S matrix; each row is the community data from one site, each column represent a  species. If N = 1, diversity at larger scale will not be calculated.</p><p><b>output</b> : a structure,</p><div><ul><li>output.R : local (alpha) richness</li><li>output.H : local Shannon diversity index</li><li>output.H_even : Evenness index, J' sensu. (Smith &amp; Wilson, 1996)</li><li>output.D : Simpson's dominance index</li><li>output.D_diversity : 1-D  : Simpson's diversity index</li><li>output.D_reciprocal : 1/D : Simpson's reciprocal index</li><li>output.D_even : Evenesee index ,E_1/D sensu. (Smith &amp; Wilson, 1996)</li><li>output.Evar : Evenness index, Evar sensu. (Smith &amp; Wilson, 1996)</li></ul></div><p>If the N&gt;1:</p><div><ul><li>output.R_gamma : Reginal scale (gamma) Richness</li><li>output.R_beta_w : Beta-diveristy by (Whittaker, 1960)</li><li>output.R_beta_add : Additive version of classical beta-diversity</li><li>output.H_gamma : Shannon diveristy at regional  (gamma) scale</li><li>output.H_beta : Beta diversity based on Shannon index (Jost, 2007)</li></ul></div><h2>Calculate diversity indices for patch 1<a name="4"></a></h2><pre class="codeinput">Patch1 = bio_diversity(insect_data (1,:))
+</pre><pre class="codeoutput">
+Patch1 = 
+
+               R: 7
+               H: 1.2309
+          H_even: 0.6325
+               D: 0.3825
+     D_diversity: 0.6175
+    D_reciprocal: 2.6144
+          D_even: 0.3735
+            Evar: 0.2769
+
+</pre><h2>Calculate diversity indices for all patches<a name="5"></a></h2><p>Results are saved in structure D</p><p>Now the local indices are stored in vectors, and there are beta and gamma indices in the output</p><pre class="codeinput">D = bio_diversity(insect_data)
+</pre><pre class="codeoutput">
+D = 
+
+         R_gamma: 13
+        R_beta_w: 2.4034
+      R_beta_add: 7.5909
+         H_gamma: 0.8255
+          H_beta: 0.8745
+               R: [44x1 double]
+               H: [44x1 double]
+          H_even: [44x1 double]
+               D: [44x1 double]
+     D_diversity: [44x1 double]
+    D_reciprocal: [44x1 double]
+          D_even: [44x1 double]
+            Evar: [44x1 double]
+
+</pre><h2>Application: Diveristy vs. Patch size<a name="6"></a></h2><p><b>Question</b> : What is the effect of patch size on biodiversity?</p><p>Verify that data about patch size ("area") is stored in patch_met(:,5)</p><pre class="codeinput">met_names(5)
+patch_size = patch_met(:,5);
+</pre><pre class="codeoutput">
+ans = 
+
+    'area'
+
+</pre><p>Effects of patch size on richness, diversity, and eveness</p><pre class="codeinput">subplot(2,2,1)
+    plot(patch_size,D.R,<span class="string">'.'</span>,<span class="string">'color'</span>,mycolor(3,:))
+    lsline
+    xlabel(<span class="string">'Patch Size'</span>);ylabel(<span class="string">'Species Richness'</span>)
+subplot(2,2,2)
+    plot(patch_size,D.H,<span class="string">'.'</span>,<span class="string">'color'</span>,mycolor(3,:))
+    lsline
+     xlabel(<span class="string">'Patch Size'</span>);ylabel(<span class="string">'Shannon diversity'</span>)
+subplot(2,2,3)
+    plot(patch_size,D.D_diversity,<span class="string">'.'</span>,<span class="string">'color'</span>,mycolor(3,:))
+    lsline
+    xlabel(<span class="string">'Patch Size'</span>);ylabel(<span class="string">'Simpson diversity'</span>)
+subplot(2,2,4)
+    plot(patch_size,D.H_even,<span class="string">'.'</span>,<span class="string">'color'</span>,mycolor(3,:))
+    lsline
+    xlabel(<span class="string">'Patch Size'</span>);ylabel(<span class="string">'Shannon eveness'</span>)
+clear <span class="string">D</span>
+</pre><img vspace="5" hspace="5" src="X_diversity_01.png" alt=""> <p>It seems that even the species richness increases with patch size, patch size dosen't seems to affect "Biodiversity". This probably because species abundance are less "even" in larger patches. (Diversity indice reviel both richness and eveness pattern.)</p><h2>More about Eveness indices<a name="9"></a></h2><p>Adapted from Smith &amp; Wilson, 1996</p><p>Here I use some artifitial communities to test the feature of three diversity indices in the function</p><div><ul><li>output.H_even : Derived from Shannon's index, the "wiki" result: <a href="http://en.wikipedia.org/wiki/Species_evenness">http://en.wikipedia.org/wiki/Species_evenness</a></li><li>output.D_even : Derived from Simpson's index</li><li>output.Evar : Invented and reconmended by Smith &amp; Wilson, 1996</li></ul></div><p><b>The artifitial communities</b></p><pre class="codeinput">C{1} = [100 1 1 100 1 1];
+C{2} = [100 1 1 100 1 1 100 1 1 100 1 1 ];
+C{3} = [100 1 1 1];
+C{4} = [100 100 100 1];
+C{5} = [1999 1 1 1 1];
+</pre><p><b>Tests for some features of good evenness indices</b></p><div><ul><li>Insensitive to richness, that means Community 1 and 2 should have the similar eveness value</li><li>Symmetry to rare and abundant species, that means Community 3 and 4 should have similar  eveness value</li><li>A very uneven community like Community 5 should have eveness value close to  0</li></ul></div><p>Save three Evenness indices in three vectors:</p><pre class="codeinput">    Evar = zeros(1,5); <span class="comment">% Evar</span>
+    EH = zeros(1,5); <span class="comment">% The Shannon one</span>
+    ED = zeros(1,5);<span class="comment">% The Simpson one</span>
+<span class="keyword">for</span> i = 1:5
+    D = bio_diversity(C{i});
+    Evar(i) = D.Evar;
+    EH(i) = D.H_even;
+    ED(i)= D.D_even;
+<span class="keyword">end</span>
+</pre><p>Plot the results</p><pre class="codeinput">subplot(3,1,1)
+    plot(1:2,Evar(1:2),<span class="string">'ok'</span>,<span class="string">'linewidth'</span>,2);hold <span class="string">on</span>
+    plot(3:4,Evar(3:4),<span class="string">'or'</span>,<span class="string">'linewidth'</span>,2)
+    plot(5,Evar(5),<span class="string">'ob'</span>,<span class="string">'linewidth'</span>,2)
+    axis([0.5 5.5 0 1])
+    title(<span class="string">'Evar (Smith &amp; Wilson)'</span>)
+ subplot(3,1,2)
+    plot(1:2,EH(1:2),<span class="string">'ok'</span>,<span class="string">'linewidth'</span>,2);hold <span class="string">on</span>
+    plot(3:4,EH(3:4),<span class="string">'or'</span>,<span class="string">'linewidth'</span>,2)
+    plot(5,EH(5),<span class="string">'ob'</span>,<span class="string">'linewidth'</span>,2)
+    axis([0.5 5.5 0 1])
+    title(<span class="string">'Shannon Eveness'</span>)
+ subplot(3,1,3)
+    plot(1:2,ED(1:2),<span class="string">'ok'</span>,<span class="string">'linewidth'</span>,2);hold <span class="string">on</span>
+    plot(3:4,ED(3:4),<span class="string">'or'</span>,<span class="string">'linewidth'</span>,2)
+    plot(5,ED(5),<span class="string">'ob'</span>,<span class="string">'linewidth'</span>,2)
+    axis([0.5 5.5 0 1])
+    title(<span class="string">'Simpson Eveness'</span>)
+</pre><img vspace="5" hspace="5" src="X_diversity_02.png" alt=""> <h2>Major references:<a name="12"></a></h2><div><ul><li>Anderson et al. (2011) Ecology Letters 14: 19&#8211;28</li><li>Smith &amp; Wilson (1996) Oikos, Vol. 76, No. 1</li><li>How to calculate biodiversity? webpage by Maryland Sea Grant: <a href="http://ww2.mdsg.umd.edu/interactive_lessons/biofilm/diverse.htm">http://ww2.mdsg.umd.edu/interactive_lessons/biofilm/diverse.htm</a></li></ul></div><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2014a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Calculating Bio-diveristy indices using [bio_diversity] 
+% This file provide usage examples and documentation for the function
+% *[bio_diveristy]*
+%
+% Use my Iva insect data *[X_community]* as example , and I will use my color plate *[my_colorplates.mat]* for plotting . 
+%
+% by Wei-Ting Lin, _2014/10/15_
+%% Setting up and load data
+clear;clc
+load X_community
+load my_colorplates
+%%
+% *[X_community]* contains two matrices, and two "name" files:
+%
+% * insect_data : 44 x 13 matrix, data for 44 patches and 13 species 
+% * patch_met : 44 x12 matrix, data for 44 patches and 12 patch attributes
+% * insect_names : content of the insects (each column in [insect_data])
+% * met_names : content of the patch attributes
+% I like to keep data as a matrix and put their names in a seperate file.
+% We are only using the *[insect_data]* here.
+%%  Using [bio_diversity.m]
+% *Syntax*
+% 
+% output = bio_diversity (X)
+%
+% *X* : data, N x S matrix; each row is the community data from one site, each column
+% represent a  species. If N = 1, diversity at larger scale will not be
+% calculated.
+%
+% *output* : a structure, 
+%
+% * output.R : local (alpha) richness
+% * output.H : local Shannon diversity index
+% * output.H_even : Evenness index, J' sensu. (Smith & Wilson, 1996) 
+% * output.D : Simpson's dominance index
+% * output.D_diversity : 1-D  : Simpson's diversity index
+% * output.D_reciprocal : 1/D : Simpson's reciprocal index
+% * output.D_even : Evenesee index ,E_1/D sensu. (Smith & Wilson, 1996) 
+% * output.Evar : Evenness index, Evar sensu. (Smith & Wilson, 1996) 
+% 
+% If the N>1:
+% 
+% * output.R_gamma : Reginal scale (gamma) Richness
+% *  output.R_beta_w : Beta-diveristy by (Whittaker, 1960)
+% * output.R_beta_add : Additive version of classical beta-diversity
+% * output.H_gamma : Shannon diveristy at regional  (gamma) scale
+% * output.H_beta : Beta diversity based on Shannon index (Jost, 2007)
+
+%% Calculate diversity indices for patch 1
+Patch1 = bio_diversity(insect_data (1,:))
+%% Calculate diversity indices for all patches
+% Results are saved in structure D
+%
+% Now the local indices are stored in vectors, and there are beta and gamma indices in the output 
+D = bio_diversity(insect_data)
+
+%% Application: Diveristy vs. Patch size
+% *Question* : What is the effect of patch size on biodiversity? 
+% 
+% Verify that data about patch size ("area") is stored in patch_met(:,5)
+met_names(5)
+patch_size = patch_met(:,5);
+%%
+% Effects of patch size on richness, diversity, and eveness
+subplot(2,2,1)
+    plot(patch_size,D.R,'.','color',mycolor(3,:))
+    lsline
+    xlabel('Patch Size');ylabel('Species Richness')
+subplot(2,2,2)
+    plot(patch_size,D.H,'.','color',mycolor(3,:))
+    lsline
+     xlabel('Patch Size');ylabel('Shannon diversity')
+subplot(2,2,3)
+    plot(patch_size,D.D_diversity,'.','color',mycolor(3,:))
+    lsline
+    xlabel('Patch Size');ylabel('Simpson diversity')
+subplot(2,2,4)
+    plot(patch_size,D.H_even,'.','color',mycolor(3,:))
+    lsline
+    xlabel('Patch Size');ylabel('Shannon eveness')
+clear D
+%%
+% It seems that even the species richness increases with patch size, patch
+% size dosen't seems to affect "Biodiversity". This probably because
+% species abundance are less "even" in larger patches. (Diversity indice reviel both richness and eveness pattern.)
+
+%% More about Eveness indices
+% Adapted from Smith & Wilson, 1996
+%
+% Here I use some artifitial communities to test the feature of three
+% diversity indices in the function
+%
+% * output.H_even : Derived from Shannon's index, the "wiki" result: http://en.wikipedia.org/wiki/Species_evenness
+% * output.D_even : Derived from Simpson's index
+% * output.Evar : Invented and reconmended by Smith & Wilson, 1996 
+%
+% *The artifitial communities*
+C{1} = [100 1 1 100 1 1];
+C{2} = [100 1 1 100 1 1 100 1 1 100 1 1 ];
+C{3} = [100 1 1 1];
+C{4} = [100 100 100 1];
+C{5} = [1999 1 1 1 1];
+
+%%
+% *Tests for some features of good evenness indices*
+%
+% * Insensitive to richness, that means Community 1 and 2 should have the similar eveness value
+% * Symmetry to rare and abundant species, that means Community 3 and 4 should have similar  eveness value
+% * A very uneven community like Community 5 should have eveness value close to  0
+%
+%
+% Save three Evenness indices in three vectors:
+    Evar = zeros(1,5); % Evar 
+    EH = zeros(1,5); % The Shannon one
+    ED = zeros(1,5);% The Simpson one
+for i = 1:5
+    D = bio_diversity(C{i});
+    Evar(i) = D.Evar;
+    EH(i) = D.H_even;
+    ED(i)= D.D_even;
+end
+
+%%
+% Plot the results
+subplot(3,1,1)
+    plot(1:2,Evar(1:2),'ok','linewidth',2);hold on
+    plot(3:4,Evar(3:4),'or','linewidth',2)
+    plot(5,Evar(5),'ob','linewidth',2)
+    axis([0.5 5.5 0 1])
+    title('Evar (Smith & Wilson)')
+ subplot(3,1,2)
+    plot(1:2,EH(1:2),'ok','linewidth',2);hold on
+    plot(3:4,EH(3:4),'or','linewidth',2)
+    plot(5,EH(5),'ob','linewidth',2)
+    axis([0.5 5.5 0 1])
+    title('Shannon Eveness')   
+ subplot(3,1,3)
+    plot(1:2,ED(1:2),'ok','linewidth',2);hold on
+    plot(3:4,ED(3:4),'or','linewidth',2)
+    plot(5,ED(5),'ob','linewidth',2)
+    axis([0.5 5.5 0 1])
+    title('Simpson Eveness')   
+%%  Major references:
+% * Anderson et al. (2011) Ecology Letters 14: 19–28
+% * Smith & Wilson (1996) Oikos, Vol. 76, No. 1
+% * How to calculate biodiversity? webpage by Maryland Sea Grant: http://ww2.mdsg.umd.edu/interactive_lessons/biofilm/diverse.htm
+##### SOURCE END #####
+--></body></html>

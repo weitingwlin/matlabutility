@@ -1,0 +1,151 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Usage example of function plot_NMDS</title><meta name="generator" content="MATLAB 8.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-04-27"><meta name="DC.source" content="X_plot_NMDS.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Usage example of function plot_NMDS</h1><!--introduction--><p>Input</p><div><ul><li>[data]: n rows each represent on observation, p colunms each represent a variable</li><li>[groups]: Optional, vector of length n, numeric, the group id of each observation</li></ul></div><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Setting up and load data</a></li><li><a href="#2">Data description</a></li><li><a href="#3">Z-transformed</a></li><li><a href="#4">NMDS and plot using plot_NMDS</a></li><li><a href="#5">Adding input [groups] can seperate the</a></li><li><a href="#6">Separating the points (observations) by group: cell array of string</a></li></ul></div><h2>Setting up and load data<a name="1"></a></h2><pre class="codeinput">clear;clc
+<span class="comment">% load data</span>
+load <span class="string">my_colorplates</span>
+    insect_data= load(<span class="string">'insectdata.txt'</span>);<span class="comment">% community data</span>
+rawdata = insect_data;
+group= load(<span class="string">'group1.txt'</span>); <span class="comment">% group information, numeric</span>
+group2 = importdata(<span class="string">'fakedata.txt'</span>); <span class="comment">% group information in text</span>
+<span class="comment">% Files like this can be created using excel "save as" .txt</span>
+[n,p] =size(rawdata);<span class="comment">% There are n sites and p species.</span>
+</pre><h2>Data description<a name="2"></a></h2><div><ul><li>insect_data : 44 x 13 matrix, data for 44 (n) patches and 13 (p) species</li><li>group : numeric vector of size n, "site" information</li><li>group : cell array of string of size n; "site" information for patches</li></ul></div><p>I will use data [insect_data] in this example; where patch represents "observation", species represent "variable"</p><p>I will use the three "sites" of patches as group, to plot with different color</p><h2>Z-transformed<a name="3"></a></h2><p>one way to get normality is Z transformation; other methods including log(N+1) and square root</p><p>uncomment this to log-transform, and replace Zdata with Ldata in following codes</p><p>Ldata = log(rawdata+1)</p><p>Z = (X-mean)/std</p><pre class="codeinput">Zdata= zscore(rawdata);
+<span class="comment">% Plot</span>
+figure
+<span class="keyword">for</span> i=1:10
+plot(1:13,Zdata(i,:),<span class="string">'Linewidth'</span>,3,<span class="string">'color'</span>,mycolor(i,:));hold <span class="string">on</span>
+<span class="keyword">end</span>
+xlabel(<span class="string">'Species'</span>); ylabel(<span class="string">'Frequency'</span>)
+legend(<span class="string">'Community 1'</span>, <span class="string">'Community 2'</span>, <span class="string">'Community 3'</span>, <span class="string">'Community 4'</span>,<span class="string">'...'</span>,<span class="string">'...'</span>)
+title(<span class="string">'Z-transformed data for the first 10 patches'</span>)
+</pre><img vspace="5" hspace="5" src="X_plot_NMDS_01.png" alt=""> <h2>NMDS and plot using plot_NMDS<a name="4"></a></h2><p>[groups] is optional, using Z-transformed data as the sole input gives a simple scatter plot</p><pre class="codeinput">plot_NMDS(Zdata)
+</pre><img vspace="5" hspace="5" src="X_plot_NMDS_02.png" alt=""> <h2>Adding input [groups] can seperate the<a name="5"></a></h2><pre class="codeinput">plot_NMDS(Zdata,group)
+title(<span class="string">'NMDS by sites'</span>)
+</pre><img vspace="5" hspace="5" src="X_plot_NMDS_03.png" alt=""> <h2>Separating the points (observations) by group: cell array of string<a name="6"></a></h2><pre class="codeinput">plot_NMDS(Zdata,group2)
+title(<span class="string">'NMDS by sites'</span>)
+</pre><img vspace="5" hspace="5" src="X_plot_NMDS_04.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2014a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Usage example of function plot_NMDS
+% Input
+%
+% * [data]: n rows each represent on observation, p colunms each represent
+% a variable
+% * [groups]: Optional, vector of length n, numeric, the group id of each observation
+%% Setting up and load data
+clear;clc
+% load data
+load my_colorplates
+    insect_data= load('insectdata.txt');% community data
+rawdata = insect_data; 
+group= load('group1.txt'); % group information, numeric
+group2 = importdata('fakedata.txt'); % group information in text
+% Files like this can be created using excel "save as" .txt
+[n,p] =size(rawdata);% There are n sites and p species.
+%% Data description
+% * insect_data : 44 x 13 matrix, data for 44 (n) patches and 13 (p) species 
+% * group : numeric vector of size n, "site" information
+% * group : cell array of string of size n; "site" information for patches
+%
+% I will use data [insect_data] in this example; where patch represents "observation", species represent "variable" 
+%
+% I will use the three "sites" of patches as group, to plot with different color 
+
+%% Z-transformed
+% one way to get normality is Z transformation; other methods including log(N+1) and square root 
+%
+% uncomment this to log-transform, and replace Zdata with Ldata in following codes
+%
+% Ldata = log(rawdata+1)
+% 
+% Z = (X-mean)/std 
+Zdata= zscore(rawdata);
+% Plot
+figure
+for i=1:10
+plot(1:13,Zdata(i,:),'Linewidth',3,'color',mycolor(i,:));hold on
+end
+xlabel('Species'); ylabel('Frequency')
+legend('Community 1', 'Community 2', 'Community 3', 'Community 4','...','...')
+title('Z-transformed data for the first 10 patches')
+%% NMDS and plot using plot_NMDS
+% [groups] is optional, using Z-transformed data as the sole input gives a
+% simple scatter plot
+plot_NMDS(Zdata)
+%% Adding input [groups] can seperate the 
+plot_NMDS(Zdata,group)
+title('NMDS by sites')
+%%   Separating the points (observations) by group: cell array of string
+
+plot_NMDS(Zdata,group2)
+title('NMDS by sites')
+
+
+
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,219 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Example: how to use [myplot_CI]</title><meta name="generator" content="MATLAB 8.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2014-10-17"><meta name="DC.source" content="X_myplot_CI.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Example: how to use [myplot_CI]</h1><!--introduction--><p>This is an DEMO for my function <b>[myplot_CI]</b>.</p><p><b>Wei-Ting Lin</b> <i>2014/10/17</i></p><p><i>This file is formatted to be published.</i></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Load example data</a></li><li><a href="#3">Use default settings</a></li><li><a href="#4">Change number of Y ticks</a></li><li><a href="#5">Add text to the plot</a></li><li><a href="#7">Change the styles</a></li><li><a href="#9">Other examples</a></li></ul></div><h2>Load example data<a name="1"></a></h2><pre class="codeinput">load <span class="string">Xdata_plot_ci</span>
+</pre><p>There are three variables in this data set.</p><div><ul><li>ci_TD : a 2x4 matrix, first row is the lower limit of confidence interval from null model</li><li>TD : vector (length = 4) as the data points</li><li>TD_ : vector (length = 4), the median of null model data</li></ul></div><p>The data is from part of my research about spatial-scale dependent Top-Down/Bottom-up effects. TD is for Top-down effect. I'm interested in TD index at different spatial scale, CI values are produced by permutation 10,000 times, and mid-point are the medians.</p><h2>Use default settings<a name="3"></a></h2><pre class="codeinput">  myplot_CI(TD,ci_TD,TD_)
+</pre><img vspace="5" hspace="5" src="X_myplot_CI_01.png" alt=""> <h2>Change number of Y ticks<a name="4"></a></h2><pre class="codeinput">  myplot_CI(TD,ci_TD,TD_,8)
+</pre><img vspace="5" hspace="5" src="X_myplot_CI_02.png" alt=""> <h2>Add text to the plot<a name="5"></a></h2><p>Not all items in the structure need to be specified. If you don't want to show some text, just "comment off" the line.</p><p>Like this:</p><p>mytexts.ylabel = 'R'</p><pre class="codeinput"> mytexts=[];
+ mytexts.title =<span class="string">'Top-down effects'</span>;
+ mytexts.ylabel = <span class="string">'R'</span>;
+ mytexts.xlabel = <span class="string">'Spatial Scale (# of plant)'</span>;
+ mytexts.xmark = {<span class="string">'1'</span>,<span class="string">'3'</span>,<span class="string">'9'</span>,<span class="string">'27'</span>};
+</pre><p>To used the default number of Y ticks, set it to 4</p><pre class="codeinput">figure
+ myplot_CI(TD,ci_TD,TD_,4,mytexts)
+</pre><img vspace="5" hspace="5" src="X_myplot_CI_03.png" alt=""> <h2>Change the styles<a name="7"></a></h2><p>I listed all style objects that is changable, all are optional. Just comment off the unwanted ones.</p><p>To used color from my_colorplate, just un-comment the next line</p><p>load my_colorplates</p><p>and replace color code with mycolor(C,:), C is the number of color</p><pre class="codeinput"> mystyle=[];
+ <span class="comment">% Lines for CI</span>
+ mystyle.limcolor = [ 0.1765    0.6275    0.6431]; <span class="comment">% = mycolor(15,:);</span>
+ mystyle.limwidth = 3;
+ <span class="comment">% Marks for midpoint</span>
+ mystyle.midmarker = <span class="string">'d'</span>;
+ mystyle.midcolor = [0.8000    0.2000    0.2000];<span class="comment">% = mycolor(2,:);</span>
+ mystyle.midfacecolor = [ 0.8000    0.7000    0.1000];<span class="comment">% mycolor(5,:);</span>
+ mystyle.midsize = 6 ;
+ mystyle.midwidth = 2;
+ <span class="comment">% Marks for data points</span>
+ mystyle.datamarker = <span class="string">'*'</span>;
+ mystyle.datacolor = [0    0.2000    0.6000];<span class="comment">% mycolor(3,:);</span>
+ mystyle.datafacecolor = [ 0.8000    0.7000    0.1000];<span class="comment">% mycolor(5,:);</span>
+ mystyle.datasize = 8 ;
+ mystyle.datawidth = 2;
+ <span class="comment">% Marks for significant data points</span>
+ mystyle.sigmarker = <span class="string">'^'</span>;
+ mystyle.sigcolor = [0.8000    0.2000    0.2000];<span class="comment">% = mycolor(2,:);</span>
+ mystyle.sigfacecolor = [0.8000    0.2000    0.2000];<span class="comment">% = mycolor(2,:);</span>
+ mystyle.sigsize = 10 ;
+ mystyle.sigwidth = 2;
+ <span class="comment">% The Zero line</span>
+ mystyle.zeroplot = 1; <span class="comment">% whether to plot the zero line</span>
+ mystyle.zerostyle =<span class="string">'--'</span>;
+ mystyle.zerocolor = <span class="string">'k'</span>;
+ mystyle.zerowidth = 1;
+</pre><p>Make the plot!</p><pre class="codeinput"> figure
+ myplot_CI(TD,ci_TD,TD_,4,mytexts,mystyle)
+</pre><img vspace="5" hspace="5" src="X_myplot_CI_04.png" alt=""> <h2>Other examples<a name="9"></a></h2><p>If you want to change the style but don't want any text</p><pre class="codeinput"> figure
+  myplot_CI(TD,ci_TD,TD_,4,[],mystyle)
+</pre><img vspace="5" hspace="5" src="X_myplot_CI_05.png" alt=""> <p>Make some change to style</p><div><ul><li>Don't want y = zero line</li><li>Don't want midpoints</li></ul></div><pre class="codeinput">mystyle=[];
+mystyle.limwidth = 5;
+mystyle.limcolor= [0.5333    0.7216    0.8471]; <span class="comment">% = mycolor(28,:);</span>
+mystyle.zeroplot = 0;
+</pre><p>Plot</p><pre class="codeinput">figure
+myplot_CI(TD,ci_TD,[],4,[],mystyle)
+</pre><img vspace="5" hspace="5" src="X_myplot_CI_06.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2014a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Example: how to use [myplot_CI]
+% This is an DEMO for my function *[myplot_CI]*.
+%
+% *Wei-Ting Lin* _2014/10/17_
+% 
+% _This file is formatted to be published._
+%% Load example data
+load Xdata_plot_ci
+%%
+% There are three variables in this data set.
+%
+% * ci_TD : a 2x4 matrix, first row is the lower limit of confidence
+% interval from null model
+% * TD : vector (length = 4) as the data points
+% * TD_ : vector (length = 4), the median of null model data
+%
+% The data is from part of my research about spatial-scale dependent Top-Down/Bottom-up effects. 
+% TD is for Top-down effect. I'm interested in TD index at different spatial scale, 
+% CI values are produced by permutation 10,000 times, and mid-point are the medians.   
+
+ %% Use default settings
+  myplot_CI(TD,ci_TD,TD_)
+ %% Change number of Y ticks
+  myplot_CI(TD,ci_TD,TD_,8)
+ %% Add text to the plot
+ % Not all items in the structure need to be specified.
+ % If you don't want to show some text, just "comment off" the line.
+ %
+ % Like this:
+ % 
+ % mytexts.ylabel = 'R'
+ mytexts=[];
+ mytexts.title ='Top-down effects';
+ mytexts.ylabel = 'R';
+ mytexts.xlabel = 'Spatial Scale (# of plant)';
+ mytexts.xmark = {'1','3','9','27'};
+ %%
+ % To used the default number of Y ticks, set it to 4
+figure
+ myplot_CI(TD,ci_TD,TD_,4,mytexts)
+ 
+ %% Change the styles
+ % I listed all style objects that is changable, all are optional.
+ % Just comment off the unwanted ones.
+ % 
+ % To used color from my_colorplate, just un-comment the next line
+ %
+ % load my_colorplates
+ %
+ % and replace color code with mycolor(C,:), C is the number of color 
+ 
+ mystyle=[];
+ % Lines for CI
+ mystyle.limcolor = [ 0.1765    0.6275    0.6431]; % = mycolor(15,:);
+ mystyle.limwidth = 3;
+ % Marks for midpoint
+ mystyle.midmarker = 'd';
+ mystyle.midcolor = [0.8000    0.2000    0.2000];% = mycolor(2,:);
+ mystyle.midfacecolor = [ 0.8000    0.7000    0.1000];% mycolor(5,:);
+ mystyle.midsize = 6 ;
+ mystyle.midwidth = 2;
+ % Marks for data points
+ mystyle.datamarker = '*';
+ mystyle.datacolor = [0    0.2000    0.6000];% mycolor(3,:);
+ mystyle.datafacecolor = [ 0.8000    0.7000    0.1000];% mycolor(5,:);
+ mystyle.datasize = 8 ;
+ mystyle.datawidth = 2;
+ % Marks for significant data points
+ mystyle.sigmarker = '^';
+ mystyle.sigcolor = [0.8000    0.2000    0.2000];% = mycolor(2,:);
+ mystyle.sigfacecolor = [0.8000    0.2000    0.2000];% = mycolor(2,:);
+ mystyle.sigsize = 10 ;
+ mystyle.sigwidth = 2;
+ % The Zero line
+ mystyle.zeroplot = 1; % whether to plot the zero line
+ mystyle.zerostyle ='REPLACE_WITH_DASH_DASH';
+ mystyle.zerocolor = 'k';
+ mystyle.zerowidth = 1;
+
+ %%
+ % Make the plot!
+ figure
+ myplot_CI(TD,ci_TD,TD_,4,mytexts,mystyle)
+ %% Other examples 
+ % If you want to change the style but don't want any text
+ figure
+  myplot_CI(TD,ci_TD,TD_,4,[],mystyle)
+%% 
+% Make some change to style
+%
+% * Don't want y = zero line
+% * Don't want midpoints
+mystyle=[];
+mystyle.limwidth = 5;
+mystyle.limcolor= [0.5333    0.7216    0.8471]; % = mycolor(28,:);
+mystyle.zeroplot = 0;
+%% 
+% Plot
+figure
+myplot_CI(TD,ci_TD,[],4,[],mystyle)
+##### SOURCE END #####
+--></body></html>

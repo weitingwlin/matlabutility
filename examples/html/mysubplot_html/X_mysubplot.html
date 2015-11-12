@@ -1,0 +1,178 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Example: how to use function [mysubplot]</title><meta name="generator" content="MATLAB 8.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-09-21"><meta name="DC.source" content="X_mysubplot.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Example: how to use function [mysubplot]</h1><!--introduction--><p>This is an DEMO for my function <b>[my_subplot]</b>.</p><p>Depends on [myplot] [mycolor]</p><p><b>Wei-Ting Lin</b> <i>2015/9/21</i></p><p><i>This file is formatted to be published using matlab.</i></p><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">[mysubplot]: Create subplots with Major title</a></li><li><a href="#2">Making mock data</a></li><li><a href="#3">Examples:</a></li><li><a href="#4">Example of merging cells</a></li><li><a href="#5">Error about merging cells</a></li></ul></div><h2>[mysubplot]: Create subplots with Major title<a name="1"></a></h2><p>Usage:</p><div><ul><li>To make subplot:</li></ul></div><pre>                mysubplot(L,W, ID,'Title')
+                [L], [W],: the dimension of subplots as in subplot(L,W,ID)
+                [ID]: the location of subplot as in subplot(L,W,ID);
+                        to make larger subplot, make [ID] a vector with IDs of multiple cells</pre><div><ul><li>To make major title (set ID=0) :</li></ul></div><pre>               mysubplot(L,W, 0,'Title')
+               [L], [W]: the dimension of subplots as in mysubplot(L,W,ID)</pre><h2>Making mock data<a name="2"></a></h2><pre class="codeinput">X = [1:10];
+Y = [1:10]+rand(10,1)'*20';
+</pre><h2>Examples:<a name="3"></a></h2><p>The examples here use [myplot], a function makes pretty plots more quickly, and [mycolor], select color more easily.</p><p>If the labels overlap, manually adjust the size of figure window would likely solve the problem.</p><pre class="codeinput">figure
+<span class="comment">% making major title</span>
+mysubplot(1,2,0,<span class="string">'Big title'</span>)
+<span class="comment">% making subplots</span>
+mysubplot(1,2,1)
+    myplot(X,Y,<span class="string">'L'</span>)
+    xlabel(<span class="string">'X'</span>);ylabel(<span class="string">'Y '</span>)
+    title(<span class="string">'small Title'</span>)
+mysubplot(1,2,2)
+    myplot(X,Y,<span class="string">'S'</span>)
+    xlabel(<span class="string">'X'</span>);ylabel(<span class="string">'Y'</span>)
+    title(<span class="string">'small Title'</span>)
+</pre><img vspace="5" hspace="5" src="X_mysubplot_01.png" alt=""> <h2>Example of merging cells<a name="4"></a></h2><pre class="codeinput">figure
+<span class="comment">% making major title</span>
+mysubplot(3,3,0,<span class="string">'Big title'</span>)
+<span class="comment">% making subplots</span>
+mysubplot(3,3,1)
+    myplot(X,Y,<span class="string">'L'</span>)
+    xlabel(<span class="string">'X'</span>);ylabel(<span class="string">'Y '</span>)
+    title(<span class="string">'small Title'</span>)
+<span class="comment">% making subplots of different sizes by merging cells</span>
+mysubplot(3,3,[6 9])
+    myplot(X,Y,<span class="string">'S'</span>)
+    xlabel(<span class="string">'X'</span>);ylabel(<span class="string">'Y'</span>)
+    title(<span class="string">'small Title'</span>)
+mysubplot(3,3,[4 5 7 8])
+    myplot(X,Y,<span class="string">'S'</span>,15)
+    xlabel(<span class="string">'X'</span>);ylabel(<span class="string">'Y'</span>)
+    title(<span class="string">'small Title'</span>)
+</pre><img vspace="5" hspace="5" src="X_mysubplot_02.png" alt=""> <h2>Error about merging cells<a name="5"></a></h2><p>if assigned subplot cells does not make a square, error occur</p><pre class="codeinput">mysubplot(2,2,[2 3])
+</pre><pre class="codeoutput error">Error using mysubplot (line 67)
+input cell IDs will not make a square
+
+Error in X_mysubplot (line 65)
+mysubplot(2,2,[2 3])
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2014a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Example: how to use function [mysubplot]
+% This is an DEMO for my function *[my_subplot]*.
+%
+% Depends on [myplot] [mycolor]
+%
+% *Wei-Ting Lin* _2015/9/21_
+% 
+% _This file is formatted to be published using matlab._
+%% [mysubplot]: Create subplots with Major title
+% Usage:
+%
+% 
+% 
+% * To make subplot:
+% 
+%                  mysubplot(L,W, ID,'Title')
+%                  [L], [W],: the dimension of subplots as in subplot(L,W,ID)
+%                  [ID]: the location of subplot as in subplot(L,W,ID);
+%                          to make larger subplot, make [ID] a vector with IDs of multiple cells
+%
+% * To make major title (set ID=0) :
+% 
+%                 mysubplot(L,W, 0,'Title')                                    
+%                 [L], [W]: the dimension of subplots as in mysubplot(L,W,ID)
+%% Making mock data
+X = [1:10];
+Y = [1:10]+rand(10,1)'*20';
+%% Examples:
+% The examples here use [myplot], a function makes pretty plots more quickly, and [mycolor], select color
+% more easily.
+%
+% If the labels overlap, manually adjust the size of figure window would likely solve the problem.
+figure
+% making major title
+mysubplot(1,2,0,'Big title')
+% making subplots
+mysubplot(1,2,1)
+    myplot(X,Y,'L')
+    xlabel('X');ylabel('Y ')
+    title('small Title')
+mysubplot(1,2,2)
+    myplot(X,Y,'S')
+    xlabel('X');ylabel('Y')
+    title('small Title')
+%% Example of merging cells
+figure
+% making major title 
+mysubplot(3,3,0,'Big title')
+% making subplots
+mysubplot(3,3,1)
+    myplot(X,Y,'L')
+    xlabel('X');ylabel('Y ')
+    title('small Title')
+% making subplots of different sizes by merging cells 
+mysubplot(3,3,[6 9])
+    myplot(X,Y,'S')
+    xlabel('X');ylabel('Y')
+    title('small Title')
+mysubplot(3,3,[4 5 7 8])
+    myplot(X,Y,'S',15)
+    xlabel('X');ylabel('Y')
+    title('small Title')
+%% Error about merging cells
+% if assigned subplot cells does not make a square, error occur
+mysubplot(2,2,[2 3])
+##### SOURCE END #####
+--></body></html>

@@ -1,0 +1,224 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Example of using function [mycorrplot_1]</title><meta name="generator" content="MATLAB 8.6"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2015-10-31"><meta name="DC.source" content="X_corrplots.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1>Example of using function [mycorrplot_1]</h1><!--introduction--><p>This is an example file demonstrating how to use * [mycorrplot_1] * to viisualize the result of correlation (i.e. the results from * corr(X) *).</p><p>Use my Iva insect data <b>[X_community]</b> as example</p><p>by Wei-Ting Lin, <i>2014/10/15</i></p><div><ul><li>update 2015/10/31 : can take table as input data, remove NaN with nancorr.m</li></ul></div><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">mycorrplot_1</a></li><li><a href="#2">Setting up and load data</a></li><li><a href="#4">Data preparations</a></li><li><a href="#6">Using [mycorrplot_1]</a></li><li><a href="#7">Examples of usage: default</a></li><li><a href="#8">Examples: working with table</a></li><li><a href="#10">Example of "type"</a></li><li><a href="#14">Example: remove NaN</a></li></ul></div><h2>mycorrplot_1<a name="1"></a></h2><p>This function should present the result of correlations in a figure with table-like structure. Visualize the result of: <b>corr[X]</b></p><p>R values and Significance levels (range of P values) are visualized as the color and sizes of circle. User can also chose to see scatterplots, and/or text with R and P values on one triangle.</p><p><b>Inspeired by</b></p><div><ul><li>corrplot : from Matlab econometrics tool box</li><li>correlationCircles:by David Legland <a href="http://www.mathworks.com/matlabcentral/fileexchange/45698-correlation-circles">http://www.mathworks.com/matlabcentral/fileexchange/45698-correlation-circles</a></li><li>R package corrplot: <a href="http://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html">http://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html</a></li><li>num2cellstr.m : by Andrew Watson <a href="http://www.mathworks.com/matlabcentral/fileexchange/20639-num2cellstr">http://www.mathworks.com/matlabcentral/fileexchange/20639-num2cellstr</a></li></ul></div><p><b>Dependent files</b></p><p>[plot_circle.m] [mycolor.m] [nancorr.m] [tnames.m]</p><h2>Setting up and load data<a name="2"></a></h2><pre class="codeinput">clear;clc
+<span class="comment">% cd 'C:\Users\ASUS\Dropbox\DataCoding\MATLAB\utility_wtl\X_examples'</span>
+<span class="comment">%  cd 'C:\Users\Wei-Ting\Dropbox\DataCoding\MATLAB\utility_wtl\X_examples'</span>
+ load <span class="string">./X_data/X_community</span>
+<span class="comment">% addpath 'C:\Users\Wei-Ting\Dropbox\DataCoding\MATLAB\utility_wtl\Utility_plot'</span>
+<span class="comment">% addpath 'C:\Users\Wei-Ting\Dropbox\DataCoding\MATLAB\utility_wtl\Utility_stat'</span>
+</pre><p><b>[X_community]</b> contains two matrices, and two "name" files:</p><div><ul><li>insect_data : 44 x 13 matrix, data for 44 patches and 13 species</li><li>patch_met : 44 x12 matrix, data for 44 patches and 12 patch attributes</li><li>insect_names : content of the insects (each column in [insect_data])</li><li>met_names : content of the patch attributes I like to keep data as a matrix and put their names in a seperate file. We are only using the <b>[insect_data]</b> here.</li></ul></div><h2>Data preparations<a name="4"></a></h2><p><b>Short names</b> The names in insect_names can be too long for some display, so I create a short version of names</p><pre class="codeinput">shortnames = {<span class="string">'Spd'</span>,<span class="string">'Ant'</span>,<span class="string">'Ophr'</span>,<span class="string">'Paria'</span>,<span class="string">'Aphid'</span>,<span class="string">'Hesp'</span>,<span class="string">'RSB'</span>,<span class="string">'Crypt'</span>,<span class="string">'Keye'</span>,<span class="string">'LB_7'</span>,<span class="string">'LB_0'</span>,<span class="string">'LB_n'</span>,<span class="string">'LB_sw'</span>}
+</pre><pre class="codeoutput">
+shortnames = 
+
+  Columns 1 through 7
+
+    'Spd'    'Ant'    'Ophr'    'Paria'    'Aphid'    'Hesp'    'RSB'
+
+  Columns 8 through 13
+
+    'Crypt'    'Keye'    'LB_7'    'LB_0'    'LB_n'    'LB_sw'
+
+</pre><p>make a table</p><pre class="codeinput">Tdata = array2table(insect_data,<span class="string">'VariableNames'</span>,shortnames);
+Tdata(1:3,:)
+</pre><pre class="codeoutput">
+ans = 
+
+      Spd        Ant      Ophr    Paria    Aphid      Hesp        RSB      Crypt     Keye      LB_7     LB_0      LB_n     LB_sw 
+    _______    _______    ____    _____    ______    _______    _______    _____    _______    ____    _______    ____    _______
+
+     1.6667     3.3333    0       0        7.6667    0.16667    0.16667    0        0.66667    0       0.16667    0             0
+    0.83333          0    0       0          67.5          0          0    0              0    0           1.5    0       0.33333
+     1.1667    0.33333    0       0            14          0    0.33333    0              0    0             0    0             0
+
+</pre><h2>Using [mycorrplot_1]<a name="6"></a></h2><p><b>Syntax</b></p><p>mycorrplot_1( X, xnames, type, colorbaron, textin )</p><div><ul><li>X : data; we are interested in correlation between each pair of columns in X; as in corr(X)</li><li>xnames : name of each column in X, stored in cell array of strings; default is {'1','2','3',....}</li><li>type :  style of output, can be 'C','T','S','B'; default is 'B'; see section *  Example of "type" *</li><li>colorbaron : 0 or 1; whether to plot out the legend or not; default is 0</li><li>textin : 0 or 1; whether to put labels in the diagnal; default is 1 if xnames not specified, 0 otherwise</li></ul></div><h2>Examples of usage: default<a name="7"></a></h2><p>Equal to mycorrplot_1( insect_data, {'1','2','3',....,'13'}, 'B', 0, 1 )</p><pre class="codeinput">mycorrplot_1(insect_data)
+</pre><img vspace="5" hspace="5" src="X_corrplots_01.png" alt=""> <h2>Examples: working with table<a name="8"></a></h2><p>The default setting, if input is a table, variable names will be inported</p><pre class="codeinput">mycorrplot_1(Tdata(:,5:11)) <span class="comment">% (for smaller plot we use only a subset here)</span>
+</pre><img vspace="5" hspace="5" src="X_corrplots_02.png" alt=""> <p>In this example, variable names are short enough so we could put variables in the diagnal.</p><pre class="codeinput">mycorrplot_1( Tdata(:,5:11), [] , [], [], 1 )
+<span class="comment">% (for smaller plot we use only a subset here)</span>
+<span class="comment">%</span>
+<span class="comment">% * tip: Use [] as place holder for other parameters; default values will be used</span>
+</pre><img vspace="5" hspace="5" src="X_corrplots_03.png" alt=""> <h2>Example of "type"<a name="10"></a></h2><p><b>'C'</b> means put all circles</p><pre class="codeinput">mycorrplot_1(insect_data, insect_names, <span class="string">'C'</span>,1,0)
+</pre><img vspace="5" hspace="5" src="X_corrplots_04.png" alt=""> <img vspace="5" hspace="5" src="X_corrplots_05.png" alt=""> <p><b>'T'</b> means put text and circles</p><p>don't need legend everytime, set colorbaron (the 4th parameter) to 0</p><pre class="codeinput">mycorrplot_1(Tdata(:,5:11),[], <span class="string">'T'</span>,0,1) <span class="comment">% use table input in this example</span>
+</pre><img vspace="5" hspace="5" src="X_corrplots_06.png" alt=""> <p><b>'S'</b> means put scatterplot and circles</p><pre class="codeinput">mycorrplot_1(insect_data, shortnames ,<span class="string">'S'</span>,0,1)
+<span class="comment">% If the names are short enough, we can put them in the diagnal boxes</span>
+</pre><img vspace="5" hspace="5" src="X_corrplots_07.png" alt=""> <p><b>'B'</b> means put "Both" scatter plot and tex; 'B' is the default</p><p>In this case, text will be put on top of the circles.</p><p><i>uncomment the belowed code for demo</i>  mycorrplot_1(insect_data(:,1:6), shortnames(:,1:6),'B',0,1)</p><h2>Example: remove NaN<a name="14"></a></h2><p>For correlaiton in each variable pairs, rows with NaNs</p><p>Create a mock data with NaNs</p><pre class="codeinput">nandata = Tdata(1:20,5:11);
+nandata{[1 2],3} = NaN; nandata{7,4:6} = NaN;
+</pre><p>A message will apear in command window if data includes NaN</p><pre class="codeinput">mycorrplot_1(nandata, [] ,<span class="string">'S'</span>,[],1)
+</pre><pre class="codeoutput">NaN removed before calculating correlation; see nancorr.m for detail
+</pre><img vspace="5" hspace="5" src="X_corrplots_08.png" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% Example of using function [mycorrplot_1]
+% This is an example file demonstrating how to use * [mycorrplot_1] * to
+% viisualize the result of correlation (i.e. the results from * corr(X) *). 
+%
+% Use my Iva insect data *[X_community]* as example
+%
+% by Wei-Ting Lin, _2014/10/15_
+%
+% * update 2015/10/31 : can take table as input data, remove NaN with
+% nancorr.m
+%% mycorrplot_1
+% This function should present the result of correlations in a figure with table-like
+% structure. Visualize the result of: *corr[X]*
+%
+% R values and Significance levels (range of P values) are visualized
+% as the color and sizes of circle. User can also chose to see
+% scatterplots, and/or text with R and P values on one triangle.
+%
+% *Inspeired by* 
+% 
+% * corrplot : from Matlab econometrics tool box
+% * correlationCircles:by David Legland http://www.mathworks.com/matlabcentral/fileexchange/45698-correlation-circles
+% * R package corrplot: http://cran.r-project.org/web/packages/corrplot/vignettes/corrplot-intro.html
+% * num2cellstr.m : by Andrew Watson http://www.mathworks.com/matlabcentral/fileexchange/20639-num2cellstr
+%
+% *Dependent files*
+%
+% [plot_circle.m] [mycolor.m] [nancorr.m] [tnames.m]
+%% Setting up and load data
+clear;clc
+% cd 'C:\Users\ASUS\Dropbox\DataCoding\MATLAB\utility_wtl\X_examples'
+%  cd 'C:\Users\Wei-Ting\Dropbox\DataCoding\MATLAB\utility_wtl\X_examples'
+ load ./X_data/X_community
+% addpath 'C:\Users\Wei-Ting\Dropbox\DataCoding\MATLAB\utility_wtl\Utility_plot'
+% addpath 'C:\Users\Wei-Ting\Dropbox\DataCoding\MATLAB\utility_wtl\Utility_stat'
+%%
+% *[X_community]* contains two matrices, and two "name" files:
+%
+% * insect_data : 44 x 13 matrix, data for 44 patches and 13 species 
+% * patch_met : 44 x12 matrix, data for 44 patches and 12 patch attributes
+% * insect_names : content of the insects (each column in [insect_data])
+% * met_names : content of the patch attributes
+% I like to keep data as a matrix and put their names in a seperate file.
+% We are only using the *[insect_data]* here.
+
+%% Data preparations 
+% *Short names*
+% The names in insect_names can be too long for some display, so I create a short version of names 
+shortnames = {'Spd','Ant','Ophr','Paria','Aphid','Hesp','RSB','Crypt','Keye','LB_7','LB_0','LB_n','LB_sw'}
+%%
+% make a table
+Tdata = array2table(insect_data,'VariableNames',shortnames);
+Tdata(1:3,:)
+%%  Using [mycorrplot_1]
+% *Syntax*
+% 
+% mycorrplot_1( X, xnames, type, colorbaron, textin )
+%
+% * X : data; we are interested in correlation between each pair of columns in X; as in corr(X)
+% * xnames : name of each column in X, stored in cell array of strings; default is {'1','2','3',....}
+% * type :  style of output, can be 'C','T','S','B'; default is 'B'; see
+% section *  Example of "type" *
+% * colorbaron : 0 or 1; whether to plot out the legend or not; default is 0
+% * textin : 0 or 1; whether to put labels in the diagnal; default is 1 if
+% xnames not specified, 0 otherwise
+%% Examples of usage: default
+% Equal to mycorrplot_1( insect_data, {'1','2','3',....,'13'}, 'B', 0, 1 )
+mycorrplot_1(insect_data)
+%% Examples: working with table
+% The default setting, if input is a table, variable names will be
+% inported 
+mycorrplot_1(Tdata(:,5:11)) % (for smaller plot we use only a subset here)
+%%
+% In this example, variable names are short enough so we could put variables in the diagnal. 
+%
+mycorrplot_1( Tdata(:,5:11), [] , [], [], 1 ) 
+% (for smaller plot we use only a subset here)
+%                                     
+% * tip: Use [] as place holder for other parameters; default values will be used
+%% Example of "type"
+% *'C'* means put all circles 
+mycorrplot_1(insect_data, insect_names, 'C',1,0)
+%%
+% *'T'* means put text and circles 
+%
+% don't need legend everytime, set colorbaron (the 4th parameter) to 0
+mycorrplot_1(Tdata(:,5:11),[], 'T',0,1) % use table input in this example
+%%
+% *'S'* means put scatterplot and circles
+%
+mycorrplot_1(insect_data, shortnames ,'S',0,1) 
+% If the names are short enough, we can put them in the diagnal boxes
+%%
+% *'B'* means put "Both" scatter plot and tex; 'B' is the default
+% 
+% In this case, text will be put on top of the circles. 
+% 
+% _uncomment the belowed code for demo_
+%  mycorrplot_1(insect_data(:,1:6), shortnames(:,1:6),'B',0,1) 
+%% Example: remove NaN
+% For correlaiton in each variable pairs, rows with NaNs 
+%
+% Create a mock data with NaNs
+nandata = Tdata(1:20,5:11);  
+nandata{[1 2],3} = NaN; nandata{7,4:6} = NaN;
+%%
+% A message will apear in command window if data includes NaN
+mycorrplot_1(nandata, [] ,'S',[],1) 
+##### SOURCE END #####
+--></body></html>
