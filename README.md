@@ -54,6 +54,8 @@ Functions used in ecological data analysis and modeling. e.g. community analysis
 ## Reference
 >Hanski & Woiwod (1993) Spatial synchrony in the dynamics of moth and aphid populations
 
+>Sevenster (1996) Aggregation and Coexistence. I. Theory and Analysis
+
 ---
 >#### Update notes
 > * 2015/10/19 : edit fix tick mark problem in **myplot_CI.m**
@@ -65,3 +67,4 @@ Functions used in ecological data analysis and modeling. e.g. community analysis
 > * 2015/11/02 : edit  **mycorrplot_1.m**, **myplot.m**, transparency only work for version 2015a and newer.
 > * 2015/11/05 : add **plotTaylorFit.m**, **TaylorFit.m**
 > * 2015/11/11 : add **numInteraction.m**, **numInteraction_bootstrap.m**, **hline.m**, **colonization.m**; edit **myplot.m** add style option; edit **X_mycorrplot_2.m** include example of table input.
+> * 2015/11/12 : add **covcc.m**, **aggregation.m**

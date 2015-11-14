@@ -52,8 +52,9 @@
      inputistable=0; % flag for whether input is a table (or matrix by default)
   if istable(X)
           inputistable = 1;
-          Xname = tnames(X); % save names before change data type
-          X = X{:,strcmp(varfun(@class,X,'OutputFormat','Cell'), 'double')} ;         
+              indnum = strcmp(varfun(@class,X,'OutputFormat','Cell'), 'double'); 
+          Xname = tnames(X(:,indnum)); % save names before change data type
+          X = X{:,indnum} ;         
           if nargin < 2 || isempty(xnames)
                 xnames = Xname;
           end        

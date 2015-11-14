@@ -3,7 +3,7 @@
 ## Ecology data analysis and modeling
 
 Functions used in ecological data analysis and modeling. e.g. community analysis, biodiversity calculation.
-
+* **aggregation.m** : Indices for inter- and intra-species aggregation.(ref. Sevenster, 1996) 
 * **association\_ind.m** : calculate association index
 * **association\_ind\_bstr.m** :  calculate association index and bootstrap analysis
 * **association\_ind\_bstr\_par.m** :  calculate association index and bootstrap analysis, accelerate using **parfor**
@@ -64,12 +64,13 @@ Function related to making figures.
 Functions related to statistics and data analysis.
 
 * **castdata.m** : put vector data into a matrix by assigned group
+* **covcc.m** : column by column covarience for two matrices.
 * **inlier.m** : function, remove outliers from vectors
 
 * **meltdata** : Put each data in a matrix as a variable in a row ("an obseervation"), column id and row id as two other variables 
 * **nancorr.m** : calculate correlation coefficient, ignore NaN in each pair
 * **nangeomean.m** : calculate geometric mean with NaN removed. 
-* **nanls.m** :  calculate ls parameters and r,p vlaue for correlation
+* **nanls.m** :  calculate ls parameters and r, p vlaue for correlation
 * **nanzscore.m** : z-transform with NaNs. (remove NaN and pass parameters to matlab function **zscore**)
 * **tcastdata** : put data from table into a matrix by assigned group
 * **tnames.m** : show names of variable in a table

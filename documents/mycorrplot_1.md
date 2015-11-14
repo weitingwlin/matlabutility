@@ -1,6 +1,8 @@
 # mycorrplot_1
 
-##### This function should present the result of correlations in a figure with table-like structure. Visualize the result of: corr[X]
+##### This function should present the result of correlations in a figure with table-like structure. Visualize the result of: corr(X)
+
+##### Rows with NaN will be removed for each pair of variables. Input can be matriX or table. 
 
 ##### R values and Significance levels (range of P values) are visualized as the color and sizes of circle. User can also chose to see scatterplots, and/or text with R and P values on one triangle.
 
@@ -20,10 +22,10 @@
 * **X** : data, can be a matrix or a table. We are interested in correlation between each pair of columns in X; as in corr(X)
 * **xnames** : optional. Cell array of strings; name of each column in X; default is {'1','2','3',....}; if input **X** is a table, default is the variable names in **X**. 
 * **type** : style of output, can be 'C','T','S','B'; default is 'B'
- + 'C' : 
- + 'T' :
- + 'S' :
- + 'B' : circle and text on the lower triangle, scatterplot on the upper.
+ + 'C' :'circles' on both upper and lower tringles
+ + 'T' :'text': text on the upper triangle, circle on the lower triangle
+ + 'S' : 'scatter plot' on the upper triangle, circle on the lower triangle
+ + 'B' : ("both") circle and text on the lower triangle, scatterplot on the upper.
 * **colorbaron** : 0 or 1; whether to plot out the legend or not; default is 0
 * **textin** : 0 or 1; whether to put labels in the diagnal; default is 1 if xnames not specified, 0 otherwise
 

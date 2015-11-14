@@ -31,8 +31,7 @@ shortnames_met = {'Site','Patch','L','W','Area','H','DtoN','Shade','mud','borr',
 % use only some of the original data in later analyses
 set1 = [1 2 4 5 6 7 12];
 set2 = [5  7 8 9 11 ];
-%%
-% make a table
+%% make data into format "table"
 Tdata = array2table(insect_data(:,set1),'VariableNames',shortnames(set1));
 Tdata(1:3,:) % display the first few lines
 Tdatamet =  array2table(patch_met(:,set2),'VariableNames',shortnames_met(set2));
@@ -77,4 +76,10 @@ mycorrplot_2(insect_data(:,set1), patch_met(:,set2))
 %  [] as place holder
 %   
 %  variable names will be passed in 
-mycorrplot_2(Tdata,Tdatamet,[],[],'T')
+mycorrplot_2(Tdata,Tdatamet,[],[],'C',[1 0 0])
+%% Missing data
+% introduce some missing data manually
+    Tdata{15,1:3}=NaN;
+    Tdatamet{[40 43 44], 5}=NaN;
+% 
+mycorrplot_2(Tdata,Tdatamet,[],[],'C',[1 0 0])

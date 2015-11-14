@@ -54,6 +54,10 @@
  
  
  % for corr(X,Y)
+  if  any(any(isnan([X Y])))
+ disp('NaN removed before calculating correlation; see nancorr.m for detail')
+  end
+ 
  [Rvals, Pvals] = nancorr(X,Y);
  [p1,p2] = size(Rvals);
  

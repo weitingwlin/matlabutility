@@ -1,5 +1,6 @@
 % example for calculating association index
-load X_community
+cd 'C:\Users\ASUS\Dropbox\DataCoding\utility_wtl\examples'
+load ./X_data/X_community
 %%
 A = association_ind(insect_data);
 %%
