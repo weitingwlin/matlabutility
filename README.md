@@ -37,7 +37,7 @@ Functions used in ecological data analysis and modeling. e.g. community analysis
 ### Making figures
 
 * **auto_tick.m** : calculate tick mark location, used in other functions. 
-* **mycolor** : function, pick color from a color plates, used in many plotting functions.
+* **mycolor.m** : function, pick color from a color plates, used in many plotting functions.
 * **mycorrplot_1** : Plot the results of correlation (i.e. corr(X)) in a figure with table-like structure.
 * **mycorrplot_2** : Plot the results of correlation (i.e. corr(X, Y)) in figures with table-like structure.
 * **myplot** : make nice(r) scatterplot or line plot quickly
