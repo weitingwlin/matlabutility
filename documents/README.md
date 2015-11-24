@@ -4,7 +4,7 @@ Not all functions have documentation.
 
 
 
-### [mycolor](https://github.com/weitingwlin/matlabutility/blob/master/documents/mycoolor.md)
+### [mycolor](https://github.com/weitingwlin/matlabutility/blob/master/documents/mycolor.md)
 A color selecter: generating a 3-number vector code for a color. Can be used in all plotting functions.
 
 
