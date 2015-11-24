@@ -3,6 +3,7 @@
 ## Ecology data analysis and modeling
 
 Functions used in ecological data analysis and modeling. e.g. community analysis, biodiversity calculation.
+
 * **aggregation.m** : Indices for inter- and intra-species aggregation.(ref. Sevenster, 1996) 
 * **association\_ind.m** : calculate association index
 * **association\_ind\_bstr.m** :  calculate association index and bootstrap analysis

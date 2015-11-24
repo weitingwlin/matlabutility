@@ -13,6 +13,7 @@
 %              color change fallow the color plate on mycolor.m 
 %              pointcolor: vector of 3, or matrix of n x 3, color of the datapoints; default is equal to .ebcolor
 %              DataPointsOn: whether to plot data points, default is 0
+%              LegendOn: whether to plot data points, default is 0
 % [Texts]: a structure about text inputs, with fields
 %              xlabels: character cell, name of each bar (column)
 %              xlabel: 
@@ -111,8 +112,13 @@ end
 jit = jit + 1;
  end
 %%
-if length(cat2) > 1
-    legend([h], cat2)
+if ~isfield(Styles,'LegendOn') 
+Styles.LegendOn=1 ; 
+end
+if Styles.LegendOn==1  
+    if length(cat2) > 1
+        legend([h], cat2)
+    end
 end
  %% Add texts
  set(gca,'FontSize',14,'linewidth',2)  

@@ -66,5 +66,6 @@ Functions used in ecological data analysis and modeling. e.g. community analysis
 > * 2015/10/31 : edit **X\_mycorrplot.m**, **myplotyy.m**, add **nanls.m**,**myplot\_ls** to replace **LS\_combo.m** and **plot\_linefit.m**
 > * 2015/11/02 : edit  **mycorrplot_1.m**, **myplot.m**, transparency only work for version 2015a and newer.
 > * 2015/11/05 : add **plotTaylorFit.m**, **TaylorFit.m**
-> * 2015/11/11 : add **numInteraction.m**, **numInteraction_bootstrap.m**, **hline.m**, **colonization.m**; edit **myplot.m** add style option; edit **X_mycorrplot_2.m** include example of table input.
+> * 2015/11/11 : add **numInteraction.m**, **numInteraction\_bootstrap.m**, **hline.m**, **colonization.m**; edit **myplot.m** add style option; edit **X\_mycorrplot_2.m** include example of table input.
 > * 2015/11/12 : add **covcc.m**, **aggregation.m**
+> * 2015/11/23 : add documentation for **mycolor.m**, **myplot.m**, Edit **myplot.m**,**myplott.m**

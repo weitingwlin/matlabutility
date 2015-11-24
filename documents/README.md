@@ -14,3 +14,6 @@ Present the result of correlations in a figure with table-like structure. Visual
 
 ### [mycorrplot_2](https://github.com/weitingwlin/matlabutility/blob/master/documents/mycorrplot_2.md)
 Present the result of correlations in a figure with table-like structure. Visualize the result of: corr(X,Y)  
+
+### [myplot](https://github.com/weitingwlin/matlabutility/blob/master/documents/myplot.md)
+Make scatter plot or line plot quiickly and nice.
