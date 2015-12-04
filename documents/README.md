@@ -17,3 +17,9 @@ Present the result of correlations in a figure with table-like structure. Visual
 
 ### [myplot](https://github.com/weitingwlin/matlabutility/blob/master/documents/myplot.md)
 Make scatter plot or line plot quiickly and nice.
+
+### [myplot_vec](https://github.com/weitingwlin/matlabutility/blob/master/documents/myplot_vec.md)
+Plotting out a 2D vector. Or drawing a line between two points.
+
+### [mystyle](https://github.com/weitingwlin/matlabutility/blob/master/documents/mystyle.md)
+Specify a plotting style by number. Also display the style sheet. 

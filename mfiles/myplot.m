@@ -1,3 +1,4 @@
+%% Make a nice plot quickly 
 % Syntax: myplot(X,Y,type,color, style)
 %             [X],[Y]: vectors of data x,y
 %             [type]: type of plots 
@@ -17,10 +18,11 @@
 %                                 input can be  table
 % Update 2015/11/11 : Add optional input 'style' 
 % Update 2015/11/23 :  Add option color n.5 for hollow markers
+% Update 2015/12/01 : Add numeric and n.5 input option of 'style'; use [] to pass default values
 %%
 function h = myplot(X,Y,type,color,style)
-if (nargin < 4), color = 3; end;
-if (nargin < 3), type = ('S'); end;
+if (nargin < 4 || isempty(color)), color = 3; end;
+if (nargin < 3 ||isempty(type)), type = ('S'); end;
 
 % compatibility to data type table
 Xlab = [];   
@@ -33,8 +35,6 @@ Ylab = [];
       Ylab = tnames(Y);
       Y=table2array(Y);
   end
-
-% script_mycolorplate
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
    hollow = 0; % flag for whether the symbal is hollow
 if length(color)==1
@@ -50,35 +50,50 @@ else if length(color)==3
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 if type=='S'
-          if (nargin < 5), style = 'o';       end
- %  H = plot(X,Y,'o','color',colorcode,'Markerfacecolor',colorcode, 'Markerfacealpha',0.2);
- if hollow == 0
-     if  strcmp(version('-release'), '2015a')
-         h = scatter(X,Y,40,'Markeredgecolor','none','Markerfacecolor',colorcode, 'Markerfacealpha',0.7);
-     else
-         h = scatter(X,Y,40,style,'Markeredgecolor','none','Markerfacecolor',colorcode);     
-     end
- else % hollow ==1    
-         h = scatter(X,Y,40,'Markeredgecolor',colorcode,'Markerfacecolor','none');
- end
-     set(gca,'FontSize',14,'linewidth',2);
-   
+          if (nargin < 5||isempty(style)), style = 'o';       end
+          
+          stylesheet = {'o', 's','d','^','p','+','*','X','v','>','<','.'};
+          a=40;
+          if isnumeric(style) 
+            if (style-floor(style) == 0.5);  hollow = 1;end  
+            style = stylesheet{floor(style)};
+          end 
+        if hollow == 0  && ~any(strcmp(style,{'+','*','X'}))  % +,*,X cannot be hollow
+                if  any( strcmp(version('-release'), {'2015a','2015b'}) )
+                h = scatter(X,Y,a,style,'Markeredgecolor','none','Markerfacecolor',colorcode, 'Markerfacealpha',0.7);
+                else
+                h = scatter(X,Y,a,style,'Markeredgecolor','none','Markerfacecolor',colorcode);     
+                end
+        else % hollow ==1    
+                h = plot(X,Y,style,'color',colorcode);   
+        end
+     set(gca,'FontSize',14,'linewidth',2);   
 end
 
 if type=='L'|| type=='B'
-        if (nargin < 5||type=='B')
+        if (nargin < 5||isempty(style)||type=='B')
                 Lstyle = '-';
         else
                 Lstyle=style;
         end
+        
+          stylesheet = {'-','--',':','-.' };
+          if (isnumeric(Lstyle)), Lstyle = stylesheet{floor(Lstyle)}; end 
+        
      h = plot(X,Y,Lstyle,'linewidth',2,'color',colorcode);
      set(gca,'FontSize',14,'linewidth',2);
 end
 
 if type=='B'
-           if (nargin < 5), style = 'o';       end
+           if (nargin < 5||isempty(style)), style = 'o';       end
+           stylesheet = {'o', 's','d','^','p','+','*','X','v','>','<','.'};
+          a=40;
+         if isnumeric(style) 
+            if (style-floor(style) == 0.5);  hollow = 1;end  
+            style = stylesheet{floor(style)};
+          end 
      hold on
-     if hollow ==0;
+     if hollow ==0  && ~any(strcmp(style,{'+','*','X'})) 
      plot(X,Y,style,'color',colorcode,'Markerfacecolor',colorcode);
      else
      plot(X,Y,style,'color',colorcode);

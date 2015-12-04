@@ -59,7 +59,7 @@ Dissim = pdist(Zdata); % the dissimilarity data
 %% NMDS
 % Output Y is the cordinate of each observation (in this case "patch") in
 % the two dimentions
-[Y, stress, disparity] = mdscale(Dissim,2,'criterion','stress');
+[Y, stress, disparity] = mdscale(Dissim,2,'criterion','sstress');
                                           % For a "Nonmetric MDS"
 figure
 myplot(Y(:,1),Y(:,2),'S')

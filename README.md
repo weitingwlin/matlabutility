@@ -44,6 +44,7 @@ Functions used in ecological data analysis and modeling. e.g. community analysis
 * **myplot_bar** :  make nice(r) barplot quickly
 * **myplot_CI** : make plot to show data and canfidence interval 
 * **myplot_ls** : Make scatter plot and ls line
+* **myplot_vec** : Plot 2D vector
 * **myplotyy** : make nice(r) plotyy quickly
 * **mysubplot** : Make subplot and add major/big title to the figure
 * **plot_circle** : eazier way to make a circle
@@ -69,3 +70,6 @@ Functions used in ecological data analysis and modeling. e.g. community analysis
 > * 2015/11/11 : add **numInteraction.m**, **numInteraction\_bootstrap.m**, **hline.m**, **colonization.m**; edit **myplot.m** add style option; edit **X\_mycorrplot_2.m** include example of table input.
 > * 2015/11/12 : add **covcc.m**, **aggregation.m**
 > * 2015/11/23 : add documentation for **mycolor.m**, **myplot.m**, Edit **myplot.m**,**myplott.m**
+> * 2015/11/24 : add **vline.m**
+> * 2015/12/01 : add **myplot_vec.m**; edit **myplot.m**
+> * 2012/12/02 : add **mystyle.m**, add documentation for **myplot_vec.m**, **mystyle.m**.

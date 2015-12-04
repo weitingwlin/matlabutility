@@ -49,6 +49,10 @@ Function related to making figures.
 >
  ![plot4](images/myplot_ls.png)
 
+* **myplot_vec**: plotting 2D vector
+>
+ ![plot4](images/myplot_vec.png)
+
 * **myplotyy** : make nice(r) plotyy quickly
 >
  ![plot4](images/myplotyy.png)
