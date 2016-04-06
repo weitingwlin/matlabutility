@@ -13,9 +13,17 @@
 %         
 % Wei-Ting Lin 2013/10/30
 % update 2015/10/21 : add default [frame]
-% updata 2015/11/06 : allow matrix as imput
+% update 2015/11/06 : allow matrix as imput
+% update 2016/02/20 : edit - input Vin can be either direction
 function Vout= mv_avrg(Vin,frame, dim)
 if (nargin<2) frame=2; end
+
+[n , p] = size(Vin);
+rotate = 0; % a flage to rotate the output vector
+if n > 1 && p ==1
+        Vin = permute(Vin, [2 1]);
+        rotate = 1;
+end
 
 %%% Vector %%%
 if isvector(Vin)
@@ -41,4 +49,9 @@ if ismatrix(Vin)
                    Vout(:, j) = mean(Vin(:, j:j+frame-1),2); 
              end
      end
+end
+
+%%%%%%%%%%%%%%%%
+if rotate == 1
+        Vout = permute(Vout, [2 1]);
 end

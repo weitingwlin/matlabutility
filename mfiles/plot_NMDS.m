@@ -21,7 +21,7 @@ if isa(groups,'double')==1
     figure
         for i=1:length(grouplist)
             if length(grouplist) <= 10
-                    myplot(Y(groups==grouplist(i),1),Y(groups==grouplist(i),2),'S',i ,2) ; hold on
+                    myplot(Y(groups==grouplist(i),1),Y(groups==grouplist(i),2),'S',i ,i) ; hold on
                
             else
                     myplot(Y(groups==grouplist(i),1),Y(groups==grouplist(i),2),'S',i ) ; hold on

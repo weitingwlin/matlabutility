@@ -1,61 +1,23 @@
 # Matlab utility codes
 
-This is a colection of matlab functions and examples I wrote through graduate school. 
+This is a collection of matlab functions and examples ("primers") I wrote through graduate school. 
 
-Codes as m-files are stored in folder **mfiles**, folder **Xamples** provide example of usage in m-files for some of mine and Matlab functions. **workzone** is a temporary stroage for under construction files.
+Codes as m-files are stored in folder **mfiles**, folder **Xamples** provide example of usage in m-files for some of mine and Matlab functions. **workzone** is a temporary stroage for under-construction files. Folder **documents** contains detailed documents for some functions.
 
 Detialed documentation please see each sub-directory.
 
-## mfiles
+## mfiles 
+
 ### Ecology data analysis and modeling
 Functions used in ecological data analysis and modeling. e.g. community analysis, biodiversity calculation.
 
-* **association\_ind.m** : calculate association index
-* **association\_ind\_bstr.m** :  calculate association index and bootstrap analysis
-* **association\_ind\_bstr\_par.m** :  calculate association index and bootstrap analysis, accelerate using **parfor**
-* **bio_diversity.m** : calculate biodiversity indices
-* **bitemark.m** : transform bite mark count to estimated number of bite (where multiple bite cannot be distinguished).
-* **bray_curtis.m** : 
-* **checkerboard.m** : creating checkerboard landscape
-* **disp_incidence.m** : simulate dispersal events (ref. Hanski & Woiwod, 1993)
-* **plotTaylorFit.m** : function to fit Taylor's power law, and make plot.
-* **TaylorFit.m** : function to fit Taylor's power law in community data.
-* **work_bitemark.m** : Working and demo of function 
 ### Statistics utility and data handling in general
-* **castdata.m** : put vector data into a matrix by assigned group
-* **inlier.m** : function, remove outliers from vectors
-
-* **meltdata** : Put each data in a matrix as a variable in a row ("an obseervation"), column id and row id as two other variables 
-* **nancorr.m** : calculate correlation coefficient, ignore NaN in each pair
-* **nangeomean.m** : calculate geometric mean with NaN removed. 
-* **nanls.m** :  calculate ls parameters and r,p vlaue for correlation
-* **nanzscore.m** : z-transform with NaNs. (remove NaN and pass parameters to matlab function **zscore**)
-* **tcastdata** : put data from table into a matrix by assigned group
-* **tnames.m** : show names of variable in a table
-* **thead.m** show first few lines of table data 
+Mainly convinient functions dealing with **NaN**, and used in exploratery data analysis. 
 
 ### Making figures
-
-* **auto_tick.m** : calculate tick mark location, used in other functions. 
-* **mycolor.m** : function, pick color from a color plates, used in many plotting functions.
-* **mycorrplot_1** : Plot the results of correlation (i.e. corr(X)) in a figure with table-like structure.
-* **mycorrplot_2** : Plot the results of correlation (i.e. corr(X, Y)) in figures with table-like structure.
-* **myplot** : make nice(r) scatterplot or line plot quickly
-* **myplot_bar** :  make nice(r) barplot quickly
-* **myplot_CI** : make plot to show data and canfidence interval 
-* **myplot_ls** : Make scatter plot and ls line
-* **myplot_vec** : Plot 2D vector
-* **myplotyy** : make nice(r) plotyy quickly
-* **mysubplot** : Make subplot and add major/big title to the figure
-* **plot_circle** : eazier way to make a circle
-* **plot_square** : Make a square or box by imput x and y points
+Plotting functions that produced nice figures faster.
 
 
----
-## Reference
->Hanski & Woiwod (1993) Spatial synchrony in the dynamics of moth and aphid populations
-
->Sevenster (1996) Aggregation and Coexistence. I. Theory and Analysis
 
 ---
 >#### Update notes
@@ -72,4 +34,12 @@ Functions used in ecological data analysis and modeling. e.g. community analysis
 > * 2015/11/23 : add documentation for **mycolor.m**, **myplot.m**, Edit **myplot.m**,**myplott.m**
 > * 2015/11/24 : add **vline.m**
 > * 2015/12/01 : add **myplot_vec.m**; edit **myplot.m**
-> * 2012/12/02 : add **mystyle.m**, add documentation for **myplot_vec.m**, **mystyle.m**.
+> * 2015/12/02 : add **mystyle.m**, add documentation for **myplot_vec.m**, **mystyle.m**.
+> * 2015/12/05 : add **template_README.md**, **scriptRitual.md**; edit **numInteraction.m**
+> * 2016/01/04 : add **explore_ttest.m**
+> * 2016/01/28 : add **randeval.m**, edit **disp_incidence.m**
+> * 2016/02/02 : add **nanste.m**, edit **tri2line.m**
+> * 2016/02/03 : add **hotellingT2.m**,**subset.m**
+> * 2016/02/29 : add **vmeanSE.m**
+> * 2016/03/01 : add (moved from **workzone**) **association_ind.m**
+> * 2016/03/

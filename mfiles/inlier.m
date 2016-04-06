@@ -5,7 +5,7 @@
 %%% SYNTAX :new_data = inlier(old_data, threshold, 'type')   %%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %%
 % 
-function new_data = inlier(old_data, threshold, type)
+function [new_data, index] = inlier(old_data, threshold, type)
 if (nargin < 3), type = 'median'; end;
 if (nargin <2), threshold = 2.5; end; % Suggested by Leys et al. 2013
 
@@ -23,5 +23,6 @@ CTR = median(old_data);
 DEV = abs(old_data-CTR)./MAD;
 
 % keep only data within the threshold
-new_data = old_data(DEV<=threshold);
+index = (DEV<=threshold);
+new_data = old_data(index);
 

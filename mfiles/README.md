@@ -14,6 +14,7 @@ Functions used in ecological data analysis and modeling. e.g. community analysis
 * **bray_curtis.m** : 
 * **checkerboard.m** : creating checkerboard landscape
 * **disp_incidence.m** : simulate dispersal events (ref. Hanski & Woiwod, 1993)
+* **explore_ttest.ms** : transform data and do t-test
 * **numInteraction.m** : Calculate numeric interaction from time series data of two populations.
 * **numInteraction_bootstrap.m** : calculate CI and median for null model of the result in **numInteraction.m** using bootstrap.
 * **plotTaylorFit.m** : function to fit Taylor's power law, and make plot.
@@ -70,6 +71,7 @@ Functions related to statistics and data analysis.
 
 * **castdata.m** : put vector data into a matrix by assigned group
 * **covcc.m** : column by column covarience for two matrices.
+* **hotellingT2.m** :  multivariate t-test with Hotelling's T-square
 * **inlier.m** : function, remove outliers from vectors
 
 * **meltdata** : Put each data in a matrix as a variable in a row ("an obseervation"), column id and row id as two other variables 
@@ -77,9 +79,22 @@ Functions related to statistics and data analysis.
 * **nangeomean.m** : calculate geometric mean with NaN removed. 
 * **nanls.m** :  calculate ls parameters and r, p vlaue for correlation
 * **nanzscore.m** : z-transform with NaNs. (remove NaN and pass parameters to matlab function **zscore**)
+* **randeval.m** : simulate and make histogram of argument
+* **subset.m** : subset in a function 
 * **tcastdata** : put data from table into a matrix by assigned group
 * **tnames.m** : show names of variable in a table
-* **thead.m** show first few lines of table data
+* **thead.m** : show first few lines of table data
+* **tri2line.m** : grab upper triangle of a (symatric) matix to a vector
+* **vmeanSE.m** : calculate and display mean and SE from a vector
+
+## Setup
+* **work_setup.m** : this m-file set working directory to this mfiles folder. Can be a template for working with multiple machines.
+
+---
+## Reference
+>Hanski & Woiwod (1993) Spatial synchrony in the dynamics of moth and aphid populations
+
+>Sevenster (1996) Aggregation and Coexistence. I. Theory and Analysis
 
 
 

@@ -1,7 +1,7 @@
 % Syntax: 
-%            myplotyy (X1,Y1,X2,Y2, type1, type2,  color1, color2)
+%            myplotyy(X1,Y1,X2,Y2, type1, type2,  color1, color2)
 %            
-%            [Hax,H1,H2] = myplotyy (X1,Y1,X2,Y2, type1, type2,  color1, color2)
+%            [Hax,H1,H2] = myplotyy(X1,Y1,X2,Y2, type1, type2,  color1, color2)
 %----------------------------------------------------------------------------------------
 %             [X1],[Y1],[X2],[Y2]: vectors of data x,y, array or table column;
 %                                           default for X2 is equal ti X1, default for X1 is 1:n

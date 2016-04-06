@@ -21,6 +21,7 @@
 %              title:
 % 
 % Update 2015/11/3
+% Update 2016/1/5 : point style change for group 2
 function myplott(tabin, inddata, indgroup, Styles, Texts)
 if (nargin < 5), Texts = struct('placehoder',[]); end 
 if (nargin < 4), Styles = struct('placeholder',[]);end; 
@@ -33,9 +34,9 @@ if (nargin < 4), Styles = struct('placeholder',[]);end;
  Texts.ylabels=inddata;
   
   % decide whether ther is a indcolor
-      group2 = categorical(ones(sum(TF),1)) ;
+      group2 = categorical(ones(sum(TF),1)) ; % if there is no group2, make a dummy
       indgroup1 = indgroup{1} ;
-   if length(indgroup) >1
+   if length(indgroup) >1 
       indgroup2 = indgroup{2} ; 
          %  if ~iscategorical(tabin{:,{indgroup2}})
           group2 = categorical(tabin{TF,{indgroup2}});
@@ -69,34 +70,27 @@ if ~isfield(Styles,'pointcolor') % pointbar color
 end
 
  if ~isfield(Styles,'jitter') % pointbar color 
-  Styles.jitter = 0;
+  Styles.jitter = 0.2;
  end
 jit = 0; % first group
-
+stit = 1; % first point style
  %% plots 
 
  for c = 1:length(cat2)
-       subdata=castdata(data(group2==cat2(c)), group1(group2==cat2(c)) );
+       subdata = castdata(data(group2==cat2(c)), group1(group2==cat2(c)) );
        STE = nanstd(subdata)./sqrt(sum(~isnan(subdata)));% standard error 
-     [n,p]=size(subdata);
-     EBcolor = Styles.ebcolor(c,:);
+      [n,p] = size(subdata);
+      EBcolor = Styles.ebcolor(c,:);
       Pcolor = Styles.pointcolor(c,:);
-     %if isfield(Styles,'BarOn') && Styles.BarOn==1  
- %   bar(nanmean(data),'FaceColor', Styles.barcolor, 'EdgeColor', Styles.barcolor)
-     % with bars, error bars are plotted smaller
-  %   if isfield(Styles,'ErrorOn')==0 || Styles.ErrorOn==1    
-   %  errorbar(nanmean(data),STE,'.','Color',Styles.ebcolor,'LineWidth',2)
-   %  end
-% else % not ploting out the bar, error bars are plotted larger
- %   if isfield(Styles,'ErrorOn')==0 || Styles.ErrorOn==1  
- if n > 1
-             errorbar(nanmean(subdata),STE,'o','Color',EBcolor,'LineWidth',2, 'MarkerSize', 2,'MarkerFaceColor',EBcolor); hold on
-       h(c) = plot((1:p) + jit * (Styles.jitter), nanmean(subdata,1),'o','Color',EBcolor,'MarkerSize', 6,'MarkerFaceColor',EBcolor) ; hold on    
+     
+ if n > 1 % num
+       errorbar((1:p) + jit * (Styles.jitter), nanmean(subdata),STE,mystyle(stit),'Color',EBcolor,'LineWidth',2, 'MarkerSize', 2,'MarkerFaceColor',EBcolor); hold on
+       h(c) = plot((1:p) + jit * (Styles.jitter), nanmean(subdata,1),mystyle(stit),'Color',EBcolor,'MarkerSize', 6,'MarkerFaceColor',EBcolor) ; hold on    
  else
-         if n<4 && n>1
+         if n<4 && n>1 % n : the number of data points
             Styles.DataPointsOn = 1  ;      
          end
- h(c)=  plot((1:p) + jit * (Styles.jitter), nanmean(subdata,1),'o','Color',EBcolor,'MarkerSize', 6,'MarkerFaceColor',EBcolor) ; hold on    
+ h(c)=  plot((1:p) + jit * (Styles.jitter), nanmean(subdata,1),mystyle(stit),'Color',EBcolor,'MarkerSize', 6,'MarkerFaceColor',EBcolor) ; hold on    
  end
     %   end
 % end
@@ -105,11 +99,12 @@ jit = 0; % first group
 if isfield(Styles,'DataPointsOn') && Styles.DataPointsOn==1  
     for P=1:p
         A = subdata(:,P);
-       plot(repmat(P+0.1,1,sum(isnan(A)==0) ),A(isnan(A)==0),'o','MarkerSize', 4,'color',Pcolor,'Markerfacecolor',Pcolor);
+       plot(repmat(P+0.1+ jit * (Styles.jitter),1,sum(isnan(A)==0) ),A(isnan(A)==0),mystyle(stit),'MarkerSize', 4,'color',Pcolor,'Markerfacecolor',Pcolor);
     end
 end
 
 jit = jit + 1;
+stit = stit +1;
  end
 %%
 if ~isfield(Styles,'LegendOn') 
