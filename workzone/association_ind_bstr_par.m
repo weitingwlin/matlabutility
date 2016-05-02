@@ -11,7 +11,7 @@
 %         [1]: simple ratio; this is the defalt 
 % alpha:  type one error, p-value of this stat. , default: 0.05
 % tail:   making a one tail or two tail, default is 2, 
-function [limit1, limit2, mid] = association_ind_bstr2(data, itter,formula,alpha, tail)
+function [limit1, limit2, mid] = association_ind_bstr_par(data, itter,formula,alpha, tail)
 % set "simple ratio" as defalt formula
 if (nargin < 5), tail = 2; end;
 if (nargin < 4), alpha = 0.05; end;

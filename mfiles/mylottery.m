@@ -5,7 +5,11 @@
 % 
 % 2015/09/07: fix problem with [weights] input; can be verticle or horizontal vectors now 
 % 2016/03/31: add an argument outn, number of outputs
+% 2016/04/19: sure this can be replaced by datasample in the statistics and
+% Machines learning toolbox
+% Example: datasample(1:5, 500, 'weight', 1:5)
 function W = mylottery(balls, weights, outn)
+message('can be replaced with **datasample**')
 L = length(balls);
 if (nargin < 2 || isempty(weights) ), weights=ones(1,L); end;
 if (nargin < 3), outn = 1; end;

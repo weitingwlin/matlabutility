@@ -1,8 +1,17 @@
-% S: Species count
-% N: individual count
-% iterationlimit
-% 
+% Fisher's alpha diversity index; using Newton's method
+%
+% SYNTAX
+%      alphaF = fisher_alpha(N, S)
+%      alphaF = fisher_alpha(N, S,  iterationlimit, eps)
+%
+%  <-     alphaF: Fisher's alpha diversity index
+%  ->     S: Species count
+%         N: individual count
+%         iterationlimit: largest iteration; optional
+%         eps: how precise the optimization should be; optional
+%
 % ref. Rosenzweig, 1995, Species Diversity in Space and Time.  pp.193-194
+% 2016/04/05
 function alphaF = fisher_alpha(N, S,  iterationlimit, eps)
 if S > N
     error('S cannot be larger then N')

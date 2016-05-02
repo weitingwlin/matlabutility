@@ -42,4 +42,5 @@ Plotting functions that produced nice figures faster.
 > * 2016/02/03 : add **hotellingT2.m**,**subset.m**
 > * 2016/02/29 : add **vmeanSE.m**
 > * 2016/03/01 : add (moved from **workzone**) **association_ind.m**
-> * 2016/03/
+> * 2016/03/31 : add **mylottery.m**
+> * 2016/04/05 : add **fisher_alpha.m**

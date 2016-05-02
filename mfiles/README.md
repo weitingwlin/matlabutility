@@ -14,7 +14,8 @@ Functions used in ecological data analysis and modeling. e.g. community analysis
 * **bray_curtis.m** : 
 * **checkerboard.m** : creating checkerboard landscape
 * **disp_incidence.m** : simulate dispersal events (ref. Hanski & Woiwod, 1993)
-* **explore_ttest.ms** : transform data and do t-test
+* **explore_ttest.m** : transform data and do t-test
+* **fisher_alpha.m** : Fisher's alpha, the diversity index
 * **numInteraction.m** : Calculate numeric interaction from time series data of two populations.
 * **numInteraction_bootstrap.m** : calculate CI and median for null model of the result in **numInteraction.m** using bootstrap.
 * **plotTaylorFit.m** : function to fit Taylor's power law, and make plot.
