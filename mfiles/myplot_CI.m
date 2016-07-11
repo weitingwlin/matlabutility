@@ -28,6 +28,7 @@
 % update: 2014/10/21 fix bugs about significant data
 % update: 2014/10/22 fix bugs about text position, rotate ylabel if it's long
 % update: 2015/10/19 fix bugs about tick mark
+% update: 2016/06/09 sort box_lim automatically
 %%
 function myplot_CI(points,box_lim, box_mid,Nt,texts,style)
 if (nargin < 6), style = []; end
@@ -35,8 +36,9 @@ if (nargin < 5), texts = []; end
 if (nargin < 4), Nt = 4; end 
 if (nargin < 3), box_mid=[];end % default number of ticks
 %%
-if isempty(find(box_lim(1,:)>box_lim(2,:)))==0
-error('Input [box_lim] should be sorted, box_lim(1,:) should be smaller')
+if isempty(find(box_lim(1,:) > box_lim(2,:)) ) == 0
+    box_lim = sort(box_lim); 
+  %'Input [box_lim] sorted so box_lim(1,:) should smaller'
 end
 %% calculate yframe and ymark by function auto_tick
    f_1 = max(max([box_lim;box_mid;points]));

@@ -9,6 +9,7 @@ Functions used in ecological data analysis and modeling. e.g. community analysis
 * **association\_ind\_bstr.m** :  calculate association index and bootstrap analysis
 * **association\_ind\_bstr\_par.m** :  calculate association index and bootstrap analysis, accelerate using **parfor**
 * **colonization.m** : calculate colonization rate from time series data.
+* **beta_NES.m** : beta-diversity of different kind 
 * **bio_diversity.m** : calculate biodiversity indices
 * **bitemark.m** : transform bite mark count to estimated number of bite (where multiple bite cannot be distinguished).
 * **bray_curtis.m** : 
@@ -72,6 +73,7 @@ Functions related to statistics and data analysis.
 
 * **castdata.m** : put vector data into a matrix by assigned group
 * **covcc.m** : column by column covarience for two matrices.
+* **groupmean.m** : calculate mean using **accumarray** but more control.
 * **hotellingT2.m** :  multivariate t-test with Hotelling's T-square
 * **inlier.m** : function, remove outliers from vectors
 
@@ -80,6 +82,7 @@ Functions related to statistics and data analysis.
 * **nangeomean.m** : calculate geometric mean with NaN removed. 
 * **nanls.m** :  calculate ls parameters and r, p vlaue for correlation
 * **nanzscore.m** : z-transform with NaNs. (remove NaN and pass parameters to matlab function **zscore**)
+* **num2month** : return month string given number 1~12
 * **randeval.m** : simulate and make histogram of argument
 * **subset.m** : subset in a function 
 * **tcastdata** : put data from table into a matrix by assigned group

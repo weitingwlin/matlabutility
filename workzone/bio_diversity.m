@@ -47,6 +47,7 @@ if N > 1 % input contain data from more than 1 site
     R_beta_add =  R_gamma - mean(R_alpha);
     H_gamma = D_ind_shannon( sum(X) );   
     H_beta = (exp(H_gamma)) / (mean(exp(H_alpha)));
+    
     % output
     output.R_gamma = R_gamma; % Reginal scale (gamma) Richness
     output.R_beta_w = R_beta_w; % Beta-diveristy by (Whittaker, 1960)
