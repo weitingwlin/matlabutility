@@ -5,7 +5,7 @@
 ##### Larger font, thicker line/markers, select color from `mycolor`
 
 #### Depends on:
-* my matlab utility function [mycolor](https://github.com/weitingwlin/matlabutility/blob/master/documents/mycolor.md) 
+* my matlab utility function [mycolor](https://github.com/weitingwlin/matlabutility/blob/master/documents/mycolor.md), [mystyle]
 
 ## Syntax
 

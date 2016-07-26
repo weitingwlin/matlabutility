@@ -5,7 +5,9 @@
 
 ## Syntax
 
-### code = mycolor(colorcode,selectplate)
+#### `code = mycolor(colorcode,selectplate)`
+
+#### `mycolor(0, selectplate)`
 
 *  **colorcode**: integer (>1), selecting from the color plate: 
   + e.g. colorcode = 3 returns [ 0 0.2000 0.6000], the code for dark blue from the default plate 'color'
@@ -14,7 +16,7 @@
      * colorcode = -1 ; return the colormap (3 * ?) matrix, specified in [selectplate]
      * colorcode is a string (passed to selectplate), return colormap (as colorcode = -1);  
 * **selectplate**: a string, assign the plate you want to chose from
- +  'color': default; the plate with discrete color; type `mycolor(0)` for detail
+ +  'color': default; the plate with discrete color; type `mycolor(0)` or `mycolor` for detail
  +  'redblue': a red to blue bipolor scale; type `mycolor(0,'redblue')` for detal
  +  'gray': a gray scale; type `mycolor(0,'redblue')` for detail
 

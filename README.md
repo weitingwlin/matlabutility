@@ -45,3 +45,4 @@ Plotting functions that produced nice figures faster.
 > * 2016/03/31 : add **mylottery.m**
 > * 2016/04/05 : add **fisher_alpha.m**
 > * 2016/06/18 : add **groupmean.m**, **num2month.m**
+> * 2016/07/25 : add **myplot_errorbar.m**, edit **myplot_bar.m**

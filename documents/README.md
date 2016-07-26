@@ -16,7 +16,10 @@ Present the result of correlations in a figure with table-like structure. Visual
 Present the result of correlations in a figure with table-like structure. Visualize the result of: corr(X,Y)  
 
 ### [myplot](https://github.com/weitingwlin/matlabutility/blob/master/documents/myplot.md)
-Make scatter plot or line plot quiickly and nice.
+Make scatter plot or line plot quickly and nice.
+
+### [myplot_bar](https://github.com/weitingwlin/matlabutility/blob/master/documents/myplot_bar.md)
+Make bar graph with option of adding data points and error bar.
 
 ### [myplot_vec](https://github.com/weitingwlin/matlabutility/blob/master/documents/myplot_vec.md)
 Plotting out a 2D vector. Or drawing a line between two points.
