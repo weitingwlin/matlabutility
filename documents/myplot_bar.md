@@ -3,7 +3,7 @@
 ##### Making bar graphs, with options to add on error bar (SE, NaN removed) and data points 
 
 #### Depends on:
-* my matlab utility function [mycolor](https://github.com/weitingwlin/matlabutility/blob/master/documents/mycolor.md), [myplot], [myplot_errorbar] 
+* my matlab utility function [mycolor](https://github.com/weitingwlin/matlabutility/blob/master/documents/mycolor.md), [myplot](https://github.com/weitingwlin/matlabutility/blob/master/documents/myplot.md), [myplot_errorbar] 
 
 ## Syntax
 

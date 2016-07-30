@@ -1,8 +1,10 @@
-#Documentations
+# Catelog
 
-Not all functions have documentation.
+### [Catalog of plotting functions](https://github.com/weitingwlin/matlabutility/blob/master/documents/catalog_myplot.md)
+### [Catalog of statistic utility](https://github.com/weitingwlin/matlabutility/blob/master/documents/catalog_stat.md)
+### [Catalog of ecological utility](https://github.com/weitingwlin/matlabutility/blob/master/documents/catalog_ecology.md)
 
-
+##Documentations
 
 ### [mycolor](https://github.com/weitingwlin/matlabutility/blob/master/documents/mycolor.md)
 A color selecter: generating a 3-number vector code for a color. Can be used in all plotting functions.

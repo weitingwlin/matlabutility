@@ -5,7 +5,7 @@
 ##### Larger font, thicker line/markers, select color from `mycolor`
 
 #### Depends on:
-* my matlab utility function [mycolor](https://github.com/weitingwlin/matlabutility/blob/master/documents/mycolor.md), [mystyle]
+* my matlab utility function [mycolor](https://github.com/weitingwlin/matlabutility/blob/master/documents/mycolor.md), [mystyle](https://github.com/weitingwlin/matlabutility/blob/master/documents/mystyle.md)
 
 ## Syntax
 
@@ -17,10 +17,10 @@
    + 'L': line
    + 'B': both
 * **color**: optional, color, can ba a number (default is 3, code for dark blue), or a vector of 3
-  + IF it is a number, selecter of color from **mycolors**　to see color plate, type `mycolor(0)`, or check document
+  + IF it is a number, selecter of color from **mycolors**　to see color plate, type `mycolor`, or check document
   + IF it is not round, round part means the color code, 0.5 decimal part means the marker be hollow
   + IF it is a vector, it is the color code
-* **style** : line or marker style of corresponding **type**. For type = 'B', apply only to marker.
+* **style** : line or marker style of corresponding **type**s. For type = 'B', apply only to marker.
 
 
 ## Example: simple usage

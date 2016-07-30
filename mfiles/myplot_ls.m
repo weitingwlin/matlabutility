@@ -50,7 +50,9 @@ h = myplot(X,Y,'S',pointcolor); hold on
          titlestring = ['R = ' num2str(R,2) '; p < 0.001; n = ' num2str(length(X)) ];
     end
     title(titlestring)
-myplot(Xhat,Yhat,'L',linecolor);
+    if P < 0.05 % plot the line only if  <0.05
+     myplot(Xhat,Yhat,'L',linecolor);
+    end
 %    legend({'' ,  ['R = ' num2str(R,2) '; p = ' num2str(P,2) ]})
 % grab labels from table 
 if istable(X)

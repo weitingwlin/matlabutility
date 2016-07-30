@@ -1,5 +1,9 @@
-function betas = betaNES(matin) 
+% calculate 3 kinds of beta diversity indices
+%  
+% used in  null_betaNES
+%
 % ref. Baselga, 2010, Global Ecol. Biogeogr.
+function betas = betaNES(matin) 
 %% 
 matin01 = matin > 0; % to a presence-absence matrix
                               % the rest base on this

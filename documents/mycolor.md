@@ -2,12 +2,14 @@
 
 ##### This function is a color selecter: generating a 3-number vector code for a color. Can be used in all plotting functions.
 
+#### Use with [_myplot_](https://github.com/weitingwlin/matlabutility/blob/master/documents/myplot.md) 
 
 ## Syntax
 
-#### `code = mycolor(colorcode,selectplate)`
-
+#### `code = mycolor(colorcode,selectplate)`  
 #### `mycolor(0, selectplate)`
+
+#### `mycolor(-1, selectplate)` 
 
 *  **colorcode**: integer (>1), selecting from the color plate: 
   + e.g. colorcode = 3 returns [ 0 0.2000 0.6000], the code for dark blue from the default plate 'color'
