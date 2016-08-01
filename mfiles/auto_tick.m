@@ -10,7 +10,9 @@
 function [tickmark] = auto_tick (f1,f2,Nt)
 %% swap if f1 <  f2
 % this step make sure f1 is the upper limit
-
+if nargin < 3
+    Nt = 4;
+end
 if f1<f2
     temp=f1;    f1=f2;    f2=temp;
 end

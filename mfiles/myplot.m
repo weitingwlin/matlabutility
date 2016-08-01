@@ -59,7 +59,7 @@ if type=='S'
             style = stylesheet{floor(style)};
           end 
         if hollow == 0  && ~any(strcmp(style,{'+','*','X'}))  % +,*,X cannot be hollow
-                if  any( strcmp(version('-release'), {'2015a','2015b'}) )
+                if  any( strcmp(version('-release'), {'2015b'}) )
                 h = scatter(X,Y,a,style,'Markeredgecolor','none','Markerfacecolor',colorcode,'Markerfacealpha',0.7);% 'Markerfacealpha',0.7);
                 else
                 h = scatter(X,Y,a,style,'Markeredgecolor','none','Markerfacecolor',colorcode);     
@@ -94,7 +94,11 @@ if type=='B'
           end 
      hold on
      if hollow ==0  && ~any(strcmp(style,{'+','*','X'})) 
-     plot(X,Y,style,'color',colorcode,'Markerfacecolor',colorcode);
+                if  any( strcmp(version('-release'), {'2015b'}) )
+                h = scatter(X,Y,a,style,'Markeredgecolor','none','Markerfacecolor',colorcode,'Markerfacealpha',0.7);% 'Markerfacealpha',0.7);
+                else
+                h = scatter(X,Y,a,style,'Markeredgecolor','none','Markerfacecolor',colorcode);     
+                end
      else
      plot(X,Y,style,'color',colorcode);
      end

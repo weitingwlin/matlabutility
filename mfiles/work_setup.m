@@ -5,7 +5,7 @@
 %% Get current machine name
 [stt, strout] =system('hostname');
 
-%% set working directory and path
+% set working directory and path
 if strncmp(strout, 'weitingdeAir',5)
     cd '/Users/weitinglin/Dropbox/DataCoding/utility_wtl/mfiles'
     addpath '/Users/weitinglin/Dropbox/DataCoding/utility_wtl/workzone'
