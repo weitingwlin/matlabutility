@@ -8,23 +8,13 @@
 % _This file is formatted to be published using matlab._
 %% [mysubplot]: Create subplots with Major title
 % Usage:
-% 
-% * To make subplot:
-% 
-%                  mysubplot(L,W, ID,'Title')
-%                  [L], [W],: the dimension of subplots as in subplot(L,W,ID)
-%                  [ID]: the location of subplot as in subplot(L,W,ID);
-%                          to make larger subplot, make [ID] a vector with IDs of multiple cells
-%
-% * To make major title (set ID=0) :
-% 
-%                 mysubplot(L,W, 0,'Title')                                    
-%                 [L], [W]: the dimension of subplots as in mysubplot(L,W,ID)
+
 %% Making mock data
     X = [1:10];
     Y = [1:10]+rand(10,1)'*20';
 %% Examples:
-
+% This and later examples here use [myplot], a function makes pretty plots more quickly, and [mycolor], select color
+% more easily.
 %
 % If the labels overlap, manually adjust the size of figure window would likely solve the problem.
     figure
@@ -39,24 +29,24 @@
             plot(X,Y,'o')
             xlabel('X');ylabel('Y')
             title('small Title B')
-%% another example
-% The examples here use [myplot], a function makes pretty plots more quickly, and [mycolor], select color
-% more easily.
-    figure
-    % making major title
-        mysubplot(2,1,0,'Big title')
-    % making subplots
-        mysubplot(2,1,1, [], 0.4, 0.4)  % incread padding size between subplots
-                                 %^ a place holder for Title. The value                             
-            myplot(X,Y,'L')
-            xlabel('X');ylabel('Y ')
-            title('small Title A')
-        mysubplot(2,1,2,[], 0.4, 0.4)
-            myplot(X,Y,'S')
-            xlabel('X');ylabel('Y')
-            title('small Title B')
-
+%% Another example
+   figure
+   mysubplot(4,4,0, 'Major title')
+for i = 1:16
+    mysubplot(4,4,i)
+    myplot(X,Y, 'S', i);
+end
+%% Shrink padding size 
+   figure
+   mysubplot(4,4,0, 'Major title')
+for i = 1:16
+    mysubplot(4,4,i, [], 0.1, 0.1)
+    myplot(X,Y, 'S', i);
+    set(gca,'xtick',[])
+    set(gca,'ytick',[])
+end
 %% Example of merging cells
+
     figure
     % making major title 
         mysubplot(3,3,0,'Big title')
@@ -77,3 +67,5 @@
 %% Error about merging cells
 % if assigned subplot cells does not make a square, error occur
         mysubplot(2,2,[2 3])
+%% To display  Cell layout
+       mysubplot(3,3)
