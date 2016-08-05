@@ -2,22 +2,20 @@
 
 This is a collection of matlab functions and examples ("primers") I wrote through graduate school. 
 
-Codes as m-files are stored in folder **mfiles**, folder **Xamples** provide example of usage in m-files for some of mine and Matlab functions. **workzone** is a temporary stroage for under-construction files. Folder **documents** contains detailed documents for some functions.
-
-Detialed documentation please see each sub-directory.
-
-## mfiles 
-
-### Ecology data analysis and modeling
-Functions used in ecological data analysis and modeling. e.g. community analysis, biodiversity calculation.
-
-### Statistics utility and data handling in general
-Mainly convinient functions dealing with **NaN**, and used in exploratery data analysis. 
-
-### Making figures
-Plotting functions that produced nice figures faster.
+Catalog of m-files can be found1 [here](https://github.com/weitingwlin/matlabutility/tree/master/documents), as well as the documentations.
 
 
+### mfiles 
+Codes as m-files are stored in folder **mfiles**.
+
+### Xamples
+**Xamples** provide example of usage in m-files for some of mine and Matlab functions
+
+### workzone
+**workzone** is a temporary stroage for under-construction files.
+
+### documents
+Folder **documents** contains detailed documents for some functions.
 
 ---
 >#### Update notes
@@ -46,3 +44,4 @@ Plotting functions that produced nice figures faster.
 > * 2016/04/05 : add **fisher_alpha.m**
 > * 2016/06/18 : add **groupmean.m**, **num2month.m**
 > * 2016/07/25 : add **myplot_errorbar.m**, edit **myplot_bar.m**
+> * 2016/08/05 : add **myplot_loglog.m**, edit **mysubplot.m0**, edit **README.md**

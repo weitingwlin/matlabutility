@@ -2,7 +2,7 @@
 
 ##### Make a nice log-log plot, or semi-log plots quickly 
  
- depend on: [auto_tick], [myplot], [mycolor], [mystyle]
+ Depends on: [auto_tick](https://github.com/weitingwlin/matlabutility/blob/master/mfiles/auto_tick.m), [myplot](https://github.com/weitingwlin/matlabutility/blob/master/documents/myplot.md), [mycolor](https://github.com/weitingwlin/matlabutility/blob/master/documents/mycolor.md), [mystyle](https://github.com/weitingwlin/matlabutility/blob/master/documents/mystyle.md)
 ## Syntax
 
 ###  h = myplot_loglog(X, Y, type, color, style, baseX, baseY)
