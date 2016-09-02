@@ -23,8 +23,17 @@ Make scatter plot or line plot quickly and nice.
 ### [myplot_bar](https://github.com/weitingwlin/matlabutility/blob/master/documents/myplot_bar.md)
 Make bar graph with option of adding data points and error bar.
 
+### [myplot_loglog](https://github.com/weitingwlin/matlabutility/blob/master/documents/myplot_loglog.md)
+Make a nice log-log plot, or semi-log plots quickly
+
+### [myplot_point](https://github.com/weitingwlin/matlabutility/blob/master/documents/myplot_point.md)
+Plotting point process on a time line
+
 ### [myplot_vec](https://github.com/weitingwlin/matlabutility/blob/master/documents/myplot_vec.md)
 Plotting out a 2D vector. Or drawing a line between two points.
 
 ### [mystyle](https://github.com/weitingwlin/matlabutility/blob/master/documents/mystyle.md)
 Specify a plotting style by number. Also display the style sheet. 
+
+### [mysubplot](https://github.com/weitingwlin/matlabutility/blob/master/documents/mysubplot.md)
+Create subplots with Major title

@@ -44,4 +44,6 @@ Folder **documents** contains detailed documents for some functions.
 > * 2016/04/05 : add **fisher_alpha.m**
 > * 2016/06/18 : add **groupmean.m**, **num2month.m**
 > * 2016/07/25 : add **myplot_errorbar.m**, edit **myplot_bar.m**
-> * 2016/08/05 : add **myplot_loglog.m**, edit **mysubplot.m0**, edit **README.md**
+> * 2016/08/05 : add **myplot_loglog.m**, edit **mysubplot.m**, edit **README.md**
+> * 2016/08/29 : add **readcell.m**
+> * 2016/09/02 : add **myplot_point.m**;

@@ -1,0 +1,224 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>X_moler_ch1</title><meta name="generator" content="MATLAB 8.5.1"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2016-08-28"><meta name="DC.source" content="X_moler_ch1.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">1.1 The golden ratio</a></li><li><a href="#3">Define an anonymous function</a></li><li><a href="#4">Continued fraction</a></li><li><a href="#5">1.2 Fibonacci Numbers</a></li><li><a href="#6">tic toc</a></li><li><a href="#7">Fibonacci v.s. golden ratio</a></li><li><a href="#9">Fractal Fern</a></li><li><a href="#10">image</a></li><li><a href="#11">1.4 magic square</a></li></ul></div><h2>1.1 The golden ratio<a name="1"></a></h2><pre class="codeinput">    phi = (1 + sqrt(5))/2
+    format <span class="string">long</span>
+    phi
+</pre><pre class="codeoutput">
+phi =
+
+   1.618033988749895
+
+
+phi =
+
+   1.618033988749895
+
+</pre><p>A polynomial function</p><pre class="codeinput">    p = [1 -1 -1];
+    r = roots(p)
+
+<span class="comment">% Symbolic solution</span>
+    syms <span class="string">x</span>
+    r = solve(1/x == x-1)
+    phi =r(2)
+    <span class="comment">% now phi is a symbolic expression</span>
+<span class="comment">% Convert symbolic expression to numeric</span>
+    <span class="comment">%  variable-precision arithmetic</span>
+        vpa(phi, 50)
+    <span class="comment">%  double-precision floating point</span>
+        phi = double(phi)
+</pre><pre class="codeoutput">
+r =
+
+  -0.618033988749895
+   1.618033988749895
+
+ 
+r =
+ 
+ 1/2 - 5^(1/2)/2
+ 5^(1/2)/2 + 1/2
+ 
+ 
+phi =
+ 
+5^(1/2)/2 + 1/2
+ 
+ 
+ans =
+ 
+1.6180339887498948482045868343656381177203091798058
+ 
+
+phi =
+
+   1.618033988749895
+
+</pre><h2>Define an anonymous function<a name="3"></a></h2><p>f(x) = 1/x - (x-1)</p><pre class="codeinput">       f = @(x) 1./x-(x-1)
+
+<span class="comment">% Plot a function</span>
+    ezplot(f, 0, 4)
+
+    <span class="comment">% the function ezplot automatically picks reasonable scales</span>
+<span class="comment">% look for solution</span>
+    phi = fzero(f,1) <span class="comment">% look for zeros near x = 1</span>
+
+<span class="comment">% Plot golden ratio</span>
+    goldrect
+</pre><pre class="codeoutput">
+f = 
+
+    @(x)1./x-(x-1)
+
+
+phi =
+
+   1.618033988749895
+
+</pre><pre class="codeoutput error">Undefined function or variable 'goldrect'.
+
+Error in X_moler_ch1 (line 33)
+    goldrect
+</pre><h2>Continued fraction<a name="4"></a></h2><p>use function goldfract(n)</p><pre class="codeinput"> goldfract(6)
+</pre><h2>1.2 Fibonacci Numbers<a name="5"></a></h2><p>f1 = 1 f2 = 2 fn = fn-1 + fn-2</p><pre class="codeinput">    fibonacci(12)
+</pre><h2>tic toc<a name="6"></a></h2><pre class="codeinput"> tic, fibnum(24), toc
+  tic, fibnum(35), toc
+</pre><h2>Fibonacci v.s. golden ratio<a name="7"></a></h2><pre class="codeinput">    n = 40;
+    f = fibonacci(n);
+    format <span class="string">long</span>
+    f(2:n) ./ f(1:n-1)
+</pre><pre class="codeinput">f(2:n) ./ f(1:n-1) - phi
+</pre><h2>Fractal Fern<a name="9"></a></h2><pre class="codeinput">finitefern(2100)
+</pre><h2>image<a name="10"></a></h2><pre class="codeinput">F = imread(<span class="string">'fern.png'</span>);
+image(F)
+</pre><h2>1.4 magic square<a name="11"></a></h2><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2015a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% 1.1 The golden ratio
+
+    phi = (1 + sqrt(5))/2
+    format long
+    phi
+%%    
+% A polynomial function
+    p = [1 -1 -1];
+    r = roots(p)
+
+% Symbolic solution
+    syms x
+    r = solve(1/x == x-1)
+    phi =r(2) 
+    % now phi is a symbolic expression
+% Convert symbolic expression to numeric
+    %  variable-precision arithmetic 
+        vpa(phi, 50)  
+    %  double-precision floating point
+        phi = double(phi)
+%% Define an anonymous function
+    % f(x) = 1/x - (x-1)
+       f = @(x) 1./x-(x-1)
+       
+% Plot a function
+    ezplot(f, 0, 4)
+    
+    % the function ezplot automatically picks reasonable scales
+% look for solution     
+    phi = fzero(f,1) % look for zeros near x = 1
+ 
+% Plot golden ratio
+    goldrect
+
+%% Continued fraction
+% use function goldfract(n)
+ goldfract(6)
+ 
+ %% 1.2 Fibonacci Numbers
+ % f1 = 1
+ % f2 = 2
+ % fn = fn-1 + fn-2
+    fibonacci(12)
+    
+ %% tic toc
+ tic, fibnum(24), toc
+  tic, fibnum(35), toc
+%% Fibonacci v.s. golden ratio
+    n = 40;
+    f = fibonacci(n);
+    format long
+    f(2:n) ./ f(1:n-1)
+%%
+f(2:n) ./ f(1:n-1) - phi
+
+%% Fractal Fern
+finitefern(2100)
+%% image
+F = imread('fern.png');
+image(F)
+
+%% 1.4 magic square
+##### SOURCE END #####
+--></body></html>

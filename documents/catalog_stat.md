@@ -15,6 +15,7 @@ Functions related to statistics and data analysis.
 * **nanzscore.m** : z-transform with NaNs. (remove NaN and pass parameters to matlab function **zscore**)
 * **num2month** : return month string given number 1~12
 * **randeval.m** : simulate and make histogram of argument
+* **readcell.m** : read .txt file into cell array of string
 * **subset.m** : subset in a function 
 * **tcastdata** : put data from table into a matrix by assigned group
 * **tnames.m** : show names of variable in a table
