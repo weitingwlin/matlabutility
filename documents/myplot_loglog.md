@@ -10,9 +10,11 @@
 * **X, Y** :data to be (maybe) transformed and plotted
 * **type, color, style** : variables to be passed to function `myplot`
   + **type** : 'S' for scatter, 'L' for line, 'B' for both, [] for default ('S')   
-  + **color** :  RGB tripletcode, or select one color from `mycolor`, [] for default ( 3 , or darkblue)  
+  + **color** :  color code **\***, [ ] for default ( 3 , or darkblue)  
   + **style** : style of line or symbal (e.g. 'o', ':'), [] for deafult
 * **baseX, baseY**: base of log transform on data X and Y. Can be 1 (not transformed), 2, e (default), or 10. [] for default (e)
+
+#####\*color: Vector (length = 3), [RGB tripletcode for colors](http://www.mathworks.com/help/matlab/ref/colorspec.html?searchHighlight=colors). Or an interger, select a color from **mycolors**. (To see color plate, type `mycolor`, or [check the document](https://github.com/weitingwlin/matlabutility/raw/master/documents/images/mycolor_2.png).)
 
 ## Examples:
 #### Make mock data

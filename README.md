@@ -47,3 +47,4 @@ Folder **documents** contains detailed documents for some functions.
 > * 2016/08/05 : add **myplot_loglog.m**, edit **mysubplot.m**, edit **README.md**
 > * 2016/08/29 : add **readcell.m**
 > * 2016/09/02 : add **myplot_point.m**;
+> * 2016/09/07 : edit **plot_NMDS.m**
