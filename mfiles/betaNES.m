@@ -1,6 +1,7 @@
 % calculate 3 kinds of beta diversity indices
 %  
 % used in  null_betaNES
+%  matin: N x P   (N sites and P species)
 %
 % ref. Baselga, 2010, Global Ecol. Biogeogr.
 function betas = betaNES(matin) 
@@ -20,13 +21,14 @@ maxb = 0;
 
 for i = 1 : (N-1)
         for j = (i + 1) : N % this is how you get all unique paires
-            b = ((matin01(i, :) == 1) +  (matin01(j, :) == 0)) == 2   ;
+            b = ((matin01(i, :) == 1) +  (matin01(j, :) == 0)) == 2   ; % present in one site not the other
             c = ((matin01(i, :) == 0) +  (matin01(j, :) == 1)) == 2   ;
-            minb = minb + min( [ sum(b) sum(c) ] );
+            minb = minb + min( [ sum(b) sum(c) ] ); % add up
             maxb = maxb + max( [ sum(b) sum(c) ] );
         end
 end
 %% indices
         betas.sor = (minb + maxb)/(2*a + minb +maxb);
         betas.sim = minb/(a + minb);
-        betas.nes = betas.sor - betas.sim;
+        betas.nes = betas.sor - betas.sim;     
+        betas.euc = nanmean(pdist(log(matin+1)));

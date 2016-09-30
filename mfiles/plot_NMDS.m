@@ -1,5 +1,5 @@
 
-function [Y, stress, disparity] = plot_NMDS(data, groups, labels, groupcolormap)
+function [Y, stress, disparity, h] = plot_NMDS(data, groups, labels, groupcolormap)
 [n,p] =size(data);
 % * data : n x p matrix, each row is an observation, each column is a
 % variable
@@ -20,10 +20,10 @@ Dissim = pdist(data); % the dissimilarity data
 [Y, stress, disparity] = mdscale(Dissim,2,'criterion','stress');
                                           % For a "Nonmetric MDS"
 %%
+h = []; % output graph handle
 if isa(groups,'double')==1
     grouplist = unique(groups);
     % List of unique value in the group
-figure
         for i=1:length(grouplist)
             if length(grouplist) <= 10
                     myplot(Y(groups==grouplist(i),1),Y(groups==grouplist(i),2),'S',i ,i) ; hold on   
@@ -31,19 +31,18 @@ figure
                         legend(num2str(grouplist)); 
                     end
             else
-                   scatter(Y(:,1), Y(:,2), 40 , groups, 'filled')   ; hold on                  
+                  h{1} = scatter(Y(:,1), Y(:,2), 40 , groups, 'filled')   ; hold on                  
                    set(gca,'FontSize',14,'linewidth',2);
                 
                          colormap(groupcolormap);
-                         colorbar
+                   h{2} =   colorbar;
             end
         end
   
 elseif isa(groups,'cell')==1
     grouplist2 = unique(groups);
-    figure
         for i=1:length(grouplist2)
-            myplot(Y(strcmp(groups,grouplist2(i)),1),Y(strcmp(groups,grouplist2(i)),2),'S',i) ; hold on
+           h1 = myplot(Y(strcmp(groups,grouplist2(i)),1),Y(strcmp(groups,grouplist2(i)),2),'S',i) ; hold on
         end
         legend(grouplist2)
 

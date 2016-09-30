@@ -23,8 +23,6 @@ clear;clc
 cd 'C:\Asus WebStorage\weiting.lin.lin@gmail.com\MySyncFolder\(ASUS-PC)2014-09-04 10-42-03\MATLAB\utility_wtl\X_examples\X_packs'
 load X_community
 
-% load the color plate [mycolor]
-script_mycolorplate
 %% View the oringinal data
 % Here each site is represented as vector of species composition
 % 
@@ -35,7 +33,7 @@ script_mycolorplate
 ldata = log(insect_data+1); % The data is log-transformed 
 % Visualising the first fiewlines of data  
 for i=1:10
-plot(1:13,ldata(i,:),'Linewidth',3,'color',mycolor(i,:));hold on
+plot(1:13,ldata(i,:),'Linewidth',3,'color',mycolor(i));hold on
 end
 
 %% PCA : using the matlab function pca
@@ -53,7 +51,7 @@ end
 figure
 % subplot(6,1,1:3)
 for j=1:4
-plot(1:13,coeff(:,j),'Linewidth',2,'color',mycolor(j,:));hold on
+plot(1:8,coeff(:,j),'Linewidth',2,'color',mycolor(j));hold on
 end
 legend('PC 1','PC 2','PC 3','PC 4');
 title('Composition of each PC')
@@ -64,7 +62,7 @@ xlabel('variable (species)'); ylabel('PC coefficient')
 figure
 % subplot(6,1,5:6)
 varPC=latent./sum(latent);
-plot(1:p,cumsum(varPC),'Linewidth',2,'color',mycolor(3,:))
+plot(1:p,cumsum(varPC),'Linewidth',2,'color',mycolor(3))
 axis([1 14 0 1.01])
 title('Cumulative % of variance explained by PC')
 xlabel('PC'); ylabel('% of variance')

@@ -23,19 +23,23 @@
 % Wei-Ting Lin 2015/09/21
 % edit line 44, 71, left margin add padW/2
  
-function mysubplot(L, W, ID, bigtitle, tightL, tightW) % ID=0 means title 
+function mysubplot(L, W, ID, bigtitle, tightL, tightW, margin) % ID=0 means title 
 if  (nargin < 3|| isempty(ID)), ID = -1; end % when ID = -1 the function will print out the subplot layout 
 if  (nargin < 4|| isempty(bigtitle)), bigtitle = ''; end 
 if  (nargin < 5 || isempty(tightL)), tightL = 0.3; end 
-if  (nargin < 6), tightW = 0.3; end 
-
+if  (nargin < 6|| isempty(tightW)), tightW = 0.3; end 
+if  (nargin < 7), margin = 0.05; end 
 if ID>L*W
 error('ID > number of subplot');
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-margin = 0.05;
+%margin = 0.05;
 
-titleH = 0.3/L;
+if L ==1
+    titleH = 0.2;
+else
+    titleH = 0.3/L;
+end
 plotW =( 1-margin*2) / W; % width of each subplot
 plotH = (1-titleH-margin*2) /L; % height
 
