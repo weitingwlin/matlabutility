@@ -11,7 +11,8 @@ Function related to making figures.
 calculate tick mark location, used in other functions. 
 ### **hline.m** 
 draw horizontal line
-### **mycolor** 
+
+### [mycolor](https://github.com/weitingwlin/matlabutility/blob/master/documents/mycolor.md) 
 function, pick color from a color plates, used in many plotting functions.
 >
  ![plot1](images/mycolor_2.png) 
@@ -44,6 +45,7 @@ make plot to show data and canfidence interval
 ### [myplot_loglog](https://github.com/weitingwlin/matlabutility/blob/master/documents/myplot_loglog.md)
 Make a nice log-log plot, or semi-log plots quickly
 ![plot](images/myplot_loglog4.png)
+
 ### **myplot_ls**  
 Make scatter plot and ls line
 >
@@ -63,7 +65,12 @@ make nice(r) plotyy quickly
 >
  ![plot4](images/myplotyy.png)
 
-### **mysubplot**  
+### **mystackbar.m**
+Make a single stacked bar graph
+>
+ ![plot1](images/mystackbar_4.png) 
+
+### [mysubplot](https://github.com/weitingwlin/matlabutility/blob/master/documents/mysubplot.md)  
 Make subplot and add major/big title to the figure
 >
 ![plot4](images/mysubplot.png)

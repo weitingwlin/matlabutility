@@ -9,11 +9,13 @@ Functions related to statistics and data analysis.
 * **inlier.m** : function, remove outliers from vectors
 
 * **meltdata** : Put each data in a matrix as a variable in a row ("an obseervation"), column id and row id as two other variables 
+* **name2str.m** : return parameter name
 * **nancorr.m** : calculate correlation coefficient, ignore NaN in each pair
 * **nangeomean.m** : calculate geometric mean with NaN removed. 
 * **nanls.m** :  calculate ls parameters and r, p vlaue for correlation
 * **nanzscore.m** : z-transform with NaNs. (remove NaN and pass parameters to matlab function **zscore**)
 * **num2month** : return month string given number 1~12
+* **para2str.m** : return string(s) with parameter name and value. 
 * **randeval.m** : simulate and make histogram of argument
 * **readcell.m** : read .txt file into cell array of string
 * **subset.m** : subset in a function 
