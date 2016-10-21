@@ -28,5 +28,5 @@ end
                 Lstyle=style;
   end
 %%
- h = stairs(X, Y, Lstyle,'linewidth', 2,'color',colorcode);
+ h = stairs(X, Y, Lstyle,'linewidth', 1,'color',colorcode);
     set(gca,'FontSize',14,'linewidth',2);

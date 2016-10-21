@@ -59,3 +59,4 @@ Folder **documents** contains detailed documents for some functions.
 > * 2016/09/07 : edit **plot_NMDS.m**
 > * 2016/09/29 : add **name2str.m**
 > * 2016/10/03 : add **para2str.m**; **mystackbar.m**
+> * 2016/10/21 : add **para2str.md**; **mystackbar.md**

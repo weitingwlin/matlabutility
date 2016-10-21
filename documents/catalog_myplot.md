@@ -65,17 +65,21 @@ make nice(r) plotyy quickly
 >
  ![plot4](images/myplotyy.png)
 
-### **mystackbar.m**
+### [**mystackbar.m**](https://github.com/weitingwlin/matlabutility/blob/master/documents/mystackbar.md)
 Make a single stacked bar graph
 >
  ![plot1](images/mystackbar_4.png) 
 
-### [mysubplot](https://github.com/weitingwlin/matlabutility/blob/master/documents/mysubplot.md)  
+### [**mysubplot**](https://github.com/weitingwlin/matlabutility/blob/master/documents/mysubplot.md)  
 Make subplot and add major/big title to the figure
 >
 ![plot4](images/mysubplot.png)
 
 ### **plot_circle**  
 eazier way to make a circle
+
 ### **plot_square**  
 Make a square or box by imput x and y points
+
+### [para2str](para2str.md)
+Return string(s) with parameter name and value. 
