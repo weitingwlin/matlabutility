@@ -56,7 +56,8 @@ Folder **documents** contains detailed documents for some functions.
 > * 2016/08/05 : add **myplot_loglog.m**, edit **mysubplot.m**, edit **README.md**
 > * 2016/08/29 : add **readcell.m**
 > * 2016/09/02 : add **myplot_point.m**;
-> * 2016/09/07 : edit **plot_NMDS.m**
+> * 2016/09/07 : edit **plot\_NMDS.m**
 > * 2016/09/29 : add **name2str.m**
 > * 2016/10/03 : add **para2str.m**; **mystackbar.m**
 > * 2016/10/21 : add **para2str.md**; **mystackbar.md**
+> * 2016/12/01 : add **myplot\_RAC.m**; **myplot\_RAC.md**

@@ -8,6 +8,7 @@
 % set working directory and path
 if strncmp(strout, 'weitingdeAir',5)
     cd '/Users/weitinglin/Dropbox/DataCoding/utility_wtl/mfiles'
+    
     addpath '/Users/weitinglin/Dropbox/DataCoding/utility_wtl/workzone'
 end
 
@@ -18,8 +19,9 @@ if strncmp(strout,'wlin_pc',5)
 end
 % addpath ''
 % laptop; lab
-if strncmp(strout,'ASUS-PC',5)
- cd 'C:\Users\ASUS\Dropbox\DataCoding\utility_wtl\mfiles'
- addpath 'C:\Users\ASUS\Dropbox\DataCoding\utility_wtl\workzone'
+if strncmp(strout,'Weiting-PC',5)
+ cd 'C:\Users\Weiting\Dropbox\DataCoding\utility_wtl\mfiles'
+ addpath 'C:\Users\Weiting\Dropbox\DataCoding\utility_wtl\workzone'
 end
 clear strout stt
+pwd

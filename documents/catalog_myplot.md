@@ -55,6 +55,12 @@ Make scatter plot and ls line
 Plotting point process on a time line
  ![plot4](images/myplot_point3.png)
 
+### [myplot_RAC](https://github.com/weitingwlin/matlabutility/blob/master/documents/myplot_RAC.md)
+
+This function plots Rank-Abundance Curve
+
+ ![plot4](images/myplot_RAC1.png)
+
 ### [myplot_vec](https://github.com/weitingwlin/matlabutility/blob/master/documents/myplot_vec.md) 
 plotting 2D vector
 >

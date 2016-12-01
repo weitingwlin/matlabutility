@@ -29,6 +29,10 @@ Make a nice log-log plot, or semi-log plots quickly
 ### [myplot_point](https://github.com/weitingwlin/matlabutility/blob/master/documents/myplot_point.md)
 Plotting point process on a time line
 
+### [myplot_RAC](https://github.com/weitingwlin/matlabutility/blob/master/documents/myplot_RAC.md)
+
+This function plots Rank-Abundance Curve
+
 ### [myplot_vec](https://github.com/weitingwlin/matlabutility/blob/master/documents/myplot_vec.md)
 Plotting out a 2D vector. Or drawing a line between two points.
 
