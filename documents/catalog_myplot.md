@@ -17,16 +17,20 @@ function, pick color from a color plates, used in many plotting functions.
 >
  ![plot1](images/mycolor_2.png) 
 
-### **mycorrplot_1**  
+### **mycolormap**
+
+### [mycorrplot_1](https://github.com/weitingwlin/matlabutility/blob/master/documents/mycorrplot_1.md)  
 Plot the results of correlation (i.e. corr(X)) in a figure with table-like structure.
 >
 ![plot2](images/mycorrplot_1_2.png)
 
-### **mycorrplot_2**  
+### [mycorrplot_2](https://github.com/weitingwlin/matlabutility/blob/master/documents/mycorrplot_2.md)  
 Plot the results of correlation (i.e. corr(X, Y)) in figures with table-like structure.
 >
 ![plot2](images/mycorrplot_2_1.png)
 
+### **myLatext**
+`text` with **LaTeX** syntax.
 
 ### [myplot](https://github.com/weitingwlin/matlabutility/blob/master/documents/myplot.md)  
 make nice(r) scatterplot or line plot quickly

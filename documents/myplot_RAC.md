@@ -4,7 +4,7 @@
 
 ##### (each community well be presented in subplots, so cannot be embeded in subplot)
 #### Depends on:
-* my matlab utility function [mycolor](https://github.com/weitingwlin/matlabutility/blob/master/documents/mycolor.md), [mysubplot](https://github.com/weitingwlin/matlabutility/blob/master/mfiles/mysubplot.m) 
+* my matlab utility function [mycolor](https://github.com/weitingwlin/matlabutility/blob/master/documents/mycolor.md), [mysubplot](https://github.com/weitingwlin/matlabutility/blob/master/mfiles/mysubplot.m), [myplot](https://github.com/weitingwlin/matlabutility/blob/master/mfiles/myplot.m) 
 
 ## Syntax
 

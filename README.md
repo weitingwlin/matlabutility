@@ -61,3 +61,5 @@ Folder **documents** contains detailed documents for some functions.
 > * 2016/10/03 : add **para2str.m**; **mystackbar.m**
 > * 2016/10/21 : add **para2str.md**; **mystackbar.md**
 > * 2016/12/01 : add **myplot\_RAC.m**; **myplot\_RAC.md**
+> * 2017/01/19 : add **fixsample.m**
+> * 2017/01/19 : add **mycolormap.m**; **myLatext.m**
