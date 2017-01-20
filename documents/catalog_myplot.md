@@ -17,7 +17,10 @@ function, pick color from a color plates, used in many plotting functions.
 >
  ![plot1](images/mycolor_2.png) 
 
-### **mycolormap**
+### [mycolormap](https://github.com/weitingwlin/matlabutility/blob/master/documents/mycolormap.md)  
+Making colormap from `mycolor` or input rgb code
+>
+ ![plot1](images/mycolormap1.png) 
 
 ### [mycorrplot_1](https://github.com/weitingwlin/matlabutility/blob/master/documents/mycorrplot_1.md)  
 Plot the results of correlation (i.e. corr(X)) in a figure with table-like structure.

@@ -28,7 +28,7 @@ if isnumeric(c)
 end
 
 if ischar(c) 
-        if any(strcmp('red',{'red', 'green', 'blue', 'purple', 'teal', 'olive'}))
+        if any(strcmp('red',{'red', 'green', 'blue', 'purple', 'teal', 'olive', 'orange'}))
                 red = flip(gray);    red(:,1) =1;
                 blue = flip(gray);   blue(:,3) =1;
                 green = flip(gray);  green(:,2) =1;
@@ -52,6 +52,9 @@ if ischar(c)
                  end
                  if strcmp(c, 'teal')
                     mymap = teal;
+                 end
+                  if strcmp(c, 'orange')
+                    mymap = mycolormap([1 0.5 0]);
                 end
         else
              error('input string should be one of: red, green, blue, purple, teal, olive');
