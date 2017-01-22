@@ -33,7 +33,7 @@ Plot the results of correlation (i.e. corr(X, Y)) in figures with table-like str
 ![plot2](images/mycorrplot_2_1.png)
 
 ### **myLatext**
-`text` with **LaTeX** syntax.
+`text` with **LaTeX** syntax. Facilitate the use of `text` function.
 
 ### [myplot](https://github.com/weitingwlin/matlabutility/blob/master/documents/myplot.md)  
 make nice(r) scatterplot or line plot quickly
@@ -87,6 +87,14 @@ Make a single stacked bar graph
 Make subplot and add major/big title to the figure
 >
 ![plot4](images/mysubplot.png)
+
+### [**mytable**](https://github.com/weitingwlin/matlabutility/blob/master/documents/mytable.md) 
+print matrix and color code the values
+>
+![plot4](images/mytable2.png)
+
+### **mytext**
+Facilitate the use of `text` function.
 
 ### **plot_circle**  
 eazier way to make a circle

@@ -1,6 +1,6 @@
-# function name 
+# mytable
 
-##### summary, short description
+##### Print matrix and color code the values
 
 ##### may be multiple line
 

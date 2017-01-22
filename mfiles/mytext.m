@@ -1,20 +1,26 @@
-function myLatext(x, y, textin, fsize, Halign, Valign, textcolor)
-%   myLatext(x, y, textin, fsize, Halign, Valign, textcolor)
+function mytext(x, y, textin, fsize, Halign, Valign, textcolor, fontname )
+%   mytext(x, y, textin, fsize, Halign, Valign, textcolor, fontname)
 %
 %   defult: fsize = 12
 %              Halign = 'center'
 %              Valign = 'middle'
+%    
+%    type `mytext` to see how the alignment argument works
 %
 %   example: 
 %    myplot(0,0);hold on;hline;vline;
-%    myLatext(0.5, 0.5 ,'mytext $N_{i,j}^2$')
-%    myLatext(0, 0 ,  'mytext', [], 9)
- %   myLatext(0, 0 , 'mytext $\alpha$', 16, 'L', 'B')
+%    mytext(0.5, 0.5, 'mytext')
+%    mytext(0, 0 ,  'mytext: Arial Black', [], 9, [], 4,'Arial Black')
+ %   mytext(0, 0 , 'mytext', 16, 'L', 'B', 2, 'Times New Roman')
+ %   
+ %  tip: use ` listfonts` to see available font name
  %
+ 
     if (nargin < 4 ||isempty(fsize)), fsize = 14; end;
     if (nargin < 5 ||isempty(Halign)), Halign = 'c'; end;
     if (nargin < 6 ||isempty(Valign)), Valign = 'm'; end;
     if (nargin < 7 ||isempty(textcolor)), textcolor = 1; end;
+    if (nargin < 8 ||isempty(fontname)), fontname = 'Helvetica'; end;
 %%
 if Halign == 'c'||Halign == 'C' || any(Halign == [2  5 8])
     Halign1 = 'center';
@@ -51,13 +57,21 @@ else
 end
 
 %%
-
+if nargin >1
    text(x , y, ...
          textin, ...
          'fontsize', fsize, ...
-          'Interpreter', 'latex', ...
          'horizontalalignment', Halign1, ...
           'verticalalignment', Valign1, ...
           'color',  colorcode,...
-          'FontName', 'Helvetica');
+          'FontName', fontname);
       %  
+else
+        L = permute(reshape(1:9, 3,3),[2 1]);
+            for t1 = 1:9
+                    [r, c] = find(L ==t1);
+                    plot(c,r, 'b+', 'markersize', 15); hold on
+                    mytext(c,r , num2str(t1), 14, t1);
+            end
+        axis off
+end

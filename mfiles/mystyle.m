@@ -46,6 +46,7 @@ if stylecode==0
                 axis([0 10.1 0 2])
                 end
         end
+        axis off
 end
 
 

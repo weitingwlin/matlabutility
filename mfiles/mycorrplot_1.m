@@ -74,9 +74,9 @@ if (nargin < 5), textin = 0; end;
 if (nargin < 4 ||isempty(colorbaron)), colorbaron= 0 ; end;
 if (nargin < 3 ||isempty(type)), type = ('B'); end;
 if (nargin < 2) && inputistable == 0, % Create a cell array of strings {'1','2',...,'p'} 
-    xnames={};
+    xnames = {};
     for i=1:p       
-    xnames{i} = num2str(i); 
+        xnames{i} = num2str(i); 
     end;
     textin = 1; % the default name is short enough
 end;

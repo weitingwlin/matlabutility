@@ -9,7 +9,7 @@
 
 ## Syntax
 
-### h = myplot( X, Y, type, color, style )
+### h = myplot( X, Y, type, color, style, linewidth)
 
 *  **X**,**Y**: vectors of data x,y, numeric or column of table
 *  **type**:optional, type of plots 
@@ -21,7 +21,7 @@
   + IF it is not round, round part means the color code, 0.5 decimal part means the marker be hollow
   + IF it is a vector, it is the color code
 * **style** : line or marker style of corresponding **type**s. For type = 'B', apply only to marker.
-
+* **linewidth**: line width, only apply to style 'L'
 
 ## Example: simple usage
 Make a plot nice and quick:

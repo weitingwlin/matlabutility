@@ -63,3 +63,4 @@ Folder **documents** contains detailed documents for some functions.
 > * 2016/12/01 : add **myplot\_RAC.m**; **myplot\_RAC.md**
 > * 2017/01/19 : add **fixsample.m**
 > * 2017/01/19 : add **mycolormap.m**; **myLatext.m**
+> * 2017/01/22 : add **mytable.m**; **mytext.m**
