@@ -8,7 +8,9 @@
 %             [color]: IF it is a number, selecter of color (type `mycolor` to see the plate) 
 %                               IF it is not round, 0.5 decimal part means the marker be hollow
 %                        IF it is a vector, it is the color code
-%             [style] : line or marker style of corresponding [type]. for type = 'B', apply only to marker
+%             [style] : line or marker style of corresponding [type]. 
+%                         for type = 'B', the firsat element apply to
+%                         marker, second apply to line
 %             [linewidth]: linewidth for type 'L'
 %%
 function h = myplot(X,Y,type,color,style, linewidth)
@@ -54,7 +56,8 @@ if type=='S'
           if (nargin < 5||isempty(style)), style = 'o';       end
           
           stylesheet = {'o', 's','d','^','p','+','*','X','v','>','<','.'};
-          a = 40;
+          a = 40;         
+            style = style(1);             
           if isnumeric(style) 
             if (style-floor(style) == 0.5);  hollow = 1;end  
             style = stylesheet{floor(style)};
@@ -72,10 +75,10 @@ if type=='S'
 end
 
 if type=='L'|| type=='B'
-        if (nargin < 5||isempty(style)||type=='B')
+        if (nargin < 5||isempty(style))
                 Lstyle = '-';
-        else
-                Lstyle=style;
+        else          
+               Lstyle=style(end);
         end
         
           stylesheet = {'-','--',':','-.' };
@@ -86,6 +89,7 @@ if type=='L'|| type=='B'
 end
 
 if type=='B'
+    style = style(1);
            if (nargin < 5||isempty(style)), style = 'o';       end
            stylesheet = {'o', 's','d','^','p','+','*','X','v','>','<','.'};
           a=40;
@@ -115,3 +119,4 @@ end
 % Update 2015/11/23 :  Add option color n.5 for hollow markers
 % Update 2015/12/01 : Add numeric and n.5 input option of 'style'; use [] to pass default values
 % Update 2017/01/22 :  Add argument linewidth
+% Update 2017/01/23 : Edit argument style: Control both line and marker style in type =='B' 

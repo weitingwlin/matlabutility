@@ -11,6 +11,8 @@ if (nargin >=3 && length(labels(1,:))==3) % can "skip" entry of labels
     groupcolormap = labels;
     labels = [];
 end
+ stylesheet = {'o', 's','d','^','p','>','<', 'o', 's','d','^','p','>','<','o', 's','d','^','p','>','<',...
+                         'o', 's','d','^','p','>','<', 'o', 's','d','^','p','>','<','o', 's','d','^','p','>','<'};
     %% Dissilimarity
 % Since Z-transformed data looks more noraml, we use Zdata 
 Dissim = pdist(data); % the dissimilarity data
@@ -42,7 +44,7 @@ if isa(groups,'double')==1
 elseif isa(groups,'cell')==1
     grouplist2 = unique(groups);
         for i=1:length(grouplist2)
-           h1 = myplot(Y(strcmp(groups,grouplist2(i)),1),Y(strcmp(groups,grouplist2(i)),2),'S',i) ; hold on
+           h1 = myplot(Y(strcmp(groups,grouplist2(i)),1),Y(strcmp(groups,grouplist2(i)),2),'S',i, stylesheet{i}) ; hold on
         end
         legend(grouplist2)
 

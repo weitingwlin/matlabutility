@@ -17,7 +17,7 @@
 %      colorsheet : the color of each Species, ranked in the first row
 %                        if input is only 1 
 %      stylesheet : the style of each Species, ranked in the first row
-function myplot_RAC(X, strs, strn, bigtitle, colorsheet, stylesheet)
+function myplot_RAC(X, strs, strn, bigtitle, colorsheet, stylesheet, zerooff)
 [n, p] = size( X ); 
 %% Defult names
 if nargin <2 || isempty(strs)
@@ -28,6 +28,9 @@ if nargin <3 || isempty(strn)
 end
 if nargin <4 || isempty(bigtitle)
     bigtitle = 'Rank-Abundance Curve';
+end
+if nargin <7 || isempty(zerooff)
+    zerooff = 0;
 end
 %% input names as string
 if iscell(strs)
@@ -52,6 +55,8 @@ else
         titles{c} = [strn, ' ', num2str(c)]; 
     end
 end
+%%
+
 %% Default color
  temp = mycolor(-1) ;
 if nargin <5 || isempty(colorsheet)
@@ -96,21 +101,45 @@ end
 figure
 [B, I ] = sort( X( 1, : ), 'descend');
 
-if n >1
+%% reset color and style
+C = colorsheet(1:p, :);
+colorsheet = C(I,:);
+C =stylesheet(1:p);
+stylesheet = C(I);
+%% make full label
+%if n >1
     mysubplot(1, n+2, 0, bigtitle)
-    mysubplot(1, n+2, 2, '', 0.3, 0.1)
-end
-
+  
+    if zerooff==1
+          mysubplot(1, (n+2)*2, (n+2)*2, '', 0.3, 0.1)
+          for s = 1:p
+            ranks = find(I==s);
+            h = scatter(ranks , X(1, s) ,60, stylesheet{ranks},'Markeredgecolor','none','Markerfacecolor',colorsheet(ranks, :));   hold on         
+          end
+           legend(legends{:})
+           myplot( 1:p, B , 'L', 1);
+    end
+      mysubplot(1, n+2, 2, '', 0.3, 0.1)
+       
+%end
+%%
 for s = 1:p
         ranks = find(I==s);
-        h = scatter(ranks , X(1, s) ,60, stylesheet{ranks},'Markeredgecolor','none','Markerfacecolor',colorsheet(ranks, :));   hold on 
-    end
+        if zerooff==1 && X(1,s)>0
+        h = scatter(ranks , X(1, s) ,60, stylesheet{ranks},'Markeredgecolor','none','Markerfacecolor',colorsheet(ranks, :));   hold on         
+        end
+end
+% the line
     myplot( 1:p, B , 'L', 1); hold on
+    if zerooff==0
         legend(legends{:})
+    end
         % replot so the symbles are on top
         for s = 1:p
             ranks = find(I==s);
-            h = scatter(ranks , X(1, s) ,60, stylesheet{ranks},'Markeredgecolor','none','Markerfacecolor',colorsheet(ranks, :));   hold on 
+             if zerooff==1 && X(1,s)>0
+                h = scatter(ranks , X(1, s) ,60, stylesheet{ranks},'Markeredgecolor','none','Markerfacecolor',colorsheet(ranks, :));   hold on 
+             end
         end
      axis([1 p 0 max(max(X))]) ;
      title(titles{1});
@@ -122,8 +151,10 @@ for i = 2:n
     [y, id ] = sort(X1(i,:), 'descend'); 
       myplot( 1:p, y , 'L', 1);hold on
     for s = 1:p
+       if zerooff==1 && y(s)>0
         h = scatter( s, y(s) ,60, stylesheet{id(s)},'Markeredgecolor','none','Markerfacecolor',colorsheet(id(s), :));   hold on 
-    end    
+       end
+    end
    box off
      axis([1 p 0 max(max(X))]) ;
      set(gca, 'ytick', '')

@@ -12,7 +12,7 @@
 % Pout: P value
 % 
 % used in myplot_ls.m, replace LS_combo in the future
-   function [B, R, P] = nanls(X,Y)
+   function [B, R, P, lm] = nanls(X,Y)
 % with tables
 if (istable(X)), X=table2array(X); end
 if (istable(Y)), Y=table2array(Y); end  
@@ -34,9 +34,11 @@ if (istable(Y)), Y=table2array(Y); end
    Y = Y(ind);
    
 % calculate ls parameters
-   A = [ones(length(X),1),X]; % X should be a verticle vector
-   B = inv(A'*A)*A'*Y; %[b0; b1]
-       [Rt,Pt] = corrcoef(X,Y);
- 
-   R = Rt(2);
-   P = Pt(2);
+  % formula for regression
+  % A = [ones(length(X),1),X]; % X should be a verticle vector
+  % B = inv(A'*A)*A'*Y; %[b0; b1]
+    
+        lm = fitlm(Y, X, 'Linear');
+        [P] = coefTest(lm);
+        [R, m, b] = regression(X', Y');
+        B = [b;m]; 
