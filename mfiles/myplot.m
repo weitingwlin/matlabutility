@@ -25,7 +25,7 @@ else
 end
 if (nargin < 4 || isempty(color)), color = 3; end;
 if (nargin < 3 ||isempty(type)), type = ('S'); end;
-
+if (nargin < 5 ||isempty(style)), style =[ 1 1]; end;
 
 % compatibility to data type table
 Xlab = [];   

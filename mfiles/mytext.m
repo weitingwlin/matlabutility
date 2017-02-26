@@ -11,7 +11,7 @@ function mytext(x, y, textin, fsize, Halign, Valign, textcolor, fontname )
 %    myplot(0,0);hold on;hline;vline;
 %    mytext(0.5, 0.5, 'mytext')
 %    mytext(0, 0 ,  'mytext: Arial Black', [], 9, [], 4,'Arial Black')
- %   mytext(0, 0 , 'mytext', 16, 'L', 'B', 2, 'Times New Roman')
+ %   mytext(0, 0 , 'mytext: Times New Roman', 16, 'L', 'B', 2, 'Times New Roman')
  %   
  %  tip: use ` listfonts` to see available font name
  %
