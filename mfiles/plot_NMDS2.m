@@ -69,7 +69,8 @@ end
         h2 = vline(0, 7, ':'); uistack(h2, 'bottom');
         xticks([-1 -0.5 0 0.5 1]);
         yticks([-1 -0.5 0 0.5 1]);
-
+        xlabel('NMDS 1')
+        ylabel('NMDS 2')
 %% Vectors
 if ~(nargin < 2 || isempty(labels) || isnumeric(labels))
     for i = 1 : length(Y(:,1))
@@ -94,8 +95,11 @@ if ~isempty(vec) % plot vector only when they are available
 end
 % in case of two plots, the axes are consistant
           axis([-1.1  1.1  -1.1  1.1])
-          
+if nplots == 2          
 h1 = hline(0, 7, ':'); uistack(h1, 'bottom');
 h2 = vline(0, 7, ':'); uistack(h2, 'bottom');
         xticks([-1 -0.5 0 0.5 1]);
         yticks([-1 -0.5 0 0.5 1]);
+        xlabel('NMDS 1')
+        ylabel('NMDS 2')
+end
