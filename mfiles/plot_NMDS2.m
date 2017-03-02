@@ -67,8 +67,10 @@ end
 
         h1 = hline(0, 7, ':'); uistack(h1, 'bottom');
         h2 = vline(0, 7, ':'); uistack(h2, 'bottom');
-        xticks([-1 -0.5 0 0.5 1]);
-        yticks([-1 -0.5 0 0.5 1]);
+           % xticks([-1 -0.5 0 0.5 1]);
+        %yticks([-1 -0.5 0 0.5 1]);
+        set(gca, 'Xtick', [-1 -0.5 0 0.5 1]);
+        set(gca, 'Ytick', [-1 -0.5 0 0.5 1]);
         xlabel('NMDS 1')
         ylabel('NMDS 2')
 %% Vectors
@@ -98,8 +100,10 @@ end
 if nplots == 2          
 h1 = hline(0, 7, ':'); uistack(h1, 'bottom');
 h2 = vline(0, 7, ':'); uistack(h2, 'bottom');
-        xticks([-1 -0.5 0 0.5 1]);
-        yticks([-1 -0.5 0 0.5 1]);
+       % xticks([-1 -0.5 0 0.5 1]);
+        %yticks([-1 -0.5 0 0.5 1]);
+        set(gca, 'Xtick', [-1 -0.5 0 0.5 1]);
+        set(gca, 'Ytick', [-1 -0.5 0 0.5 1]);
         xlabel('NMDS 1')
         ylabel('NMDS 2')
 end
