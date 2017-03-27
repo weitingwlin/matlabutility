@@ -14,18 +14,19 @@
 %             [linewidth]: linewidth for type 'L'
 %%
 function h = myplot(X,Y,type,color,style, linewidth)
+    a=40;
 if (nargin < 6 || isempty(linewidth)),
     linewidth = 2;
 else
     if any(strcmp(type, {'S', 'B'}))
     a = linewidth * 20;
     linewidth =2; 
-    warning('"linewidth" only works for type "L"');
+  %  warning('"linewidth" only works for type "L"');
     end
 end
 if (nargin < 4 || isempty(color)), color = 3; end;
 if (nargin < 3 ||isempty(type)), type = ('S'); end;
-if (nargin < 5 ||isempty(style)), style =[ 1 1]; end;
+if (nargin < 5 ||isempty(style)), style =[1 1]; end;
 
 % compatibility to data type table
 Xlab = [];   
@@ -56,7 +57,7 @@ if type=='S'
           if (nargin < 5||isempty(style)), style = 'o';       end
           
           stylesheet = {'o', 's','d','^','p','+','*','X','v','>','<','.'};
-          a = 40;         
+    
             style = style(1);             
           if isnumeric(style) 
             if (style-floor(style) == 0.5);  hollow = 1;end  
@@ -66,7 +67,7 @@ if type=='S'
                 if  any( strcmp(version('-release'), {'2015b'}) )
                 h = scatter(X,Y,a,style,'Markeredgecolor','none','Markerfacecolor',colorcode,'Markerfacealpha',0.7);% 'Markerfacealpha',0.7);
                 else
-                h = scatter(X,Y,a,style,'Markeredgecolor','none','Markerfacecolor',colorcode);     
+                h = scatter(X, Y, a, style,'Markeredgecolor','none','Markerfacecolor',colorcode);     
                 end
         else % hollow ==1    
                 h = plot(X,Y,style,'color',colorcode);   
@@ -92,7 +93,7 @@ if type=='B'
     style = style(1);
            if (nargin < 5||isempty(style)), style = 'o';       end
            stylesheet = {'o', 's','d','^','p','+','*','X','v','>','<','.'};
-          a=40;
+
          if isnumeric(style) 
             if (style-floor(style) == 0.5);  hollow = 1;end  
             style = stylesheet{floor(style)};
@@ -109,7 +110,12 @@ if type=='B'
      end
             set(gca,'FontSize',14,'linewidth',2);
 end
-  xlabel(Xlab);ylabel(Ylab);
+if ~isempty(Xlab)
+    xlabel(Xlab);
+end
+if ~isempty(Ylab)
+    ylabel(Ylab);
+end
 %%  
 % Update 2015/09/21 : use function form [mycolor] instead of script_mycolorplate 
 % Update 2015/09/22 : input [color] can be a 3-number code

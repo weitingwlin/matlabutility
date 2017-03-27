@@ -1,7 +1,11 @@
 % plot NMDS result with score and vectors
 
-function [h] = plot_NMDS2(Y, vec, groups, labels, groupcolormap, veclabels, nplots)
-n = length(Y(:,1)); % number of species
+function [h, Y] = plot_NMDS2(Y, vec, groups, labels, groupcolormap, veclabels, nplots)
+n = length(Y(:,1)); % number of points
+msize = 2; % marker size
+if n <= 100
+    msize = 3;    
+end
 if (~isempty(vec))
     p = length(vec(:,1)); % number of vector
 end
@@ -37,13 +41,14 @@ if isa(groups,'double')==1
         for i=1:length(grouplist)
             if length(grouplist) <= 10 
                 % fewer groups use mycolor
-                   h{1}(i)= myplot(Y(groups == grouplist(i), 1),Y(groups == grouplist(i),2),'S', color() ,i) ; hold on   
+                   h{1}(i)= myplot(Y(groups == grouplist(i), 1),Y(groups == grouplist(i),2),'S', color(i) ,i) ; hold on   
                     if (nargin >= 2)
                         legend(h{1}(i), num2str(grouplist)); 
                     end
             else
                 % too many groups use colormap
-                  h{1} = scatter(Y(:,1), Y(:,2), 40 , groups, 'filled')   ; hold on                  
+                a = 20 * msize;
+                  h{1} = scatter(Y(:,1), Y(:,2), a , groups, 'filled')   ; hold on                  
                    set(gca,'FontSize',14,'linewidth',2);             
                          colormap(groupcolormap);
                    h{3} =   colorbar;
@@ -51,11 +56,11 @@ if isa(groups,'double')==1
         end
   
 elseif isa(groups,'cell')==1
-    grouplist2 = unique(groups);
+    grouplist2 = unique(groups, 'stable');
         for i=1:length(grouplist2)
            h{1} = myplot(Y(strcmp(groups,grouplist2(i)),1), ...
                                Y(strcmp(groups,grouplist2(i)),2), ...
-                               'S', color(i), stylesheet{i}) ; hold on
+                               'S', color(i), stylesheet{i}, msize) ; hold on
         end
         legend(grouplist2)
 
@@ -92,7 +97,7 @@ if ~isempty(vec) % plot vector only when they are available
         %%%%%%%%%%%%%
         % plotting the vectors
         for v = 1:p
-                myplot_vec(vec(v,1), vec(v,2), veclabels(v), 1, [], [], 14); hold on
+                myplot_vec(vec(v,1), vec(v,2), veclabels(v), 1, [], [], 12); hold on
         end      
 end
 % in case of two plots, the axes are consistant

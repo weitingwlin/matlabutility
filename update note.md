@@ -39,3 +39,4 @@
 > * 2017/01/22 : add **mytable.m**; **mytext.m**
 > * 2017/02/24 : edit **myplot.m**; add **num2cellstr.m**, **plot_NMDS2.m**
 > * 2017/02/26 : replace **plot_square.m** with **myplot_square.m**, edit **plot_NMDS2.m**
+> * 2017/03/27 : fix label problem on **myplot.m**  
