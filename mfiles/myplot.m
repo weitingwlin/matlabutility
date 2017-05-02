@@ -15,7 +15,7 @@
 %%
 function h = myplot(X,Y,type,color,style, linewidth)
     a=40;
-if (nargin < 6 || isempty(linewidth)),
+if (nargin < 6 || isempty(linewidth))
     linewidth = 2;
 else
     if any(strcmp(type, {'S', 'B'}))

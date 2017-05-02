@@ -12,51 +12,44 @@
 %       colormap(mycolormap(3)); colorbar 
 %       colormap(mycolormap('teal'));
 %  
-function mymap = mycolormap(c)
-if isnumeric(c)
-        if length(c) ==1
-                myplate = mycolor(-1);
-                tc = myplate(c, :); % top color 
-        else
-            if length(c) == 3 && all(c <= 1) 
-                tc = c;
-            else
-                error('input should be a 3 digit rgb color code or a color selector');
-            end
-        end
-        mymap =  [linspace(1, tc(1), 64)' linspace(1, tc(2), 64)' linspace(1, tc(3), 64)'];
+function mymap = mycolormap(c, mode, c2)
+if nargin == 1
+    mode = 1;
 end
 
-if ischar(c) 
-        if any(strcmp('red',{'red', 'green', 'blue', 'purple', 'teal', 'olive', 'orange'}))
-                red = flip(gray);    red(:,1) =1;
-                blue = flip(gray);   blue(:,3) =1;
-                green = flip(gray);  green(:,2) =1;
-                purple = (red + blue)/2;
-                olive =(red + green)/2;
-                teal =(blue + green)/2;
-                if strcmp(c, 'red')
-                    mymap = red;
+if ischar(c) && mode == 1
+        [mymap, ~] = mycolorstring(c);
+else
+        % get the full scale color 
+        if ischar(c)
+        [~, tc] = mycolorstring(c);
+        end
+        if isnumeric(c)
+                if length(c) ==1
+                        myplate = mycolor(-1);
+                        tc = myplate(c, :); % top color 
+                else
+                        if length(c) == 3 && all(c <= 1) 
+                                tc = c;
+                        else
+                                error('input should be a 3 digit rgb color code or a color selector');
+                        end
                 end
-                 if strcmp(c, 'green')
-                    mymap = green;
-                 end
-                 if strcmp(c, 'blue')
-                    mymap = blue;
-                 end
-                 if strcmp(c, 'purple')
-                    mymap = purple;
-                 end
-                 if strcmp(c, 'olive')
-                    mymap = olive;
-                 end
-                 if strcmp(c, 'teal')
-                    mymap = teal;
-                 end
-                  if strcmp(c, 'orange')
-                    mymap = mycolormap([1 0.5 0]);
-                end
-        else
-             error('input string should be one of: red, green, blue, purple, teal, olive');
+        end
+        % make color map
+        if mode == 1
+                mymap =  [linspace(1, tc(1), 64)' linspace(1, tc(2), 64)' linspace(1, tc(3), 64)'];
+        else % mode == 2
+            if nargin <=2
+               csum = sum(tc); % top RGB score
+               bc = ([1 1 1] - tc)/sum ([1 1 1] - tc) * csum;
+            else
+                bc = c2;
+            end   
+               mapt = [linspace(1, tc(1), 32)' linspace(1, tc(2), 32)' linspace(1, tc(3), 32)'];
+               mapb = [linspace(1, bc(1), 32)' linspace(1, bc(2), 32)' linspace(1, bc(3), 32)'];
+               mymap = [flip(mapb); mapt];
         end
 end
+end
+

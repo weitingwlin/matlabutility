@@ -11,11 +11,12 @@
 %       set(hcb,'YTick', [0 1 2 10]);
 %       im.AlphaData = 0.8;
 
-function [im, hcb] = mytable(A, fullcolor, fsize, fname)
+function [im, hcb] = mytable(A, fullcolor, fsize, fname, mode)
     if (nargin < 2 ||isempty( fullcolor)),  fullcolor = 3; end;
     if (nargin < 3 ||isempty(fsize)), fsize = 10; end;
     if (nargin < 4 ||isempty(fname)), fname = 'Helvetica'; end;
-
+    if (nargin < 5 ||isempty(mode)), mode = 'D'; end;
+    
 im = imagesc(A); hold on
 colormap(mycolormap(fullcolor));
 % im.AlphaData = .8;
