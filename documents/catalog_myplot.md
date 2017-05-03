@@ -104,3 +104,9 @@ Make a square or box by imput x and y points
 
 ### [para2str](para2str.md)
 Return string(s) with parameter name and value. 
+
+### [str2rgb](https://github.com/weitingwlin/matlabutility/blob/master/documents/str2rgb.md)
+
+Convert color name (in string) to rgb code
+>
+ ![plot1](images/str2rgb_1.png) 
