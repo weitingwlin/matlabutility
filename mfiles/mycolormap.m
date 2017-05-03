@@ -16,40 +16,42 @@ function mymap = mycolormap(c, mode, c2)
 if nargin == 1
     mode = 1;
 end
+%%  change colors to rgb code
+tc = parsecolor(c);
+%% make color map
+       switch mode
+           case 1
+                mymap =  [linspace(1, tc(1), 64)' linspace(1, tc(2), 64)' linspace(1, tc(3), 64)'];
+        
+           case 2
+                    if nargin <=2||isempty(c2)
+                        csum = sum(tc); % top RGB score
+                        bc = ([1 1 1] - tc)/sum ([1 1 1] - tc) * csum;
+                    else
+                        bc = parsecolor(c2);
+                    end   
+                    mapt = [linspace(1, tc(1), 32)' linspace(1, tc(2), 32)' linspace(1, tc(3), 32)'];
+                    mapb = [linspace(1, bc(1), 32)' linspace(1, bc(2), 32)' linspace(1, bc(3), 32)'];
+                    mymap = [flip(mapb); mapt];
+           otherwise
+                    error('mode most be 1 or 2')
+       end
+end
 
-if ischar(c) && mode == 1
-        [mymap, ~] = mycolorstring(c);
-else
-        % get the full scale color 
-        if ischar(c)
-        [~, tc] = mycolorstring(c);
-        end
-        if isnumeric(c)
-                if length(c) ==1
-                        myplate = mycolor(-1);
-                        tc = myplate(c, :); % top color 
+%%
+function tc = parsecolor(c)
+    if ischar(c) 
+        tc = str2rgb(c);
+    else       
+        if length(c) ==1
+                myplate = mycolor(-1);
+                tc = myplate(c, :); % top color 
+        else
+                if length(c) == 3 && all(c <= 1) 
+                       tc = c;
                 else
-                        if length(c) == 3 && all(c <= 1) 
-                                tc = c;
-                        else
-                                error('input should be a 3 digit rgb color code or a color selector');
-                        end
+                        error('input should be a 3 digit rgb color code or a color selector');
                 end
         end
-        % make color map
-        if mode == 1
-                mymap =  [linspace(1, tc(1), 64)' linspace(1, tc(2), 64)' linspace(1, tc(3), 64)'];
-        else % mode == 2
-            if nargin <=2
-               csum = sum(tc); % top RGB score
-               bc = ([1 1 1] - tc)/sum ([1 1 1] - tc) * csum;
-            else
-                bc = c2;
-            end   
-               mapt = [linspace(1, tc(1), 32)' linspace(1, tc(2), 32)' linspace(1, tc(3), 32)'];
-               mapb = [linspace(1, bc(1), 32)' linspace(1, bc(2), 32)' linspace(1, bc(3), 32)'];
-               mymap = [flip(mapb); mapt];
-        end
+    end
 end
-end
-
