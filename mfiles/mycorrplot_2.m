@@ -4,14 +4,14 @@
 % by Wei-Ting Lin, _2014/10/23_
 
 % Dependent
-% [plot_circle.m] [mycolor.m] [nancorr.m] [tnames.m]
+% [plot_circle.m] [mycolor.m] [nancorr.m] [tnames.m][mycolormap.m][str2rgb.m]
 %
 % *Example* : [X_corrplots_2.m]
 
 %%  Using [mycorrplot_2]
 % *Syntax*
 % 
-% mycorrplot_2(X,Y,xnames,ynames,type,plotson)
+% mycorrplot_2(X,Y,xnames,ynames,type,plotson, colormaps)
 %
 % * X, Y: array or table, the data; X and Y should have the same number of rows; we are
 % interested in correlation between each column of X and each column of Y.
@@ -31,7 +31,17 @@
 %      
 % update 2015/10/30 : use mycolor function, compatible with data type "table", NaN ignored, new scatterplot style 
 %%
- function mycorrplot_2(X,Y,xnames,ynames,type, plotson)
+ function mycorrplot_2(X, Y, xnames, ynames, type, plotson, colormaps)
+ if (nargin < 5|| isempty(type)), type = ('B'); end;
+if (nargin < 6|| isempty(plotson)), plotson = [1 1 0]; end;
+%%% Error %%%
+if isempty(find(plotson==1))
+    error('At least one element in plotson must be 1')
+end
+
+ if nargin < 7
+     colormaps = mycolormap('blue', 2, 'red');
+ end
   % Add compatibility to data type "table"
      inputxtable=0; % flag for whether input is a table (or matrix by default)
      inputytable=0; 
@@ -59,7 +69,7 @@
   end
  
  [Rvals, Pvals] = nancorr(X,Y);
- [p1,p2] = size(Rvals);
+ [p1, p2] = size(Rvals);
  
 %%% Setting up default values
 if (nargin < 3) && inputxtable == 0
@@ -75,12 +85,6 @@ ynames={};
     end;
 end;
 
-if (nargin < 5|| isempty(type)), type = ('B'); end;
-if (nargin < 6), plotson = [1 1 0]; end;
-%%% Error %%%
-if isempty(find(plotson==1))
-    error('At least one element in plotson must be 1')
-end
 
 %%% Setting up the "subplot" parameters
 XRange = 0.8/(p2+1); YRange=0.8/(p1+1);
@@ -93,7 +97,7 @@ Xss(1)=0.1+XBox;% Starting points of X
              Xss(j) = Xss(j-1) + XRange;
          end
     end
-Yss(1)=0.9-YRange; % starting points of Y
+Yss(1) = 0.9-YRange; % starting points of Y
     if p1>1
         for i = 2:p1
             Yss(i) = Yss(i-1) -  YRange;
@@ -102,7 +106,7 @@ Yss(1)=0.9-YRange; % starting points of Y
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% make a plot to visualize R and P
+%% make a plot to visualize R and P
 Csize = ones(p1,p2);
     Csize(Pvals>=0.05) = 0.4;
     Csize(Pvals<0.05 & Pvals > 0.01) = 0.8;
@@ -110,50 +114,50 @@ Ccolor = 1+floor((Rvals+1)*32);
     Ccolor(Ccolor==65)=64;    
     % eventhogh unlikely, this code prevent P=1 to have the 65th color
 if plotson(1)==1
-figure
+    figure
 %subplot1(2,3)
-for j=1:p1 % each row  of subplots
-    for i=1:p2 % each col of subplot
+    for j=1:p1 % each row  of subplots
+            for i=1:p2 % each col of subplot
         % setting up the subplots
-        axes('position',[Xss(i) Yss(j) XBox YBox]);
-         axis([-1 1 -1 1])
+                    axes('position',[Xss(i) Yss(j) XBox YBox]);
+                    axis([-1 1 -1 1])
         % Plotting with circle
-        if type=='C' || type=='B'      
-            if Csize(j,i) >= 0.8 % Significant
-                plot_circle([0 0],Csize(j,i),mycolor(Ccolor(j,i),'redblue'),[0 0 0])   
-            else % Not significant
-                plot_circle([0 0],Csize(j,i),mycolor(Ccolor(j,i),'redblue'))   
-            end
-        end
+                    if type=='C' || type=='B'      
+                            if Csize(j,i) >= 0.8 % Significant
+                                    plot_circle([0 0], Csize(j,i), colormaps(Ccolor(j,i),:),[0 0 0])   
+                            else % Not significant
+                                    plot_circle([0 0], Csize(j,i), colormaps(Ccolor(j,i),:))   
+                            end
+                    end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
          % Printing out texts 
-        if type=='T' || type=='B'
-        text(0,0,['R:' num2str(Rvals(j,i),'%.3f')],'HorizontalAlignment','center','VerticalAlignment','bottom','fontsize',8)
-         text(0,0,['p:' num2str(Pvals(j,i),'%.3f')],'HorizontalAlignment','center','VerticalAlignment','top','fontsize',8)
-        end
-        set(gca,'Xtick',[],'Ytick',[])
+                    if type=='T' || type=='B'
+                            text(0,0,['R:' num2str(Rvals(j,i),'%.3f')],'HorizontalAlignment','center','VerticalAlignment','bottom','fontsize',8)
+                            text(0,0,['p:' num2str(Pvals(j,i),'%.3f')],'HorizontalAlignment','center','VerticalAlignment','top','fontsize',8)
+                    end
+                    set(gca,'Xtick',[],'Ytick',[])
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-        %  put on lebels on the margin boxes
-         if i==1 % Y- labels on the left; names of input X           
-             if max(cellfun('length',xnames))<=round(50/p1) %%%%% Rotate if string is too long
-                  h=text(-1.5,0,xnames{j},'fontsize',10);
-                set(h, 'rotation', 90,'HorizontalAlignment','center');
-             else
-                  h=text(-1.07,0,xnames{j},'fontsize',8,'HorizontalAlignment','right');
-             end
-         end
-          if j==p1 % X- labels on the bottom; names of input Y                            
-                if max(cellfun('length',ynames))>=round(50/p2) %%%%% Rotate if string is too long
-                     h=text(0,-1.07,ynames{i},'fontsize',8,'HorizontalAlignment','left');
-                    set(h, 'rotation', -90)
-                else
-                     h=text(0,-1.5,ynames{i},'fontsize',10,'HorizontalAlignment','Center');
-                end
-          end
+        %  put on labels on the margin boxes
+                    if i == 1 % Y- labels on the left; names of input X           
+                            if max(cellfun('length',xnames))<=round(50/p1) %%%%% Rotate if string is too long
+                                    h = text(-1.5,0,xnames{j},'fontsize',12);
+                                    set(h, 'rotation', 60,'HorizontalAlignment','center');
+                            else
+                                    h=text(-1.07,0,xnames{j},'fontsize',10,'HorizontalAlignment','right');
+                            end
+                    end
+                    if j == p1 % X- labels on the bottom; names of input Y                            
+                            if max(cellfun('length',ynames))>=round(50/p2) %%%%% Rotate if string is too long
+                                    h=text(0,-1.07,ynames{i},'fontsize',10,'HorizontalAlignment','left');
+                                    set(h, 'rotation', -90)
+                            else
+                                    h=text(0,-1.5,ynames{i},'fontsize',12,'HorizontalAlignment','Center');
+                            end
+                    end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            end
     end
-end
 end % if plotson(1)==1
 
 
@@ -168,14 +172,15 @@ for j=1:p1 % each row  of subplots
     % subplot(2,3,i)
         axes('position',[Xss(i) Yss(j) XBox YBox]);
            if  strcmp(version('-release'), '2015a')
-        scatter(X(:,j),Y(:,i),25,'Markeredgecolor','none','Markerfacecolor',[0 0 0], 'Markerfacealpha',0.7); hold on
+                    scatter(X(:,j),Y(:,i),25,'Markeredgecolor','none','Markerfacecolor',[0 0 0], 'Markerfacealpha',0.5); hold on
            else
-        scatter(X(:,j),Y(:,i),25,'Markeredgecolor','none','Markerfacecolor',[0 0 0]); hold on
+                    scatter(X(:,j),Y(:,i),25,'Markeredgecolor','none','Markerfacecolor',[0 0 0]); hold on
            end
-        h =lsline;
-        set(h, 'linewidth',2,'color','b')
-        set(gca,'Xtick',[],'Ytick',[])       
-      
+            if Csize(j,i) >= 0.8 % Significant
+                    h =lsline;
+                    set(h, 'linewidth',2,'color','b')
+            end
+            set(gca,'Xtick',[],'Ytick',[])   
     end
 end
 
@@ -187,10 +192,10 @@ end
      box off
      set(gca,'Xtick',[],'Ytick',[])
              if max(cellfun('length',xnames))<=round(40/p1) %%%%% Rotate if string is short
-                  h=text(0.5,0,xnames{j},'fontsize',10);
+                  h=text(0.5,0,xnames{j},'fontsize',12);
                 set(h, 'rotation', 90,'HorizontalAlignment','center','VerticalAlignment','middle');
              else
-                  h=text(0.9,0,xnames{j},'fontsize',8,'HorizontalAlignment','right');
+                  h=text(0.9,0,xnames{j},'fontsize',10,'HorizontalAlignment','right');
              end
     end
     for  i=1:p2 % Label on each column
@@ -200,10 +205,10 @@ end
      box off
      set(gca,'Xtick',[],'Ytick',[])
            if max(cellfun('length',ynames))>=round(50/p2) %%%%% Rotate if string is too long
-                     h=text(0,0.9,ynames{i},'fontsize',8,'HorizontalAlignment','left','VerticalAlignment','middle');
-                    set(h, 'rotation', -90)
+                     h=text(0,0.9,ynames{i},'fontsize',12,'HorizontalAlignment','left','VerticalAlignment','middle');
+                    set(h, 'rotation', -60)
            else
-                     h=text(0,0.5,ynames{i},'fontsize',10,'HorizontalAlignment','Center');
+                     h=text(0,0.5,ynames{i},'fontsize',14,'HorizontalAlignment','Center');
            end
     end
 end
@@ -217,7 +222,7 @@ if plotson(3)==1
     temp = [-1:0.04:1];
 figure
  axes('position',[0.1 0.6 0.8 0.1]);
-        colormap(mycolor('redblue')) % set color mat to a red-blue scale
+        colormap(colormaps) % set color mat to a red-blue scale
     imagesc(temp)
     set(gca,'YTick',[],'Xtick',[1 13 26 39 51],'Xticklabel',{'-1','-0.5','0','0.5','1'},'fontsize',14)
     xlabel('Correlation Coefficient','fontsize',15)

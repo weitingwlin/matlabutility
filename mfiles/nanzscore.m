@@ -1,7 +1,7 @@
 % Remove NaN and pass to zscore function
 % NaN remain NaN in the out put data 
 %
-function out = nanzscore(mat, flag,  dim);
+function out = nanzscore(mat, flag,  dim)
 
 if (nargin < 3), dim = 1; end;
 if (nargin < 2), flag = 0; end;
