@@ -87,7 +87,7 @@ end;
 
 
 %%% Setting up the "subplot" parameters
-XRange = 0.8/(p2+1); YRange=0.8/(p1+1);
+XRange = 0.8/(p2+1); YRange=0.7/(p1+1);
 XBox = XRange*0.95;  YBox=YRange*0.95;
 % Range = Box + Gap
 
@@ -97,7 +97,7 @@ Xss(1)=0.1+XBox;% Starting points of X
              Xss(j) = Xss(j-1) + XRange;
          end
     end
-Yss(1) = 0.9-YRange; % starting points of Y
+Yss(1) = 0.8-YRange; % starting points of Y
     if p1>1
         for i = 2:p1
             Yss(i) = Yss(i-1) -  YRange;
@@ -132,8 +132,8 @@ if plotson(1)==1
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
          % Printing out texts 
                     if type=='T' || type=='B'
-                            text(0,0,['R:' num2str(Rvals(j,i),'%.3f')],'HorizontalAlignment','center','VerticalAlignment','bottom','fontsize',8)
-                            text(0,0,['p:' num2str(Pvals(j,i),'%.3f')],'HorizontalAlignment','center','VerticalAlignment','top','fontsize',8)
+                            text(0,0,['R:' num2str(Rvals(j,i),'%.3f')],'HorizontalAlignment','center','VerticalAlignment','bottom','fontsize',12)
+                            text(0,0,['p:' num2str(Pvals(j,i),'%.3f')],'HorizontalAlignment','center','VerticalAlignment','top','fontsize',12)
                     end
                     set(gca,'Xtick',[],'Ytick',[])
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -141,18 +141,18 @@ if plotson(1)==1
         %  put on labels on the margin boxes
                     if i == 1 % Y- labels on the left; names of input X           
                             if max(cellfun('length',xnames))<=round(50/p1) %%%%% Rotate if string is too long
-                                    h = text(-1.5,0,xnames{j},'fontsize',12);
+                                    h = text(-1.5,0,xnames{j},'fontsize',14);
                                     set(h, 'rotation', 60,'HorizontalAlignment','center');
                             else
-                                    h=text(-1.07,0,xnames{j},'fontsize',10,'HorizontalAlignment','right');
+                                    h=text(-1.07,0,xnames{j},'fontsize',14,'HorizontalAlignment','right');
                             end
                     end
                     if j == p1 % X- labels on the bottom; names of input Y                            
                             if max(cellfun('length',ynames))>=round(50/p2) %%%%% Rotate if string is too long
-                                    h=text(0,-1.07,ynames{i},'fontsize',10,'HorizontalAlignment','left');
+                                    h=text(0,-1.07,ynames{i},'fontsize',12,'HorizontalAlignment','left');
                                     set(h, 'rotation', -90)
                             else
-                                    h=text(0,-1.5,ynames{i},'fontsize',12,'HorizontalAlignment','Center');
+                                    h=text(0,-1.5,ynames{i},'fontsize',14,'HorizontalAlignment','Center');
                             end
                     end
         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -192,10 +192,10 @@ end
      box off
      set(gca,'Xtick',[],'Ytick',[])
              if max(cellfun('length',xnames))<=round(40/p1) %%%%% Rotate if string is short
-                  h=text(0.5,0,xnames{j},'fontsize',12);
+                  h=text(0.5,0,xnames{j},'fontsize',14);
                 set(h, 'rotation', 90,'HorizontalAlignment','center','VerticalAlignment','middle');
              else
-                  h=text(0.9,0,xnames{j},'fontsize',10,'HorizontalAlignment','right');
+                  h=text(0.9,0,xnames{j},'fontsize',14,'HorizontalAlignment','right');
              end
     end
     for  i=1:p2 % Label on each column
