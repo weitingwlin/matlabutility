@@ -4,14 +4,20 @@
 %             mymap = mycolormap(c);
 %             
 %             c : the color of full scale. Can be a code to select color from `mycolor`, a 3-digid rgb color code, 
-%                  or one of the strings: 'red', 'green', 'blue', 'purple', 'teal', 'olive'           
+%                  or one of the strings: type `str2rgb`to see the color names
+%             mode: 1 or 2 for gradient (mode = 1, the default) or bipolor (or, diverging, mode = 2)
+%             c2: if mode = 2, this assign the second color (code for
+%             smaller values), default is the complementary color of c.
 %
 % Example:
 %           A = [1 2 3 ; 4 5 6; 0 0 10]
 %       imagesc(A)
 %       colormap(mycolormap(3)); colorbar 
 %       colormap(mycolormap('teal'));
-%  
+%        rng(1);
+%       B = randn(5)
+%        imagesc(B)
+%       colormap(mycolormap('blue', 2, 'orange'));colorbar
 function mymap = mycolormap(c, mode, c2)
 if nargin == 1
     mode = 1;
