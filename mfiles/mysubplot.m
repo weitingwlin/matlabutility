@@ -11,10 +11,11 @@
 %                                                  Default : 0.3, 0.3                                                  
 %                                   
 % to make major title:
-%                 mysubplot(L,W, 0,Title)
+%                 mysubplot(L,W, 0,Title, Titlesize)
 %                                      _set ID=0_               
 %                 [L], [W]: the dimension of subplots as in mysubplot(L,W,ID)
 %                 [Title]: string of the major title
+%                 [Titlesize]: font size of the major title default is 16
 %
 %  to display cell layout: 
 %                mysubplot(L, W)
@@ -26,10 +27,16 @@
 function mysubplot(L, W, ID, bigtitle, tightL, tightW, margin) % ID=0 means title 
 if  (nargin < 3|| isempty(ID)), ID = -1; end % when ID = -1 the function will print out the subplot layout 
 if  (nargin < 4|| isempty(bigtitle)), bigtitle = ''; end 
-if  (nargin < 5 || isempty(tightL)), tightL = 0.3; end 
+if  (nargin < 5 || isempty(tightL))
+    if ID == 0
+        tightL = 16; % default of `titleSize` 
+    else
+        tightL = 0.3;
+    end
+end 
 if  (nargin < 6|| isempty(tightW)), tightW = 0.3; end 
 if  (nargin < 7), margin = 0.05; end 
-if ID>L*W
+if ID > L*W
 error('ID > number of subplot');
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -50,9 +57,10 @@ padL =tightL * plotH;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Making title
 if ID==0
+    titleSize = tightL;
 subplot('position',[0  1-titleH   1  titleH ])% new Length of the whole figure is (11/10)*LCM
 axis([-1 1 -1 1])
-text(0,0,bigtitle, 'VerticalAlignment','Middle','HorizontalAlignment','Center','FontSize',16)
+text(0,0,bigtitle, 'VerticalAlignment','Middle','HorizontalAlignment','Center','FontSize', titleSize)
 box off
 axis off
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

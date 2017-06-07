@@ -14,7 +14,7 @@
 %             [linewidth]: linewidth for type 'L'
 %%
 function h = myplot(X,Y,type,color,style, linewidth)
-    a=40;
+    a = 40;
 if (nargin < 6 || isempty(linewidth))
     linewidth = 2;
 else
@@ -70,7 +70,7 @@ if type=='S'
                 h = scatter(X, Y, a, style,'Markeredgecolor','none','Markerfacecolor',colorcode);     
                 end
         else % hollow ==1    
-                h = plot(X,Y,style,'color',colorcode);   
+                h = plot(X,Y,style,'color',colorcode, 'MarkerSize', a/40*4);   
         end
      set(gca,'FontSize',14,'linewidth',linewidth);   
 end

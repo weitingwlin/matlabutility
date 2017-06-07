@@ -42,3 +42,4 @@
 > * 2017/03/27 : fix label problem on **myplot.m**  
 > * 2017/05/02: Add **str2rgb.m**, edit **mytable.m**, **mycolormap.m**
 > * 2017/05/02: Edit **str2rgb.m**, edit **mycorrplot_2.m**
+> * 2017/05/31: Edit **mysubplot.m**, edit **mytext**

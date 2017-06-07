@@ -1,18 +1,25 @@
 function mytext(x, y, textin, fsize, Halign, Valign, textcolor, fontname )
+%  Easy way to use `text`:
+%
 %   mytext(x, y, textin, fsize, Halign, Valign, textcolor, fontname)
+%   mytext(x, y, textin, fsize, align_code, [], textcolor, fontname)
 %
+%   Textin: will be passed through `sprintf` so expressions like `\n` will
+%   work.
 %   defult: fsize = 12
-%              Halign = 'center'
-%              Valign = 'middle'
+%                Halign = 'center'
+%                Valign = 'middle'
 %    
-%    type `mytext` to see how the alignment argument works
-%
+%   type `mytext` to see how the alignment argument works
+%    
 %   example: 
-%    myplot(0,0);hold on;hline;vline;
+%    myplot(0,0);hold on; hline; vline; axis off
 %    mytext(0.5, 0.5, 'mytext')
+%    mytext(-0.5, 0.5, 'mytext: Large (16)', 16)
 %    mytext(0, 0 ,  'mytext: Arial Black', [], 9, [], 4,'Arial Black')
  %   mytext(0, 0 , 'mytext: Times New Roman', 16, 'L', 'B', 2, 'Times New Roman')
- %   
+ %   mytext(0.5, -0.5, 'mytext\n with a new line', [], 4)
+ %   mytext(0.5, 0.5, 'mytext\x03A9 with a new line', [], 4)
  %  tip: use ` listfonts` to see available font name
  %
  
@@ -49,7 +56,7 @@ if length(textcolor) == 1
             colorcode = textcolor;    
         end
 else
-        if length(color)==3
+        if length(textcolor)==3
                 colorcode = textcolor;    
         else
                 error('input [color] should be an interger (select from [mycolor]) or a 3-number color code')
@@ -59,7 +66,7 @@ end
 %%
 if nargin >1
    text(x , y, ...
-         textin, ...
+         sprintf(textin), ...
          'fontsize', fsize, ...
          'horizontalalignment', Halign1, ...
           'verticalalignment', Valign1, ...
