@@ -13,15 +13,16 @@
 %
 % note 2016/02/19: add ploton option
 %
-function  effects = numInteraction(MatA, MatB, screening, ploton)
-if ( nargin < 4 ), ploton  = 0; end
+function  effects = numInteraction(MatA, MatB, screening, ploton, frame)
+if ( nargin < 5 ), frame  = 2; end
+if ( nargin < 4 || isempty(ploton)), ploton  = 0; end
 if ( nargin <3 || isempty(screening)), screening = [0, 0]; end;
 
 % calculate moving average and difference    
-    mvA = mv_avrg(MatA); 
-    mvB = mv_avrg(MatB); 
-    dfA = diff(MatA, 1, 2); 
-    dfB = diff(MatB, 1, 2);
+    mvA = mv_avrg(MatA, frame); 
+    mvB = mv_avrg(MatB, frame); 
+    dfA = mv_diff(MatA, frame); 
+    dfB = mv_diff(MatB, frame);
 % Filtering data where N(t) and N(t+1) are both zeros
 %%% On the cause side
     if screening(1) == 1

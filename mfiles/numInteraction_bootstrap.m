@@ -2,8 +2,9 @@
 % 
 % dependent: [nancorr.m], [mv_avrg.m] [numInteraction.m]
 
-function  out = numInteraction_bootstrap(MatA, MatB, itteration, replacement)
+function  out = numInteraction_bootstrap(MatA, MatB, itteration, replacement, frame)
 %% Setting default bootstraping parameters: w/o replacement, 1000 itterations
+if ( nargin < 5 ), frame  = 2; end
 if (nargin <4),  replacement = false;  end % default is without replacement  
     % convert replacement to logical if it is numeric
     if isa(replacement,'double') == 1
@@ -15,7 +16,7 @@ if (nargin <3),  itteration = 1000;  end
     end
 
 %% calculate the "Data" interaction
-effectAB = numInteraction(MatA,MatB);
+effectAB = numInteraction(MatA,MatB, [], [], frame);
 
 %% calculate the null model
      [n, p] = size(MatA);
@@ -28,7 +29,7 @@ for t = 1: itteration
     % create permutated data
     shA = datasample(MatA, n, 1, 'replace', replacement); % shuffle the patch(plant) ID of the data
     shB = datasample(MatB, n, 1, 'replace', replacement);
-    output = numInteraction(shA, shB); % calculate TD, BU indices
+    output = numInteraction(shA, shB, [], [], frame); % calculate TD, BU indices
    AonB(t) = output.AonB_R;
    BonA(t) = output.BonA_R;
 end
@@ -39,4 +40,5 @@ ciBonA = quantile(BonA,[0.025 0.975],1);
 medAonB = median(AonB);
 medBonA = median(BonA);
 %%
-out = struct('ciAonB',ciAonB,'ciBonA',ciBonA,'medAonB',medAonB, 'medBonA',medBonA);
+out = struct('ciAonB',ciAonB,'ciBonA',ciBonA,'medAonB',medAonB, 'medBonA',medBonA,...
+                  'AonB', effectAB.AonB_R, 'BonA', effectAB.BonA_R);
