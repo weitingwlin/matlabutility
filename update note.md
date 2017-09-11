@@ -46,3 +46,4 @@
 > * 2017/06/13: Add **pstring.m**, **modelString.m**
 > * 2017/09/07: Edit **mv_avrg.m**, **mv_diff.m**
 > * 2017/09/08: Add **pval.m**, Edit **numInteraction.m**
+> * 2017/09/11: Add **cellstr2num.m**

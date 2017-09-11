@@ -29,7 +29,7 @@ for t = 1: itteration
     % create permutated data
     shA = datasample(MatA, n, 1, 'replace', replacement); % shuffle the patch(plant) ID of the data
     shB = datasample(MatB, n, 1, 'replace', replacement);
-    output = numInteraction(shA, shB, [], [], frame); % calculate TD, BU indices
+    output = numInteraction(shA, shB, [], [], frame); % calculate numeric interaction indices
    AonB(t) = output.AonB_R;
    BonA(t) = output.BonA_R;
 end
@@ -41,4 +41,5 @@ medAonB = median(AonB);
 medBonA = median(BonA);
 %%
 out = struct('ciAonB',ciAonB,'ciBonA',ciBonA,'medAonB',medAonB, 'medBonA',medBonA,...
-                  'AonB', effectAB.AonB_R, 'BonA', effectAB.BonA_R);
+                  'AonB', effectAB.AonB_R, 'BonA', effectAB.BonA_R, ...
+                   'p_AonB', pval(effectAB.AonB_R, AonB, 2),   'p_BonA', pval(effectAB.BonA_R, BonA, 2));
